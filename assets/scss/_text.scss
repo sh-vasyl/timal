@@ -11,7 +11,7 @@
 }
 
 .alfaLink {
-	transition: 0.5s ease;
+	transition: $s500;
 
 	&:hover {
 		opacity: 0.5;

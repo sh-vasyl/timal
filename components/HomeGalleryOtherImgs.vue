@@ -20,28 +20,28 @@
 		const paralaxY = -cursor.value.y
 		gsap.to(homeGalleryImg.value[0], {
 			ease: 'none',
-			x: paralaxX * 40,
-			y: paralaxY * 40,
+			x: paralaxX * 50,
+			y: paralaxY * 50,
 		})
 		gsap.to(homeGalleryImg.value[1], {
 			ease: 'none',
-			x: paralaxX * 30,
-			y: paralaxY * 10,
+			x: -paralaxX * 40,
+			y: -paralaxY * 40,
 		})
 		gsap.to(homeGalleryImg.value[2], {
 			ease: 'none',
-			x: paralaxX * 15,
-			y: paralaxY * 25,
+			x: paralaxX * 30,
+			y: paralaxY * 30,
 		})
 		gsap.to(homeGalleryImg.value[3], {
 			ease: 'none',
-			x: paralaxX * 25,
+			x: paralaxX * 10,
 			y: paralaxY * 10,
 		})
 		gsap.to(homeGalleryImg.value[4], {
 			ease: 'none',
-			x: paralaxX * 30,
-			y: paralaxY * 15,
+			x: -paralaxX * 15,
+			y: -paralaxY * 15,
 		})
 	}
 

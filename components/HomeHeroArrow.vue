@@ -17,6 +17,15 @@
 	align-items: center;
 }
 
+.home-hero-arrow:hover .home-hero-arrow__arrow {
+	transform: scaleX(1.2);
+}
+
+.home-hero-arrow__arrow {
+	transition: $s500;
+	transform-origin: center left;
+}
+
 .home-hero-arrow__text {
 	font-size: vw(24px);
 	line-height: 86%;

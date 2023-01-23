@@ -58,10 +58,11 @@
 
 .header-logo__name {
 	opacity: 0;
-	width: vw(112px);
+	width: vw(150px);
 	position: absolute;
 	top: 50%;
-	left: 0;
+	margin-top: vw(3px);
+	left: vw(7px);
 	transform: translateY(-50%);
 	max-width: none;
 }

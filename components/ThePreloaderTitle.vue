@@ -35,6 +35,8 @@
 
 .preloader-title__first {
 	opacity: 0.1;
+	max-width: none;
+	width: 100vw;
 }
 
 .preloader-title__second-wrap {
