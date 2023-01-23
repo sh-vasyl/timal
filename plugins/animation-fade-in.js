@@ -9,7 +9,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 				scrollTrigger = {},
 				delay = 0,
 				duration = 1,
-				y = 80,
+				y = 30,
 				opacity = 1,
 			} = binding.value || {}
 

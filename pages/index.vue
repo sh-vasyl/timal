@@ -1,14 +1,3 @@
-<script setup>
-
-/**
- * ANIMATIONS
- */
-	// tryOnMounted(() => {
-	// 	AnimationHero()
-	// })
-
-</script>
-
 <template>
 
 	<div class="home-view">
@@ -26,10 +15,4 @@
 	position: relative;
 }
 
-.test {
-	width: 300px;
-	position: relative;
-	z-index: 2;
-	margin: 0 auto;
-}
 </style>

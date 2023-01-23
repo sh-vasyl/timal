@@ -3,6 +3,7 @@ import { SplitText } from 'gsap/SplitText'
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.directive('animation-text-lines', {
+
     async mounted (el, binding) {
 			const store = useDefaultStore()
 			const { arg = '', modifiers = {} } = binding
@@ -25,16 +26,6 @@ export default defineNuxtPlugin((nuxtApp) => {
 				autoAlpha = 1,
 			} = binding.value || {}
 
-			let argOptions = {}
-
-			switch (arg) {
-				case 'fadein':
-					argOptions.autoAlpha = 0
-					break;
-				default:
-					argOptions = {}
-			}
-
 			watch(() => store.isPreloaderVisible, (value) => {
 				const tl = gsap.timeline({
 					onComplete: () => {
@@ -45,7 +36,6 @@ export default defineNuxtPlugin((nuxtApp) => {
 					scrollTrigger: {
 						trigger: el,
 						start: 'top bottom',
-						// toggleActions: 'restart none none none',
 						toggleActions: 'play none none none',
 						...scrollTrigger
 					}
@@ -55,7 +45,6 @@ export default defineNuxtPlugin((nuxtApp) => {
 					delay,
 					stagger,
 					autoAlpha,
-					...argOptions
 				}
 
 				if (arg === 'mask') {

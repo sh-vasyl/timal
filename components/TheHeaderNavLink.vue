@@ -1,14 +1,14 @@
 <template>
 
-	<a class="header-nav__link alfaLink" href="">
+	<nuxt-link to="/commercial" class="header-nav__link alfaLink">
 		<span class="header-nav__link-text">Commercial</span>
 		<span class="header-nav__link-count">(2)</span>
-	</a>
-	<a class="header-nav__link alfaLink" href="">
+	</nuxt-link>
+	<nuxt-link to="/" class="header-nav__link alfaLink">
 		<span class="header-nav__link-text">Editorial</span>
 		<span class="header-nav__link-count">(14)</span>
-	</a>
-	<a class="header-nav__link alfaLink" href="mailto:shot@tanyatimal.studio">
+	</nuxt-link>
+	<a href="mailto:shot@tanyatimal.studio" class="header-nav__link alfaLink">
 		<span class="header-nav__link-text">shot@tanyatimal.studio</span>
 	</a>
 

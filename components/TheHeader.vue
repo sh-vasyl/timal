@@ -1,14 +1,8 @@
-<script setup>
-
-	const routeName = useRoute().name
-
-</script>
 
 <template>
 	<header
 		v-animation-fade-in
 		class="header"
-		:class="`header-${routeName}`"
 		>
 		<div class="header-head _container">
 			<TheHeaderLogo />
@@ -29,10 +23,11 @@
 	z-index: 99;
 	padding-top: vw(32px);
 	padding-bottom: vw(32px);
+	color: $c-white;
 }
 
-.header-index {
-	color: $c-white;
+.header-inner {
+	color: $c-black;
 }
 
 .header-head {

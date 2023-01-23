@@ -22,6 +22,7 @@
 			duration: preloaderTimeInSeconds.value,
 			ease: 'none',
 			onStart: () => {
+				gsap.set('.home-hero-title', {top: 0, yPercent: 0})
 				gsap.to(preloaderWrapper.value, {
 					opacity: 1
 				})
