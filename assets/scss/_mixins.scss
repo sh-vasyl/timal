@@ -1,0 +1,72 @@
+/* for fonts */
+
+@mixin font-face($font-family, $file-path, $weight: normal) {
+	@font-face {
+		font-family: $font-family;
+		src: url('#{$file-path}.otf');
+		font-display: swap;
+		font-weight: $weight;
+	}
+}
+
+/* for adaptives */
+
+@mixin max($size) {
+	@if map-has-key($breakpoints-max, $size) {
+		@media (max-width: #{map-get($breakpoints-max, $size)}px) {
+			@content;
+		}
+	}
+
+	@else {
+		@media (max-width: #{$size}px) {
+			@content;
+		}
+	}
+}
+
+@mixin min($size) {
+	@if map-has-key($breakpoints-min, $size) {
+		@media (min-width: #{map-get($breakpoints-min, $size)}px) {
+			@content;
+		}
+	}
+
+	@else {
+		@media (min-width: #{$size}px) {
+			@content;
+		}
+	}
+}
+
+// for offsets
+
+@function foffset($color, $min-viewport) {
+	$color-map: map-get($offsets, $color);
+
+	@if map-has-key($color-map, $min-viewport) {
+		@return map-get($color-map, $min-viewport);
+	}
+}
+
+@mixin offset-media($prop, $color) {
+	#{$prop}: foffset($color, bg);
+
+	@media screen and (max-width: #{map-get($breakpoints-max, bg)}px) {
+		#{$prop}: foffset($color, sm);
+	}
+
+	@media screen and (max-width: #{map-get($breakpoints-max, sm)}px) {
+		#{$prop}: foffset($color, xs);
+	}
+
+	@media screen and (max-width: #{map-get($breakpoints-max, xs)}px) {
+		#{$prop}: foffset($color, xxs);
+	}
+}
+
+// for px to vw
+
+@function vw($px-vw, $base-vw: 1440px) {
+	@return calc(($px-vw * 100vw) / $base-vw);
+}

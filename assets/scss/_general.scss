@@ -1,0 +1,38 @@
+body,
+html {
+	overscroll-behavior: none;
+	touch-action: pan-y, pan-x;
+}
+
+body {
+	background: $c-white;
+	color: $c-black;
+	font-family: $i500;
+	font-size: vw(10px);
+	line-height: vw(12px);
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+#viewport {
+	width: 100vw;
+	overflow: hidden;
+	height: 100%;
+}
+
+._container {
+	width: 100vw;
+	padding-left: 32px;
+	padding-right: 32px;
+}
+
+button,
+a {
+	all: unset;
+}
+
+button,
+a {
+	cursor: pointer
+}

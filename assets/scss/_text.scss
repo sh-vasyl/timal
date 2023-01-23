@@ -1,0 +1,24 @@
+.ttu {
+	text-transform: uppercase;
+}
+
+.tf1 {
+	font-family: $ultralight;
+}
+
+.tf2 {
+	font-family: $xl;
+}
+
+.alfaLink {
+	transition: 0.5s ease;
+
+	&:hover {
+		opacity: 0.5;
+	}
+}
+
+.s32 {
+	font-size: vw(32px);
+	line-height: 86%;
+}
