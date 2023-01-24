@@ -14,6 +14,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 			normalizeScroll: true,
 			ignoreMobileResize: true,
 			smoothTouch: 0,
+			effects: true,
 		});
 	})
 

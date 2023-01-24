@@ -1,18 +1,13 @@
 <template>
 
-	<div class="home-view">
-		<HomeImg />
-		<HomeHeroView />
-		<HomeGalleryView />
-		<TheFooter />
-	</div>
+	<TheHeader />
+	<TheWrapper>
+		<HomeView>
+			<HomeImg />
+			<HomeHeroView />
+			<HomeGalleryView />
+			<TheFooter />
+		</HomeView>
+	</TheWrapper>
 
 </template>
-
-<style lang="scss" scoped>
-.home-view {
-	color: $c-white;
-	position: relative;
-}
-
-</style>

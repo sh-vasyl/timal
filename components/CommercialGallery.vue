@@ -1,9 +1,7 @@
-
-
 <template>
 
 	<div class="commercial-gallery">
-		gallery
+		<slot />
 	</div>
 
 </template>
@@ -13,8 +11,8 @@
 .commercial-gallery {
 	position: absolute;
 	top: 50%;
-	left: 50%;
+	width: 100vw;
+	left: 0;
 	transform: translateY(-50%);
-
 }
 </style>

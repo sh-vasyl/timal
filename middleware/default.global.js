@@ -1,12 +1,17 @@
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { ScrollSmoother } from "gsap/ScrollSmoother"
 
-export default defineNuxtRouteMiddleware((to, from) => {
-
+export default defineNuxtRouteMiddleware(async (to, from) => {
 	// animation restart
-	ScrollTrigger.getAll().forEach(el => el.animation.restart())
 
-	// Header
-	const header = document.querySelector('.header')
-	to.name !== 'index' ? header.classList.add('header-inner') : header.classList.remove('header-inner')
+	setTimeout(() => {
+		console.log(ScrollSmoother.get());
+		console.log(ScrollTrigger.getAll());
+
+		// ScrollSmoother.get().refresh()
+		// ScrollTrigger.getAll().forEach(el => el.kill())
+	}, 3000)
+
+
 
 })

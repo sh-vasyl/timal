@@ -1,20 +1,9 @@
 <script setup>
 
-	import gsap from 'gsap'
+	const commercialTitle = ref(null)
 
-	const homeHeroTitle = ref(null)
-
-	tryOnMounted(() => {
-		// gsap.to(homeHeroTitle.value, {
-		// 	opacity: 0,
-		// 	scaleX: 1.2 ,
-		// 	scrollTrigger: {
-		// 		trigger: '.home-hero',
-		// 		scrub: true,
-		// 		start: 'top top',
-		// 		end: 'center 25%'
-		// 	}
-		// })
+	defineExpose({
+		commercialTitle
 	})
 
 </script>
@@ -35,6 +24,7 @@
 	transform: rotate(-180deg);
 	position: absolute;
 	bottom: vw(32px);
-	left: vw(32px)
+	left: vw(32px);
+	z-index: 1;
 }
 </style>

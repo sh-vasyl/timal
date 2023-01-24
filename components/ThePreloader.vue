@@ -3,6 +3,7 @@
 	import gsap from 'gsap'
 	import { ScrollSmoother } from 'gsap/ScrollSmoother'
 
+	const route = useRoute()
 	const store = useDefaultStore()
 	const preloader = ref(null)
 	const preloaderWrapper = ref(null)
@@ -77,12 +78,16 @@
 					duration: 1,
 					ease: 'none'
 				}, 0)
-				endOfAnimationTl.to('.home-hero-title', {
-					top: '50%',
-					y: '-50%',
-					duration: 1,
-					ease: 'none'
-				}, 0)
+
+				if(route.name === 'index') {
+					endOfAnimationTl.to('.home-hero-title', {
+						top: '50%',
+						y: '-50%',
+						duration: 1,
+						ease: 'none'
+					}, 0)
+				}
+
 			},
 		})
 	})

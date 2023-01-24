@@ -2,7 +2,6 @@
 
 	import gsap from 'gsap'
 
-
 	const headerLogoIcon = ref(null)
 	const headerLogoName = ref(null)
 
@@ -42,27 +41,11 @@
 			src="/images/home/title.svg"
 			alt="header logo name"
 		/>
-		<img
-			class="header-inner-logo__name"
-			src="/icons/logo-black.svg"
-			alt="header inner logo"
-		/>
 	</nuxt-link>
 
 </template>
 
 <style lang="scss" scoped>
-
-.header .header-inner-logo__name {
-	display: none;
-}
-.header-inner .header-logo__icon,
-.header-inner .header-logo__name {
-	display: none;
-}
-.header-inner .header-inner-logo__name {
-	display: block
-}
 
 .header-logo {
 	position: relative;

@@ -1,10 +1,9 @@
 <script setup>
 
-	import gsap from 'gsap'
+	const commercialDescr = ref(null)
 
-	const homeHeroTitle = ref(null)
-
-	tryOnMounted(() => {
+	defineExpose({
+		commercialDescr
 	})
 
 </script>
