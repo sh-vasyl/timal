@@ -1,14 +1,9 @@
 <template>
+
 	<section class="home-hero">
-
-		<HomeHeroTitle />
-		<HomeHeroDescr />
-		<HomeHeroFooter>
-			<HomeHeroSoc />
-			<HomeHeroArrow />
-		</HomeHeroFooter>
-
+		<slot />
 	</section>
+
 </template>
 
 <style lang="scss" scoped>

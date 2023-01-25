@@ -1,6 +1,7 @@
 <script setup>
-
-	const { progress } = defineProps(['progress'])
+	defineProps({
+		progress: Number
+	})
 
 </script>
 

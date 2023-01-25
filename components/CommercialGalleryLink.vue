@@ -4,15 +4,16 @@
 
 	const commercialGalleryLink = ref([])
 
-	defineExpose({
-		commercialGalleryLink
-	})
-
+	/**
+	 * Props
+	 */
 	defineProps({
 		href: String
 	})
 
-	// set random rotation
+	/**
+	 * Set random rotation
+	 */
 	tryOnMounted(() => {
 		gsap.to(commercialGalleryLink.value.$el, {
 			rotateZ: (Math.random() - 0.5) * 5

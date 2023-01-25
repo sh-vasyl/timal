@@ -5,8 +5,9 @@
 	/**
 	 * Props
 	 */
-	 defineProps({
-		images: Array,
+	defineProps({
+		src: String,
+		index: Number
 	})
 
 	/**
@@ -42,10 +43,9 @@
 		@mouseleave="mouseLeave"
 	>
 		<img
-			v-for="(img, i) in images"
 			ref="homeGalleryImg"
-			:class="`home-gallery-three-img home-gallery-three-img-${i + 2}`"
-			:src="img.src"
+			:class="`home-gallery-three-img home-gallery-three-img-${index + 2}`"
+			:src="src"
 			alt="home gallery image"
 		/>
 	</div>

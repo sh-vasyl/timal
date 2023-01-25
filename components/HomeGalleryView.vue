@@ -1,12 +1,9 @@
 <template>
+
 	<section class="home-gallery-view">
-
-		<HomeGalleryThreeImgs />
-		<HomeGalleryOtherImgs />
-		<HomeGalleryButton />
-		<HomeGalleryLines />
-
+		<slot />
 	</section>
+
 </template>
 
 <style lang="scss" scoped>
@@ -17,6 +14,5 @@
 	width: 100vw;
 	overflow: hidden;
 }
-
 
 </style>

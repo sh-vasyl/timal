@@ -1,10 +1,24 @@
 <script setup>
 
+	import gsap from 'gsap'
+
+	/**
+	 * Animation descr
+	 */
+	const store = useDefaultStore()
 	const commercialDescr = ref(null)
 
-	defineExpose({
-		commercialDescr
-	})
+	function anim() {
+		gsap.from(commercialDescr.value, {
+			opacity: 0,
+			xPercent: -100,
+			duration: 1.5,
+			delay: 0.1
+		})
+	}
+
+	tryOnMounted(() => anim())
+	watch(() => store.isPreloaderVisible, () => anim())
 
 </script>
 

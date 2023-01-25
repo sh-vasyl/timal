@@ -1,5 +1,29 @@
+<script setup>
+
+	import gsap from 'gsap'
+
+	/**
+	 * Animation Footer
+	 */
+	const store = useDefaultStore()
+	const heroFooter = ref(null)
+
+	function anim() {
+		gsap.to(heroFooter.value, {
+			opacity: 1,
+			y: 0,
+			duration: 1,
+			delay: 0.5
+		})
+	}
+
+	tryOnMounted(() => anim())
+	watch(() => store.isPreloaderVisible, () => anim())
+
+</script>
+
 <template>
-  <div v-animation-text-lines class="home-hero-footer">
+  <div ref="heroFooter" class="home-hero-footer">
 		<div class="_container home-hero-footer__wrap">
 			<slot></slot>
 		</div>
@@ -14,6 +38,8 @@
 	bottom: vw(16px);
 	left: 0;
 	width: 100vw;
+	opacity: 0;
+	transform: translateY(100%);
 }
 
 .home-hero-footer__wrap {

@@ -1,16 +1,6 @@
-<script setup>
-
-	const commercialGalleryWrapper= ref(null)
-
-	defineExpose({
-		commercialGalleryWrapper
-	})
-
-</script>
-
 <template>
 
-	<div ref="commercialGalleryWrapper" class="commercial-gallery__wrapper">
+	<div class="commercial-gallery__wrapper">
 		<slot />
 	</div>
 

@@ -5,7 +5,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.directive('animation-text-lines', {
 
     async mounted (el, binding) {
-			const store = useDefaultStore()
 			const { arg = '', modifiers = {} } = binding
 			await document.fonts.ready
 			const split = new SplitText(el, { type: 'lines', linesClass: 'mask' })
@@ -26,39 +25,38 @@ export default defineNuxtPlugin((nuxtApp) => {
 				autoAlpha = 1,
 			} = binding.value || {}
 
-			watch(() => store.isPreloaderVisible, (value) => {
-				const tl = gsap.timeline({
-					onComplete: () => {
-						gsap.set(el.querySelectorAll('.mask'), {
-							clearProps: 'overflow'
-						})
-					},
-					scrollTrigger: {
-						trigger: el,
-						start: 'top bottom',
-						toggleActions: 'play none none none',
-						...scrollTrigger
-					}
-				})
-				const options = {
-					duration,
-					delay,
-					stagger,
-					autoAlpha,
-				}
 
-				if (arg === 'mask') {
-					options.yPercent = 105
-					if (modifiers.down) {
-						options.yPercent = -105
-					}
-				} else {
-					options.y = Math.abs(y)
+			const tl = gsap.timeline({
+				onComplete: () => {
+					gsap.set(el.querySelectorAll('.mask'), {
+						clearProps: 'overflow'
+					})
+				},
+				scrollTrigger: {
+					trigger: el,
+					start: 'top bottom',
+					toggleActions: 'play none none none',
+					...scrollTrigger
 				}
+			})
+			const options = {
+				duration,
+				delay,
+				stagger,
+				autoAlpha,
+			}
 
-				tl.from(lines, {
-					...options
-				})
+			if (arg === 'mask') {
+				options.yPercent = 105
+				if (modifiers.down) {
+					options.yPercent = -105
+				}
+			} else {
+				options.y = Math.abs(y)
+			}
+
+			tl.from(lines, {
+				...options
 			})
 
     },

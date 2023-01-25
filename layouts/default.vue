@@ -1,8 +1,14 @@
+
 <template>
+
 	<div id="viewport">
 		<ThePreloader />
-		<slot />
+		<TheSmoothWrapper>
+			<slot />
+		</TheSmoothWrapper>
 	</div>
+
 </template>
 <style lang='scss' scoped>
+
 </style>

@@ -1,6 +1,10 @@
 <script setup>
 	import { gsap } from 'gsap'
 
+	/**
+	 * Animation infinity lines
+	 */
+
 	const infiniteLine = ref([])
 	let ticking = ref(false)
 

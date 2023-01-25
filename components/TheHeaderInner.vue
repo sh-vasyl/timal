@@ -1,6 +1,27 @@
+<script setup>
+
+	import gsap from 'gsap'
+
+	// Header animation
+	const store = useDefaultStore()
+	const headerInner = ref(null)
+
+	function anim() {
+		gsap.from(headerInner.value, {
+			opacity: 0,
+			yPercent: -100,
+			duration: 1
+		})
+	}
+
+	tryOnMounted(() => anim())
+	watch(() => store.isPreloaderVisible, () => anim())
+
+</script>
+
 <template>
 	<header
-		v-animation-fade-in
+		ref="headerInner"
 		class="header-inner"
 		>
 		<div class="header-inner-head _container">

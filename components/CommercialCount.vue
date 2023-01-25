@@ -1,10 +1,22 @@
 <script setup>
 
+	import gsap from 'gsap'
+
+	/**
+	 * Animation count
+	 */
+	const store = useDefaultStore()
 	const commercialCount = ref(null)
 
-	defineExpose({
-		commercialCount
-	})
+	function anim() {
+		gsap.from(commercialCount.value, {
+			opacity: 0,
+			duration: 3,
+		})
+	}
+
+	tryOnMounted(() => anim())
+	watch(() => store.isPreloaderVisible, () => anim())
 
 </script>
 

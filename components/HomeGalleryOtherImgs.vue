@@ -1,6 +1,17 @@
 <script setup>
+
 	import gsap from 'gsap'
 
+	/**
+	 * Props
+	 */
+	defineProps({
+		images: Array,
+	})
+
+	/**
+	 * Parallax on mousemove
+	 */
 	const homeGalleryImg = ref([])
 	const cursor = ref({})
 	cursor.value.x = 0
@@ -49,10 +60,11 @@
 
 <template>
 
-	<img v-for="(img, i) in 5"
+	<img
+		v-for="(img, i) in images"
 		ref="homeGalleryImg"
 		:class="`home-gallery-img home-gallery-img-${i + 5}`"
-		:src="`/images/collection-1/img-${i + 5}.jpeg`"
+		:src="img.src"
 		alt="home gallery image"
 	/>
 

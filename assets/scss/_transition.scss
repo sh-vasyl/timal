@@ -1,0 +1,20 @@
+.page-enter-active,
+.page-leave-active {
+  transition: all 1.5s linear;
+}
+.page-leave-to,
+.page-leave-from {
+	transition: all 1.5s linear;
+}
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+}
+
+.page-leave-from {
+	opacity: 0;
+}

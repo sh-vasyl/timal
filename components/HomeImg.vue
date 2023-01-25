@@ -2,19 +2,27 @@
 
 	import gsap from 'gsap'
 
-	const store = useDefaultStore()
+	/**
+	 * Props
+	 */
+	defineProps({
+		images: Array
+	})
+
+	/**
+	 * Animation changing background
+	 */
 	const homeImg = ref([])
 	const homeImgCurrent = ref(1)
 	const timeChangeImg = ref(15000)
-	const collections = ref([
-		'/images/collection-1/img-1.jpeg',
-		'/images/collection-1/img-2.jpeg',
-		'/images/collection-1/img-3.jpeg',
-		'/images/collection-1/img-4.jpeg',
-	])
+	let interval;
+	tryOnMounted(() => {
+		gsap.from(homeImg.value, {opacity: 0, duration: 1.5})
+		interval = setInterval(() => changeImgs(), timeChangeImg.value)
+	})
 
-	watch(() => store.isPreloaderVisible, () => {
-		setInterval(() => changeImgs(), timeChangeImg.value)
+	tryOnUnmounted(() => {
+		clearInterval(interval)
 	})
 
 	function changeImgs() {
@@ -30,10 +38,10 @@
 <template>
 
 	<img
-		v-for="(img, i) in collections"
+		v-for="img in images"
 		ref="homeImg"
 		class="home-img"
-		:src="img"
+		:src="img.src"
 		alt="Home image"
 	/>
 

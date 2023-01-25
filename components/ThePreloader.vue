@@ -2,29 +2,53 @@
 
 	import gsap from 'gsap'
 	import { ScrollSmoother } from 'gsap/ScrollSmoother'
+	import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+	/**
+	 * Preloader photos
+	 */
+	const preloaderPhotos = ref([
+		{ src: '/images/preloader/sasha-z-1.jpeg', text: 'sasha-z-1.jpeg' },
+		{ src: '/images/preloader/sasha-z-2.jpeg', text: 'sasha-z-2.jpeg' },
+		{ src: '/images/preloader/sasha-z-3.jpeg', text: 'sasha-z-3.jpeg' },
+		{ src: '/images/preloader/sasha-z-4.jpeg', text: 'sasha-z-4.jpeg' },
+		{ src: '/images/preloader/sasha-z-5.jpeg', text: 'sasha-z-5.jpeg' },
+		{ src: '/images/preloader/sasha-z-6.jpeg', text: 'sasha-z-6.jpeg' },
+		{ src: '/images/preloader/sasha-z-7.jpeg', text: 'sasha-z-7.jpeg' },
+		{ src: '/images/preloader/sasha-z-8.jpeg', text: 'sasha-z-8.jpeg' },
+		{ src: '/images/preloader/sasha-z-9.jpeg', text: 'sasha-z-9.jpeg' },
+		{ src: '/images/preloader/sasha-z-10.jpeg', text: 'sasha-z-10.jpeg' }
+	])
+
+	/**
+	 * Preloader animation
+	 */
 	const route = useRoute()
 	const store = useDefaultStore()
 	const preloader = ref(null)
 	const preloaderWrapper = ref(null)
 	const preloaderTitle = ref(null)
-	const preloaderPhotos = ref(null)
+	const preloaderTitleSecond = ref(null)
+	const preloaderPhotoItem = ref([])
 	const preloaderTimeInSeconds = ref(3)
 	let progress = ref(0)
 	let tl = gsap.timeline()
 
-	// Scroll off
-	tryOnMounted(() => ScrollSmoother.get().paused(true))
+	tryOnMounted(() => {
 
-	// Preloader animation
-	tryOnBeforeMount(() => {
+		// Scroll off
+		ScrollSmoother.get().paused(true)
+
+		// Start animation
 		tl.to(progress, {
 			progress: 99,
 			duration: preloaderTimeInSeconds.value,
 			ease: 'none',
 			onStart: () => {
-				gsap.set('.home-hero-title', {top: 0, yPercent: 0})
-				gsap.to(preloaderWrapper.value, {
+				if(route.name === 'index') {
+					gsap.set('.home-hero-title', {top: 0, yPercent: 0})
+				}
+				gsap.to(preloaderWrapper.value.$el, {
 					opacity: 1
 				})
 			},
@@ -33,20 +57,19 @@
 				progress.value = Math.floor(progress.progress)
 
 				// Title
-				gsap.to(preloaderTitle.value.preloaderTitleFirst, {
+				gsap.to(preloaderTitleSecond.value.$el, {
 					width: Math.floor(progress.progress) + '%'
 				})
-
 				// Images
-				const preloaderPhotoIndex = Math.floor(progress.value / preloaderPhotos.value.preloaderPhotoItem.length)
-				gsap.to(preloaderPhotos.value.preloaderPhotoItem[preloaderPhotoIndex], {
+				const preloaderPhotoIndex = Math.floor(progress.value / preloaderPhotoItem.value.length)
+
+				gsap.to(preloaderPhotoItem.value[preloaderPhotoIndex].$el, {
 					opacity: 1
 				})
 			},
 		})
-	})
 
-	tryOnMounted(() => {
+		// End animation
 		tl.to(progress, {
 			progress: 100,
 			ease: 'none',
@@ -55,12 +78,11 @@
 				progress.value = Math.floor(progress.progress)
 
 				// Title
-				gsap.to(preloaderTitle.value.preloaderTitleFirst, {
+				gsap.to(preloaderTitleSecond.value.$el, {
 					width: Math.floor(progress.progress) + '%'
 				})
 			},
 			onComplete: () => {
-				// End of  animation
 				const endOfAnimationTl = gsap.timeline({
 					onStart: () => {
 						ScrollSmoother.get().paused(false)
@@ -72,7 +94,7 @@
 					duration: 1,
 					ease: 'none'
 				})
-				endOfAnimationTl.to(preloaderTitle.value.preloaderTitle, {
+				endOfAnimationTl.to(preloaderTitle.value.$el, {
 					top: '50%',
 					y: '-50%',
 					duration: 1,
@@ -92,15 +114,35 @@
 		})
 	})
 
+	/**
+	 * Restart animation after preloader
+	 */
+	// watch(() => store.isPreloaderVisible, () => {
+	// 	ScrollTrigger.getAll().forEach(el => el.animation.restart())
+	// })
+
 </script>
 
 <template>
 	<div ref="preloader" class="preloader">
-		<div ref="preloaderWrapper" class="preloader-wrapper">
-			<ThePreloaderTitle ref="preloaderTitle" />
+		<ThePreloaderWrapper ref="preloaderWrapper">
+			<ThePreloaderTitle ref="preloaderTitle">
+				<ThePreloaderTitleFirst />
+				<ThePreloaderTitleSecond ref="preloaderTitleSecond" />
+			</ThePreloaderTitle>
 			<ThePreloaderPercent :progress="progress" />
-			<ThePreloaderPhotos ref="preloaderPhotos" />
-		</div>
+			<ThePreloaderPhotos>
+				<ThePreloaderPhotoItem
+					v-for="(item, i) in preloaderPhotos"
+					ref="preloaderPhotoItem"
+					:index="i"
+				>
+					<ThePreloaderPhotoItemImg :src="item.src" />
+					<ThePreloaderPhotoItemText :text="item.text" />
+				</ThePreloaderPhotoItem>
+			</ThePreloaderPhotos>
+
+		</ThePreloaderWrapper>
 	</div>
 </template>
 
@@ -116,10 +158,6 @@
 	overflow: hidden;
 	background: $c-white;
 	color: $c-black;
-}
-
-.preloader-wrapper {
-	opacity: 0;
 }
 
 </style>

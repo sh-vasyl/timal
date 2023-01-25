@@ -1,6 +1,10 @@
 <script setup>
+
 	import { gsap } from 'gsap'
 
+	/**
+	 * Animation hover on button
+	 */
 	const buttonPath = ref(null)
 
 	function anim() {

@@ -1,7 +1,10 @@
 <template>
-	<div id="smooth-wrapper">
-		<div id="smooth-content">
-			<slot />
-		</div>
+	<div class="wrapper">
+		<slot />
 	</div>
 </template>
+<style lang="scss" scoped>
+	.commercial-wrapper {
+		background: $c-white;
+	}
+</style>
