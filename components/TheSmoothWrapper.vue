@@ -5,3 +5,11 @@
 		</div>
 	</div>
 </template>
+
+<style lang="scss" scoped>
+
+#smooth-wrapper {
+	background: $c-white;
+}
+
+</style>

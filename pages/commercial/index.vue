@@ -7,23 +7,23 @@
 	 */
 	const galleryProjects = ref([
 		{
-			href: '/',
+			href: '/commercial/id',
 			src: '/images/commercial/img-1.png'
 		},
 		{
-			href: '/',
+			href: '/commercial/id',
 			src: '/images/commercial/img-2.png'
 		},
 		{
-			href: '/',
+			href: '/commercial/id',
 			src: '/images/commercial/img-3.png'
 		},
 		{
-			href: '/',
+			href: '/commercial/id',
 			src: '/images/commercial/img-4.png'
 		},
 		{
-			href: '/',
+			href: '/commercial/id',
 			src: '/images/commercial/img-5.png'
 		},
 	])
@@ -107,7 +107,7 @@
 
 <template>
 
-	<TheWrapper class="commercial-wrapper">
+	<TheWrapper class="wrapper-inner">
 		<ClientOnly>
 			<Teleport to="#viewport">
 				<TheHeaderInner />

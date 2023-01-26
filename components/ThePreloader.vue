@@ -30,7 +30,7 @@
 	const preloaderTitle = ref(null)
 	const preloaderTitleSecond = ref(null)
 	const preloaderPhotoItem = ref([])
-	const preloaderTimeInSeconds = ref(3)
+	const preloaderTimeInSeconds = ref(1)
 	let progress = ref(0)
 	let tl = gsap.timeline()
 

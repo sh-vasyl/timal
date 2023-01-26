@@ -43,7 +43,8 @@
 	z-index: 99;
 	padding-top: vw(32px);
 	padding-bottom: vw(32px);
-	color: $c-black;
+	mix-blend-mode: difference;
+	color: $c-white;
 }
 
 .header-inner-head {

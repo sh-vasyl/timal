@@ -4,7 +4,7 @@
 	</div>
 </template>
 <style lang="scss" scoped>
-	.commercial-wrapper {
-		background: $c-white;
+	.wrapper-inner {
+		// background: $c-white;
 	}
 </style>

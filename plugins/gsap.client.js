@@ -2,9 +2,10 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import { SplitText } from 'gsap/SplitText'
+import { Draggable } from 'gsap/Draggable'
 
 export default defineNuxtPlugin(async (nuxtApp) => {
-	gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText)
+	gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, Draggable)
 
 	let mm = gsap.matchMedia();
 
