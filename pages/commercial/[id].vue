@@ -32,6 +32,7 @@
 	const seeAllImages = ref(false)
 	let tlScroll;
 	let tlItems;
+	let tlDraggable;
 
 	/**
 	 * Animation gallery after preloader or route change
@@ -106,7 +107,17 @@
 	 * See all photos one screen
 	 */
 	function seeAllPhotos() {
-		seeAllImages.value = true
+		if(!seeAllImages.value) {
+			modeSeeAll()
+			dragImages()
+			seeAllImages.value = true
+		} else {
+			modeBack()
+			seeAllImages.value = false
+		}
+	}
+
+	function modeSeeAll() {
 		const galleryItems = document.querySelectorAll('.shooting-gallery__item')
 
 		gsap.set(shootingNext.value.$el, { autoAlpha: 0 })
@@ -117,8 +128,8 @@
 		})
 		gsap.set(shootingGalleryWrapper.value.$el, {
 			width: '100vw',
-			paddingLeft: '50vw',
-			paddingRight: '50vw',
+			paddingLeft: 0,
+			paddingRight: 0,
 		})
 
 		tlScroll.scrollTrigger.kill(true)
@@ -146,7 +157,92 @@
 				delay: 0.3
 			})
 		})
+	}
 
+	function modeBack() {
+		const galleryItems = document.querySelectorAll('.shooting-gallery__item')
+		galleryItems.forEach(item => Draggable.get(item).kill())
+
+		let tl = gsap.timeline({
+			onComplete: () => {
+				setTimeout(() => {
+					galleryItems.forEach((item, i) => {
+						if(i) gsap.set(item, {scale: 0.5})
+					})
+
+					gsap.to(shootingCount.value.$el, {opacity: 1, x: 0})
+
+					tlScroll = gsap.to(shootingGalleryWrapper.value.$el, {
+						ease: "none",
+						x: document.documentElement.clientWidth - shootingGalleryWrapper.value.$el.clientWidth,
+						scrollTrigger: {
+							trigger: shootingView.value.$el,
+							pin: true,
+							scrub: 0.1,
+							end: "+=700%",
+							onUpdate: (self) => {
+								if(self.progress > 0.1) {
+									gsap.to(shootingTitle.value.$el, { fontSize: "5vw" })
+									gsap.to(shootingDescr.value.$el, {opacity: 0, x: -100})
+									gsap.to(shootingMore.value.$el, {left: 0})
+								} else {
+									gsap.to(shootingTitle.value.$el, { fontSize: "8.75vw" })
+									gsap.to(shootingDescr.value.$el, {opacity: 1, x: 0})
+									gsap.to(shootingMore.value.$el, {left: '24.65vw'})
+								}
+							}
+						}
+					})
+
+					galleryItems.forEach((item, i) => {
+						const idx = i + 1
+						tlItems = gsap.to(item, {
+							scale: 1,
+							ease: 'none',
+							scrollTrigger: {
+								containerAnimation: tlScroll,
+								trigger: item,
+								scrub: true,
+								start: 'left right',
+								end: 'center center',
+								onEnter: () => galleryCurrentNumberImage.value = idx,
+								onEnterBack: () => galleryCurrentNumberImage.value = idx,
+							}
+						});
+					})
+				}, 100)
+
+			}
+		})
+		tl.set(shootingNext.value.$el, { autoAlpha: 1 }, 0)
+		tl.set(galleryItems, {
+			position: 'relative',
+			left: 0,
+			top: 0,
+			x: 0,
+			y: 0
+		}, 0)
+		tl.set(shootingGalleryWrapper.value.$el, {
+			width: 'max-content',
+			paddingLeft: '55vw',
+			paddingRight: '55vw',
+		}, 0)
+
+		tl.to('.shooting-gallery__text', {opacity: 0}, 0)
+		shootingSeeAll.value.$el.textContent = '(see all)'
+
+		tl.to(galleryItems, {
+			width: '45vw',
+			scale: 1,
+			height: '100%',
+			duration: 2,
+			delay: 0.3
+		}, 0)
+
+	}
+
+	function dragImages() {
+		const galleryItems = document.querySelectorAll('.shooting-gallery__item')
 		Draggable.create(galleryItems, {
 			edgeResistance: 0.65,
 			bounds: shootingGalleryWrapper.value.$el,
@@ -163,7 +259,6 @@
 				gsap.set('.shooting-gallery__text-wrapper', {color: 'black'})
 			},
 		});
-
 	}
 
 </script>

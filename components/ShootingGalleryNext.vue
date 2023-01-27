@@ -22,4 +22,5 @@
 	text-transform: none;
 	padding-left: vw(16px);
 }
+
 </style>

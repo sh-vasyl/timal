@@ -12,7 +12,7 @@
 		gsap.from(shootingHeroTitle.value, {
 			opacity: 0,
 			xPercent: -150,
-			duration: 1.5
+			duration: 1.5,
 		})
 	}
 
