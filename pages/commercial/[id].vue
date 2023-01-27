@@ -32,7 +32,6 @@
 	const seeAllImages = ref(false)
 	let tlScroll;
 	let tlItems;
-	let tlDraggable;
 
 	/**
 	 * Animation gallery after preloader or route change
@@ -162,6 +161,11 @@
 	function modeBack() {
 		const galleryItems = document.querySelectorAll('.shooting-gallery__item')
 		galleryItems.forEach(item => Draggable.get(item).kill())
+
+		gsap.set('.shooting-gallery__item-bg', {opacity: 0})
+		gsap.set('.shooting-gallery__img-bg', {opacity: 0})
+		gsap.set('.shooting-gallery__text-bg', {opacity: 0})
+		gsap.set('.shooting-gallery__text-wrapper', {color: 'black'})
 
 		let tl = gsap.timeline({
 			onComplete: () => {
