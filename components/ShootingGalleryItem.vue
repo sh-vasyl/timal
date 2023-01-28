@@ -1,7 +1,8 @@
 <script setup>
 
 	defineProps({
-		images: Array
+		src: String,
+		text: String
 	})
 
 </script>
@@ -9,18 +10,17 @@
 <template>
 
 	<div
-		v-for="(item, i) in images"
 		ref="shootingGalleryItem"
 		class="shooting-gallery__item"
 	>
 		<div class="shooting-gallery__img-wrap">
 			<div class="shooting-gallery__img-bg"></div>
-			<img :src="item.src" class="shooting-gallery__img" alt="gallery image" />
+			<img :src="src" class="shooting-gallery__img" alt="gallery image" />
 		</div>
 		<div class="shooting-gallery__item-bg"></div>
 		<div class="shooting-gallery__text">
 			<div class="shooting-gallery__text-wrapper">
-				{{ item.text }}
+				{{ text }}
 			</div>
 			<div class="shooting-gallery__text-bg"></div>
 		</div>
@@ -37,7 +37,8 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	position: relative;
+	position: absolute;
+	top: 0;
 }
 
 .shooting-gallery__item-bg {

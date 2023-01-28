@@ -8,7 +8,7 @@
 
 <style lang="scss" scoped>
 .commercial-view {
-	position: relative;
+	// position: relative;
 	height: 100vh;
 }
 

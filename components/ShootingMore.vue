@@ -36,8 +36,7 @@
 	position: absolute;
 	top: 33.333%;
 	transform: translateY(-50%) rotate(-180deg);
-	left: vw(355px);
-	padding-right: vw(32px);
+	left: vw(387px);
 	color: $c-white;
 	display: flex;
 }

@@ -35,7 +35,7 @@
 	mix-blend-mode: darken;
 	writing-mode: vertical-rl;
 	transform: rotate(-180deg);
-	position: absolute;
+	position: fixed;
 	bottom: vw(32px);
 	left: vw(32px);
 	z-index: 1;

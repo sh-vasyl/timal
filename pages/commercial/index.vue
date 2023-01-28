@@ -1,6 +1,8 @@
 <script setup>
 
 	import gsap from 'gsap'
+	import { ScrollTrigger } from 'gsap/ScrollTrigger'
+	import { Draggable } from 'gsap/Draggable'
 
 	/**
 	 * Gallery images
@@ -29,7 +31,7 @@
 	])
 
 	/**
-	 * Gallery animation
+	 * Variables
 	 */
 	const store = useDefaultStore()
 	const commercialView = ref(null)
@@ -38,70 +40,118 @@
 	const commercialCount = ref(null)
 	const commercialGalleryWrapper = ref(null)
 	const commercialGalleryLink = ref([])
+	const commercialGalleryImg = ref([])
 	const commercialSignatureFirst = ref(null)
 	const commercialSignatureSecond = ref(null)
+	const commercialProxy = ref(null)
 
-	// Animation projects after preloader
-	function animItems() {
-		gsap.from('.commercial-gallery__link', {
-			xPercent: 150, duration: 1, stagger: 0.1, ease: 'none',
-		})
-	}
-	tryOnMounted(() => animItems())
-	watch(() => store.isPreloaderVisible, () => animItems())
+	const currentScrollPosition = ref(0)
 
-	// Animation on scroll
+	const animationDistance = ref(250)
+	const animationDragSpeed = ref(2)
+
+	/**
+	 * Init everything (after route change or preloader)
+	 */
 	tryOnMounted(() => {
-		let delayedCall;
+		initProjectsScroll()
+		animateItems()
+	})
+	watch(() => store.isPreloaderVisible, () => {
+		animateItems()
+	})
 
-		gsap.to(commercialGalleryWrapper.value.$el, {
+	function initProjectsScroll() {
+		let tlScroll = gsap.to(commercialGalleryWrapper.value.$el, {
 			x: document.documentElement.clientWidth - commercialGalleryWrapper.value.$el.clientWidth,
 			ease: "none",
 			scrollTrigger: {
 				trigger: commercialView.value.$el,
 				pin: true,
-				scrub: 0.1,
+				scrub: 1,
 				end: "+=700%",
+				invalidateOnRefresh: true,
 				onUpdate: (self) => {
-					if(self.progress > 0.1) {
-						gsap.to(commercialTitle.value.$el, { fontSize: "5vw" })
-						gsap.to([commercialDescr.value.$el, commercialCount.value.$el], {
-							opacity: 0, x: -100, stagger: 0.05
-						})
-						// gsap.to([
-						// 	commercialSignatureFirst.value.$el,
-						// 	commercialSignatureSecond.value.$el
-						// ], {
-						// 	x: '-50vw', ease: 'none'
-						// })
+					currentScrollPosition.value = self.scroll()
+
+					if(currentScrollPosition.value > animationDistance.value) {
+						animateTextTo()
 					} else {
-						gsap.to(commercialTitle.value.$el, { fontSize: "8.75vw" })
-						gsap.to([commercialDescr.value.$el, commercialCount.value.$el], {
-							opacity: 1, x: 0, stagger: 0.05
-						})
-						// gsap.to([
-						// 	commercialSignatureFirst.value.$el,
-						// 	commercialSignatureSecond.value.$el
-						// ], {
-						// 	x: 0, ease: 'none'
-						// })
+						animateTextFrom()
 					}
-
-					commercialGalleryLink.value.forEach(link => {
-						gsap.to(link.$el, {scale: 0.8})
-					})
-
-					if(delayedCall)
-					delayedCall.kill();
-					delayedCall = gsap.delayedCall(0.1, () => {
-						commercialGalleryLink.value.forEach(link => {
-							gsap.to(link.$el, {scale: 1})
-						})
-					})
 				}
 			}
 		});
-	})
+
+		ScrollTrigger.addEventListener("scrollStart", () => {
+			animateLinksTo()
+		});
+		ScrollTrigger.addEventListener("scrollEnd", () => {
+			animateLinksFrom()
+		});
+
+		let clamp, dragRatio;
+
+		Draggable.create(commercialProxy.value.$el, {
+			trigger: commercialGalleryWrapper.value.$el,
+			type: "x",
+			onDragStart() {
+				clamp || ScrollTrigger.refresh();
+				this.startScroll = tlScroll.scrollTrigger.scroll()
+				animateLinksTo()
+			},
+			onDrag() {
+				tlScroll.scrollTrigger.scroll(clamp(this.startScroll - (this.x - this.startX) * dragRatio));
+			},
+			onDragEnd() {
+				animateLinksFrom()
+			}
+		});
+
+		ScrollTrigger.addEventListener("refresh", () => {
+			clamp = gsap.utils.clamp(tlScroll.scrollTrigger.start + 1, tlScroll.scrollTrigger.end - 1)
+			dragRatio = commercialGalleryWrapper.value.$el.clientWidth /
+									document.documentElement.clientWidth * animationDragSpeed.value
+		});
+	}
+
+	function animateLinksTo() {
+		commercialGalleryLink.value.forEach(link => {
+			gsap.to(link.$el, {scale: 0.8})
+		})
+		commercialGalleryImg.value.forEach(img => {
+			gsap.to(img.$el, {scale: 1.2})
+		})
+	}
+
+	function animateLinksFrom() {
+		commercialGalleryLink.value.forEach(link => {
+			gsap.to(link.$el, {scale: 1})
+		})
+		commercialGalleryImg.value.forEach(img => {
+			gsap.to(img.$el, {scale: 1})
+		})
+	}
+
+	function animateTextTo() {
+		gsap.to(commercialTitle.value.$el, { fontSize: "5vw" })
+		gsap.to(commercialDescr.value.$el, { autoAlpha: 0, x: -100 })
+		gsap.to(commercialCount.value.$el, { x: '-24.5vw' })
+	}
+
+	function animateTextFrom() {
+		gsap.to(commercialTitle.value.$el, { fontSize: "8.75vw" })
+		gsap.to(commercialDescr.value.$el, { autoAlpha: 1, x: 0 })
+		gsap.to(commercialCount.value.$el, { x: 0 })
+	}
+
+	function animateItems() {
+		commercialGalleryLink.value.forEach(link => {
+			gsap.from(link.$el, {
+				xPercent: 150, duration: 1, stagger: 0.1, ease: 'none',
+			})
+		})
+	}
 
 </script>
 
@@ -127,11 +177,12 @@
 						ref="commercialGalleryLink"
 						:href="link.href"
 					>
-						<CommercialGalleryImg :src="link.src" />
+						<CommercialGalleryImg ref="commercialGalleryImg" :src="link.src" />
 					</CommercialGalleryLink>
 				</CommercialGalleryWrapper>
 			</CommercialGallery>
 		</CommercialView>
+		<CommercialProxy ref="commercialProxy" />
 	</TheWrapper>
 
 

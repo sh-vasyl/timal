@@ -1,5 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+	runtimeConfig: {
+		baseUrl: "https://timal-strapi.dev-onfire.work/api"
+	},
 	pages: true,
 	app: {
 		pageTransition: { name: 'page' },
