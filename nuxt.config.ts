@@ -1,11 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	runtimeConfig: {
-		baseUrl: "https://timal-strapi.dev-onfire.work/api"
+		public: {
+			baseUrl: "https://timal-strapi.dev-onfire.work"
+		}
 	},
 	pages: true,
 	app: {
-		pageTransition: { name: 'page' },
+		pageTransition: { name: 'page', mode: 'in-out' },
 		head: {
 			title: 'Tanya Timal',
 			htmlAttrs: {

@@ -41,23 +41,14 @@
 	const animationDistance = ref(250)
 
 	/**
-	 * Init everything (after route change or preloader)
+	 * (after route change or preloader)
 	 */
 	tryOnMounted(() => {
 		getTotalImages()
 		getItemWidth()
 		setItemsPosition()
 		if(!toggleViewMode.value) initGalleryScroll()
-		animateItems()
 	})
-	watch(() => store.isPreloaderVisible, () => {
-		animateItems()
-	})
-
-
-	function animateItems() {
-		gsap.from(shootingGalleryItem.value[0].$el, { filter: 'blur(2rem)', duration: 1})
-	}
 
 	function setItemsPosition() {
 		shootingGalleryItem.value.forEach((item, i) => {
@@ -249,22 +240,34 @@
 		</ClientOnly>
 
 		<ShootingView ref="shootingView">
-			<ShootingTitle ref="shootingTitle" />
-			<ShootingDescr ref="shootingDescr" />
-			<ShootingMore ref="shootingMore">
-				<ShootingCount
-					ref="shootingCount"
-					:current-number="currentNumberImage"
-					:total-images="totalImages"
-				/>
-				<ShootingSeeAll
-					ref="shootingSeeAll"
-					@click="toggleMode"
-				/>
-			</ShootingMore>
 
-			<ShootingGallery >
+			<TheTitle class="--difference">
+				<ShootingTitle ref="shootingTitle" />
+			</TheTitle>
+
+			<TheDescription class="--difference">
+				<ShootingDescr ref="shootingDescr" />
+			</TheDescription>
+
+			<TheActions class="--difference">
+				<ShootingMore ref="shootingMore">
+					<ShootingCount
+						ref="shootingCount"
+						:current-number="currentNumberImage"
+						:total-images="totalImages"
+					/>
+
+					<ShootingSeeAll
+						ref="shootingSeeAll"
+						@click="toggleMode"
+					/>
+				</ShootingMore>
+			</TheActions>
+
+
+			<ShootingGallery ref="shootingGallery">
 				<ShootingSignature ref="shootingSignature" />
+
 				<ShootingGalleryWrapper ref="shootingGalleryWrapper">
 					<ShootingGalleryItem
 						v-for="(item, i) in galleryImages"
@@ -272,9 +275,11 @@
 						:src="item.src"
 						:text="item.text"
 					/>
+
 					<ShootingGalleryNext ref="shootingNext" />
 				</ShootingGalleryWrapper>
 			</ShootingGallery>
+
 		</ShootingView>
 	</TheWrapper>
 

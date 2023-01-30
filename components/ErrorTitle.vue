@@ -2,15 +2,13 @@
 
 <template>
 
-	<div class="shooting-more vt">
-		<slot />
+	<div class="error-title vt h3">
+		Got <br /> nothing
 	</div>
 
 </template>
 
 
 <style lang="scss" scoped>
-.shooting-more {
-	display: flex;
-}
+.error-title {}
 </style>

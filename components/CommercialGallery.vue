@@ -1,6 +1,18 @@
+<script setup>
+	/**
+	 * Animate first screen
+	 */
+	const store = useDefaultStore()
+	const commercialGallery = ref(null)
+	const { animate } = useFadeBlur()
+	tryOnMounted(() => {if(!store.isPreloaderVisible) animate(commercialGallery.value)})
+	watch(() => store.isPreloaderVisible, () => animate(commercialGallery.value))
+
+</script>
+
 <template>
 
-	<div class="commercial-gallery">
+	<div ref="commercialGallery" class="commercial-gallery">
 		<slot />
 	</div>
 

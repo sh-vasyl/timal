@@ -1,30 +1,8 @@
-<script setup>
-
-	import gsap from 'gsap'
-
-	/**
-	 * Animation descr
-	 */
-	const store = useDefaultStore()
-	const shootingDescr = ref(null)
-
-	function anim() {
-		gsap.from(shootingDescr.value, {
-			opacity: 0,
-			xPercent: -100,
-			duration: 1.5,
-			delay: 0.1
-		})
-	}
-
-	tryOnMounted(() => anim())
-	watch(() => store.isPreloaderVisible, () => anim())
-
-</script>
+<script setup></script>
 
 <template>
 
-	<div ref="shootingDescr" class="shooting-descr">
+	<div class="shooting-descr vt">
 		<div class="shooting-descr__item">
 			<span class="shooting-descr__item-prof">photographer</span>
 			<span class="shooting-descr__item-slash">-</span>
@@ -48,16 +26,7 @@
 <style lang="scss" scoped>
 .shooting-descr {
 	line-height: 160%;
-	writing-mode: vertical-rl;
 	font-size: vw(11px);
-	transform: rotate(-180deg);
-	position: absolute;
-	bottom: vw(32px);
-	left: vw(387px);
-	height: vw(320px);
-	mix-blend-mode: difference;
-	z-index: 1;
-	color: $c-white;
 }
 
 .shooting-descr__item-prof {

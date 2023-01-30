@@ -17,7 +17,7 @@
 		})
 	}
 
-	tryOnMounted(() => anim())
+	tryOnMounted(() => {if(!store.isPreloaderVisible) anim()})
 	watch(() => store.isPreloaderVisible, () => anim())
 
 </script>

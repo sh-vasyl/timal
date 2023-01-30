@@ -1,13 +1,13 @@
 <template>
 
-	<div class="commercial-view">
+	<div class="error-view">
 		<slot />
 	</div>
 
 </template>
 
 <style lang="scss" scoped>
-.commercial-view {
+.error-view {
 	position: relative;
 	height: 100vh;
 }

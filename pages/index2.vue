@@ -3,26 +3,6 @@
 	import gsap from 'gsap'
 
 	/**
-	 * API
-	 */
-	const runTimeConfig = useRuntimeConfig()
-	const url = runTimeConfig.public.baseUrl
-
-	const { data: home, data2 } = await useAsyncData('home', () => {
-		return $fetch('/api/home')
-	})
-
-	const homeData = home?.value?.data
-
-	const descr = homeData?.data?.attributes?.main_description
-	const copyright = homeData?.data?.attributes?.all_rights_reserved
-	const socials = homeData?.data?.attributes?.social_block?.add_social
-
-	console.log(homeData);
-
-
-
-	/**
 	 * Photos collection
 	 */
 	const collectionPhotos = ref([
@@ -67,14 +47,9 @@
 
 			<HomeHeroView>
 				<HomeHeroTitle />
-				<HomeHeroDescr
-					ref="heroDescr"
-					:text="descr"
-				/>
+				<HomeHeroDescr ref="heroDescr" />
 				<HomeHeroFooter>
-					<HomeHeroSoc
-						:links="socials"
-					/>
+					<HomeHeroSoc />
 					<HomeHeroArrow />
 				</HomeHeroFooter>
 			</HomeHeroView>
@@ -86,11 +61,7 @@
 				<HomeGalleryLines />
 			</HomeGalleryView>
 
-			<TheFooter>
-				<TheFooterCopyrights :copyright="copyright" />
-				<TheFooterDesigned />
-			</TheFooter>
-
+			<TheFooter />
 		</HomeView>
 	</TheWrapper>
 

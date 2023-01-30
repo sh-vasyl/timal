@@ -114,13 +114,6 @@
 		})
 	})
 
-	/**
-	 * Restart animation after preloader
-	 */
-	// watch(() => store.isPreloaderVisible, () => {
-	// 	ScrollTrigger.getAll().forEach(el => el.animation.restart())
-	// })
-
 </script>
 
 <template>

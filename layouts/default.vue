@@ -1,4 +1,6 @@
 <script setup>
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 	const nuxtApp = useNuxtApp()
 	nuxtApp.hook('page:start', () => {
 		console.log('start');

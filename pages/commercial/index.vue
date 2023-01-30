@@ -5,6 +5,21 @@
 	import { Draggable } from 'gsap/Draggable'
 
 	/**
+	 * API
+	 */
+	// const runTimeConfig = useRuntimeConfig()
+	// const url = runTimeConfig.public.baseUrl
+
+	// const { data: commercial } = await useAsyncData('commercial', () => {
+	// 	return $fetch('/api/commercial')
+	// })
+
+	// const commercialData = commercial.value.data.data[1]
+	// console.log(url);
+	// console.log(commercialData.attributes.shootings.data[0].attributes.photos.data[0].attributes.url);
+
+
+	/**
 	 * Gallery images
 	 */
 	const galleryProjects = ref([
@@ -45,31 +60,35 @@
 	const commercialSignatureSecond = ref(null)
 	const commercialProxy = ref(null)
 
+	const totalProjects = ref(0)
 	const currentScrollPosition = ref(0)
 
 	const animationDistance = ref(250)
 	const animationDragSpeed = ref(2)
+	const animationScrollSpeed = ref(4)
 
 	/**
-	 * Init everything (after route change or preloader)
+	 * (after route change or preloader)
 	 */
 	tryOnMounted(() => {
-		initProjectsScroll()
-		animateItems()
-	})
-	watch(() => store.isPreloaderVisible, () => {
-		animateItems()
+		getTotalProjects()
+		initProjectsSlider()
 	})
 
-	function initProjectsScroll() {
+	function getTotalProjects() {
+		totalProjects.value = commercialGalleryLink.value.length
+	}
+
+	function initProjectsSlider() {
 		let tlScroll = gsap.to(commercialGalleryWrapper.value.$el, {
 			x: document.documentElement.clientWidth - commercialGalleryWrapper.value.$el.clientWidth,
 			ease: "none",
 			scrollTrigger: {
 				trigger: commercialView.value.$el,
 				pin: true,
+				id: 'scroll',
 				scrub: 1,
-				end: "+=700%",
+				end: `+=${animationScrollSpeed.value}00%`,
 				invalidateOnRefresh: true,
 				onUpdate: (self) => {
 					currentScrollPosition.value = self.scroll()
@@ -85,10 +104,10 @@
 
 		ScrollTrigger.addEventListener("scrollStart", () => {
 			animateLinksTo()
-		});
+		})
 		ScrollTrigger.addEventListener("scrollEnd", () => {
 			animateLinksFrom()
-		});
+		})
 
 		let clamp, dragRatio;
 
@@ -96,7 +115,7 @@
 			trigger: commercialGalleryWrapper.value.$el,
 			type: "x",
 			onDragStart() {
-				clamp || ScrollTrigger.refresh();
+				clamp
 				this.startScroll = tlScroll.scrollTrigger.scroll()
 				animateLinksTo()
 			},
@@ -108,11 +127,10 @@
 			}
 		});
 
-		ScrollTrigger.addEventListener("refresh", () => {
-			clamp = gsap.utils.clamp(tlScroll.scrollTrigger.start + 1, tlScroll.scrollTrigger.end - 1)
-			dragRatio = commercialGalleryWrapper.value.$el.clientWidth /
+		clamp = gsap.utils.clamp(tlScroll.scrollTrigger.start + 1, tlScroll.scrollTrigger.end - 1)
+		dragRatio = commercialGalleryWrapper.value.$el.clientWidth /
 									document.documentElement.clientWidth * animationDragSpeed.value
-		});
+
 	}
 
 	function animateLinksTo() {
@@ -135,22 +153,12 @@
 
 	function animateTextTo() {
 		gsap.to(commercialTitle.value.$el, { fontSize: "5vw" })
-		gsap.to(commercialDescr.value.$el, { autoAlpha: 0, x: -100 })
-		gsap.to(commercialCount.value.$el, { x: '-24.5vw' })
+		gsap.to([commercialCount.value.$el, commercialDescr.value.$el], { autoAlpha: 0 })
 	}
 
 	function animateTextFrom() {
 		gsap.to(commercialTitle.value.$el, { fontSize: "8.75vw" })
-		gsap.to(commercialDescr.value.$el, { autoAlpha: 1, x: 0 })
-		gsap.to(commercialCount.value.$el, { x: 0 })
-	}
-
-	function animateItems() {
-		commercialGalleryLink.value.forEach(link => {
-			gsap.from(link.$el, {
-				xPercent: 150, duration: 1, stagger: 0.1, ease: 'none',
-			})
-		})
+		gsap.to([commercialCount.value.$el, commercialDescr.value.$el], { autoAlpha: 1 })
 	}
 
 </script>
@@ -165,11 +173,24 @@
 		</ClientOnly>
 
 		<CommercialView ref="commercialView">
-			<CommercialTitle ref="commercialTitle" />
-			<CommercialDescr ref="commercialDescr" />
-			<CommercialCount ref="commercialCount" />
+			<TheTitle class="--darken">
+				<CommercialTitle ref="commercialTitle" />
+			</TheTitle>
+
+			<TheDescription class="--darken">
+				<CommercialDescr ref="commercialDescr" />
+			</TheDescription>
+
+			<TheActions class="--darken">
+				<CommercialCount
+					ref="commercialCount"
+					:total-projects="totalProjects"
+				/>
+			</TheActions>
+
 			<CommercialSignatureFirst ref="commercialSignatureFirst" />
 			<CommercialSignatureSecond ref="commercialSignatureSecond" />
+
 			<CommercialGallery>
 				<CommercialGalleryWrapper ref="commercialGalleryWrapper">
 					<CommercialGalleryLink
@@ -181,6 +202,7 @@
 					</CommercialGalleryLink>
 				</CommercialGalleryWrapper>
 			</CommercialGallery>
+
 		</CommercialView>
 		<CommercialProxy ref="commercialProxy" />
 	</TheWrapper>

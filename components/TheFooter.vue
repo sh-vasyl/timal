@@ -1,8 +1,8 @@
+
 <template>
-	<footer class="footer">
+	<footer v-animation-fade-in class="footer">
 		<div class="footer-head _container">
-			<TheFooterCopyrights />
-			<TheFooterDesigned />
+			<slot />
 		</div>
 	</footer>
 </template>

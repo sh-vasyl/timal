@@ -17,7 +17,6 @@
 	const timeChangeImg = ref(15000)
 	let interval;
 	tryOnMounted(() => {
-		gsap.from(homeImg.value, {opacity: 0, duration: 1.5})
 		interval = setInterval(() => changeImgs(), timeChangeImg.value)
 	})
 

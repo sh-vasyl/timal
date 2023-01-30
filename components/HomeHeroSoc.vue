@@ -1,7 +1,19 @@
+<script setup>
+	defineProps({
+		links: Array
+	})
+</script>
+
 <template>
   <div class="hero-soc">
-		<a class="hero-soc__link alfaLink ttu" href="https://www.instagram.com/" target="_blank">instagram</a>
-		<a class="hero-soc__link alfaLink ttu" href="https://www.whatsapp.com/" target="_blank">whatsapp</a>
+		<a
+			v-for="(link, i) in links"
+			class="hero-soc__link alfaLink ttu"
+			:href="link.link_social"
+			target="_blank"
+		>
+			{{ link.name_social }}
+		</a>
 	</div>
 </template>
 

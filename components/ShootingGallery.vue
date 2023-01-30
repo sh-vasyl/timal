@@ -1,6 +1,18 @@
+<script setup>
+	/**
+	 * Animate first screen
+	 */
+	const store = useDefaultStore()
+	const shootingGallery = ref(null)
+	const { animate } = useFadeBlur()
+	tryOnMounted(() => {if(!store.isPreloaderVisible) animate(shootingGallery.value)})
+	watch(() => store.isPreloaderVisible, () => animate(shootingGallery.value))
+
+</script>
+
 <template>
 
-	<div class="shooting-gallery">
+	<div ref="shootingGallery" class="shooting-gallery">
 		<slot />
 	</div>
 

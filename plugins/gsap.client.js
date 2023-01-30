@@ -7,10 +7,6 @@ import { Draggable } from 'gsap/Draggable'
 export default defineNuxtPlugin(async (nuxtApp) => {
 	gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, Draggable)
 
-	ScrollTrigger.defaults({
-		invalidateOnRefresh: true,
-	})
-
 	let mm = gsap.matchMedia();
 
 	mm.add("(min-width: 768px)", () => {

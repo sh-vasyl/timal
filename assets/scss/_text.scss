@@ -18,6 +18,21 @@
 	}
 }
 
+.--darken {
+	mix-blend-mode: darken;
+	color: $c-black;
+}
+
+.--difference {
+	mix-blend-mode: difference;
+	color: $c-white;
+}
+
+.vt {
+	writing-mode: vertical-rl;
+	transform: rotate(-180deg);
+}
+
 .s32 {
 	font-size: vw(32px);
 	line-height: 86%;
@@ -32,6 +47,13 @@
 
 .h5 {
 	font-size: vw(32px);
+	line-height: 86%;
+	font-family: $xl;
+	text-transform: uppercase;
+}
+
+.h6 {
+	font-size: vw(24px);
 	line-height: 86%;
 	font-family: $xl;
 	text-transform: uppercase;

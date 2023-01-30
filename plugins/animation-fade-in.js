@@ -9,7 +9,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 				delay = 0,
 				duration = 1,
 				y = 30,
-				opacity = 1,
+				opacity = 0,
 			} = binding.value || {}
 
 			const tl = gsap.timeline({
