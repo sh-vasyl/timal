@@ -8,17 +8,31 @@
 	const runTimeConfig = useRuntimeConfig()
 	const url = runTimeConfig.public.baseUrl
 
-	const { data: home, data2 } = await useAsyncData('home', () => {
+	// Home api
+	const { data: home } = await useAsyncData('home', () => {
 		return $fetch('/api/home')
 	})
+	const dataHome = home?.value?.data
+	const dataHeroDescr = dataHome?.data?.attributes?.main_description
+	const dataFooterCopyright = dataHome?.data?.attributes?.all_rights_reserved
+	const dataHeroSocials = dataHome?.data?.attributes?.social_block?.add_social
 
-	const homeData = home?.value?.data
 
-	const descr = homeData?.data?.attributes?.main_description
-	const copyright = homeData?.data?.attributes?.all_rights_reserved
-	const socials = homeData?.data?.attributes?.social_block?.add_social
+	const { data: categories } = await useAsyncData('categories', () => {
+		return $fetch('/api/categories')
+	})
 
-	console.log(homeData);
+	// // commercial api
+	// const commercialData = categories.value?.data?.data[0]
+	// const commercialCount = commercialData?.attributes?.shootings?.data?.length
+
+	// console.log(categories.value);
+
+
+	// // editorial api
+	// const editorialData = categories.value?.data?.data[1]
+	// const editorialCount = editorialData?.attributes?.shootings?.data?.length
+
 
 
 
@@ -69,11 +83,11 @@
 				<HomeHeroTitle />
 				<HomeHeroDescr
 					ref="heroDescr"
-					:text="descr"
+					:text="dataHeroDescr"
 				/>
 				<HomeHeroFooter>
 					<HomeHeroSoc
-						:links="socials"
+						:links="dataHeroSocials"
 					/>
 					<HomeHeroArrow />
 				</HomeHeroFooter>
@@ -87,7 +101,7 @@
 			</HomeGalleryView>
 
 			<TheFooter>
-				<TheFooterCopyrights :copyright="copyright" />
+				<TheFooterCopyrights :copyright="dataFooterCopyright" />
 				<TheFooterDesigned />
 			</TheFooter>
 

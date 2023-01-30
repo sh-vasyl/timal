@@ -1,10 +1,17 @@
-<script setup></script>
+<script setup>
+
+	defineProps({
+		name1: String,
+		name2: String,
+	})
+
+</script>
 
 <template>
 
 	<div class="shooting-title vt h3">
-		<div>Sporty</div>
-		<div>Sasha Z.</div>
+		<div>{{name1}}</div>
+		<div>{{name2}}</div>
 	</div>
 
 </template>

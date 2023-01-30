@@ -2,7 +2,24 @@
 
 	import gsap from 'gsap'
 
-	// Header animation
+	/**
+	 * Api
+	 */
+	const { data: categories } = await useAsyncData('categories', () => {
+		return $fetch('/api/categories')
+	})
+
+	// commercial api
+	const commercialData = categories.value?.data?.data[0]
+	const commercialCount = commercialData?.attributes?.shootings?.data?.length
+
+	// editorial api
+	const editorialData = categories.value?.data?.data[1]
+	const editorialCount = editorialData?.attributes?.shootings?.data?.length
+
+	/**
+	 * Header animation
+	 */
 	const store = useDefaultStore()
 	const header = ref(null)
 
@@ -24,7 +41,10 @@
 		<div class="header-head _container">
 			<TheHeaderLogo />
 			<TheHeaderNav>
-				<TheHeaderNavLink />
+				<TheHeaderNavLink
+					:commercial-count="commercialCount"
+					:editorial-count="editorialCount"
+				/>
 			</TheHeaderNav>
 		</div>
 	</header>

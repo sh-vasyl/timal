@@ -1,8 +1,17 @@
+<script setup>
+
+	defineProps({
+		text: String,
+		href: String
+	})
+
+</script>
+
 <template>
 
-	<nuxt-link to="/" class="shooting-gallery-next alfaLink">
+	<nuxt-link :to="href" class="shooting-gallery-next alfaLink">
 		<div class="shooting-gallery-next__text h5">(next)</div>
-		<div class="shooting-gallery-next__name h3">Ink Lingerie</div>
+		<div class="shooting-gallery-next__name h3">{{ text }}</div>
 	</nuxt-link>
 
 </template>

@@ -5,20 +5,38 @@
 	import { ScrollSmoother } from "gsap/ScrollSmoother"
 
 	/**
-	 * Data
+	 * API
 	 */
-	const galleryImages = ref([
-		{src: '/images/commercial/img-1.png', text: 'sasha-z-1.jpg'},
-		{src: '/images/commercial/img-2.png', text: 'sasha-z-2.jpg'},
-		{src: '/images/commercial/img-3.png', text: 'sasha-z-3.jpg'},
-		{src: '/images/commercial/img-4.png', text: 'sasha-z-4.jpg'},
-		{src: '/images/commercial/img-5.png', text: 'sasha-z-5.jpg'},
-	])
+	const runTimeConfig = useRuntimeConfig()
+	const url = runTimeConfig.public.baseUrl
+	const { slug } = useRoute().params
+
+	const { data: categories } = await useAsyncData('categories', () => {
+		return $fetch('/api/categories')
+	})
+	const dataCommercial = categories.value?.data?.data[0]
+	const dataShootings = dataCommercial?.attributes?.shootings?.data;
+	const dataShootingCurrentIndex = ref(null);
+	const dataShooting = dataShootings.find((el, i) => {
+		dataShootingCurrentIndex.value = i
+		return el?.attributes?.slug === slug
+	})
+
+	// current project
+	const dataShootingName1 = dataShooting?.attributes?.name1
+	const dataShootingName2 = dataShooting?.attributes?.name2
+	const dataShootingInfo = dataShooting?.attributes?.info_block?.add_info
+	const dataShootingPhotos = dataShooting?.attributes?.photos?.data
+
+	// next project
+	const dataShootingNextIndex = (dataShootingCurrentIndex.value + 1) % dataShootings.length;
+	const dataShootingNextProject = dataShootings[dataShootingNextIndex]
+	const dataShootingNextName = dataShootingNextProject?.attributes?.name2
+
 
 	/**
 	 * Variables
 	 */
-	const store = useDefaultStore()
 	const shootingView = ref(null)
 	const shootingTitle = ref(null)
 	const shootingDescr = ref(null)
@@ -242,11 +260,18 @@
 		<ShootingView ref="shootingView">
 
 			<TheTitle class="--difference">
-				<ShootingTitle ref="shootingTitle" />
+				<ShootingTitle
+					:name1="dataShootingName1"
+					:name2="dataShootingName2"
+					ref="shootingTitle"
+				/>
 			</TheTitle>
 
 			<TheDescription class="--difference">
-				<ShootingDescr ref="shootingDescr" />
+				<ShootingDescr
+					:descr="dataShootingInfo"
+					ref="shootingDescr"
+				/>
 			</TheDescription>
 
 			<TheActions class="--difference">
@@ -270,13 +295,17 @@
 
 				<ShootingGalleryWrapper ref="shootingGalleryWrapper">
 					<ShootingGalleryItem
-						v-for="(item, i) in galleryImages"
+						v-for="item in dataShootingPhotos"
 						ref="shootingGalleryItem"
-						:src="item.src"
-						:text="item.text"
+						:src="url + item?.attributes?.url"
+						:text="item?.attributes?.name"
 					/>
 
-					<ShootingGalleryNext ref="shootingNext" />
+					<ShootingGalleryNext
+						:text="dataShootingNextName"
+						:href="`/commercial/${dataShootingNextProject?.attributes?.slug}`"
+						ref="shootingNext"
+					/>
 				</ShootingGalleryWrapper>
 			</ShootingGallery>
 

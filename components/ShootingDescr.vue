@@ -1,22 +1,21 @@
-<script setup></script>
+<script setup>
+
+	defineProps({
+		descr: Array
+	})
+
+</script>
 
 <template>
 
 	<div class="shooting-descr vt">
-		<div class="shooting-descr__item">
-			<span class="shooting-descr__item-prof">photographer</span>
+		<div
+			v-for="info in descr"
+			class="shooting-descr__item"
+		>
+			<span class="shooting-descr__item-prof">{{ info?.title }}</span>
 			<span class="shooting-descr__item-slash">-</span>
-			<span class="shooting-descr__item-name ttu">Tanya Timal</span>
-		</div>
-		<div class="shooting-descr__item">
-			<span class="shooting-descr__item-prof">model</span>
-			<span class="shooting-descr__item-slash">-</span>
-			<span class="shooting-descr__item-name ttu">Sasha Z.</span>
-		</div>
-		<div class="shooting-descr__item">
-			<span class="shooting-descr__item-prof">MUA/Hair</span>
-			<span class="shooting-descr__item-slash">-</span>
-			<span class="shooting-descr__item-name ttu">Anna Nikolchenko</span>
+			<span class="shooting-descr__item-name ttu">{{ info?.description }}</span>
 		</div>
 	</div>
 

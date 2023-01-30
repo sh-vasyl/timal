@@ -1,10 +1,13 @@
-<script setup></script>
+<script setup>
+
+	defineProps({
+		text: String
+	})
+</script>
 
 <template>
 
-	<div class="commercial-descr vt">
-		Commercial is an adjective describing something with money-making and marketing intentions. If you’re a bit of a book snob, steer clear of commercial fiction, which is written for the widest enjoyment.
-	</div>
+	<div v-html="text" class="commercial-descr vt"></div>
 
 </template>
 

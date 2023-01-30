@@ -1,9 +1,13 @@
-<script setup></script>
+<script setup>
+defineProps({
+	text: String
+})
+</script>
 
 <template>
 
 	<div class="commercial-title vt h3">
-		COMMERCial
+		{{ text }}
 	</div>
 
 </template>

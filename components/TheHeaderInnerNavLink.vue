@@ -1,16 +1,27 @@
+<script setup>
+
+defineProps({
+	commercialCount: Number,
+	editorialCount: Number,
+})
+
+</script>
+
 <template>
 
-	<nuxt-link to="/commercial" class="header-inner-nav__link alfaLink">
-		<span class="header-inner-nav__link-text">Commercial</span>
-		<span class="header-inner-nav__link-count">(2)</span>
-	</nuxt-link>
-	<nuxt-link to="/" class="header-inner-nav__link alfaLink">
-		<span class="header-inner-nav__link-text">Editorial</span>
-		<span class="header-inner-nav__link-count">(14)</span>
-	</nuxt-link>
-	<a href="mailto:shot@tanyatimal.studio" class="header-inner-nav__link alfaLink">
-		<span class="header-inner-nav__link-text">shot@tanyatimal.studio</span>
-	</a>
+	<div class="header-nav__wrap">
+		<nuxt-link to="/commercial" class="header-inner-nav__link alfaLink">
+			<span class="header-inner-nav__link-text">Commercial</span>
+			<span class="header-inner-nav__link-count">({{ commercialCount }})</span>
+		</nuxt-link>
+		<nuxt-link to="/" class="header-inner-nav__link alfaLink">
+			<span class="header-inner-nav__link-text">Editorial</span>
+			<span class="header-inner-nav__link-count">({{ editorialCount }})</span>
+		</nuxt-link>
+		<a href="mailto:shot@tanyatimal.studio" class="header-inner-nav__link alfaLink">
+			<span class="header-inner-nav__link-text">shot@tanyatimal.studio</span>
+		</a>
+	</div>
 
 </template>
 
