@@ -10,9 +10,7 @@
 			<span class="copyrights-title__first tf1">© All rights</span>
 			<span class="copyrights-title__second tf2">Reserved</span>
 		</div>
-		<div class="copyrights-descr ttu">
-			{{ copyright }}
-		</div>
+		<div v-html="copyright" class="copyrights-descr ttu"></div>
 	</div>
 
 </template>

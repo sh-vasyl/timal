@@ -1,61 +1,27 @@
 <script setup>
 
-	import gsap from 'gsap'
-
-	/**
-	 * Props
-	 */
 	defineProps({
-		images: Array
+		src: String
 	})
-
-	/**
-	 * Animation changing background
-	 */
-	const homeImg = ref([])
-	const homeImgCurrent = ref(1)
-	const timeChangeImg = ref(15000)
-	let interval;
-	tryOnMounted(() => {
-		interval = setInterval(() => changeImgs(), timeChangeImg.value)
-	})
-
-	tryOnUnmounted(() => {
-		clearInterval(interval)
-	})
-
-	function changeImgs() {
-		homeImg.value.forEach(img => gsap.to(img, { opacity: 0, duration: 1.5 }))
-
-		gsap.to(homeImg.value[homeImgCurrent.value], { opacity: 1, duration: 1.5 })
-
-		homeImgCurrent.value === homeImg.value.length - 1 ?
-		homeImgCurrent.value = 0 : homeImgCurrent.value += 1
-	}
 
 </script>
 <template>
 
-	<img
-		v-for="img in images"
-		ref="homeImg"
-		class="home-img"
-		:src="img.src"
-		alt="Home image"
-	/>
+	<img class="home-img" :src="src" alt="Home image"/>
 
 </template>
 
 
 <style lang="scss" scoped>
+
 .home-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	opacity: 0;
 	position: absolute;
 	top: 0;
 	left: 0;
-	height: 100%;
-	object-fit: cover;
-	z-index: -1;
-	opacity: 0;
 }
 
 .home-img:first-child {

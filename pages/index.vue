@@ -18,33 +18,49 @@
 	const dataHeroSocials = dataHome?.data?.attributes?.social_block?.add_social
 
 
+	// categories api
 	const { data: categories } = await useAsyncData('categories', () => {
 		return $fetch('/api/categories')
 	})
 
-	// // commercial api
-	// const commercialData = categories.value?.data?.data[0]
-	// const commercialCount = commercialData?.attributes?.shootings?.data?.length
+	const commercialData = categories.value?.data?.data[0]
+	const editorialData = categories.value?.data?.data[1]
 
-	// console.log(categories.value);
-
-
-	// // editorial api
-	// const editorialData = categories.value?.data?.data[1]
-	// const editorialCount = editorialData?.attributes?.shootings?.data?.length
-
-
+	const commercialShootingData = commercialData?.attributes?.shootings?.data
+	const editorialShootingData = editorialData?.attributes?.shootings?.data
+	const categoriesShootingData = [...commercialShootingData, ...editorialShootingData]
 
 
 	/**
-	 * Photos collection
+	 * Animation changing background
 	 */
-	const collectionPhotos = ref([
-		{ src: '/images/collection-1/img-1.jpeg' },
-		{ src: '/images/collection-1/img-2.jpeg' },
-		{ src: '/images/collection-1/img-3.jpeg' },
-		{ src: '/images/collection-1/img-4.jpeg' }
-	])
+	const currentShootingSlug = ref(null)
+	const currentCategory = ref(null)
+	currentShootingSlug.value = categoriesShootingData[0]?.attributes?.slug
+	currentCategory.value = categoriesShootingData[0]?.attributes?.category?.data?.attributes?.name.toLowerCase()
+
+	const homeImg = ref([])
+	const homeImgCurrent = ref(1)
+	const timeChangeImg = ref(15000)
+	let interval;
+	tryOnMounted(() => {
+		interval = setInterval(() => changeImgs(), timeChangeImg.value)
+	})
+
+	tryOnUnmounted(() => {
+		clearInterval(interval)
+	})
+
+	function changeImgs() {
+		homeImg.value.forEach(img => gsap.to(img.$el, { opacity: 0, duration: 1.5 }))
+		gsap.to(homeImg.value[homeImgCurrent.value].$el, { opacity: 1, duration: 1.5 })
+
+		currentShootingSlug.value = categoriesShootingData[homeImgCurrent.value]?.attributes?.slug
+		currentCategory.value = categoriesShootingData[homeImgCurrent.value]?.attributes?.category?.data?.attributes?.name.toLowerCase()
+
+		homeImgCurrent.value === homeImg.value.length - 1 ?
+		homeImgCurrent.value = 0 : homeImgCurrent.value += 1
+	}
 
 	/**
 	 * Photos gallery
@@ -62,8 +78,6 @@
 		{ src: '/images/collection-1/img-9.jpeg' },
 	])
 
-
-
 </script>
 
 
@@ -77,7 +91,14 @@
 		</ClientOnly>
 
 		<HomeView>
-			<HomeImg :images="collectionPhotos"/>
+			<HomeImgWrap>
+				<HomeImg
+					v-for="img in categoriesShootingData"
+					:src="url + img?.attributes?.photos?.data[0]?.attributes?.url"
+					ref="homeImg"
+				/>
+			</HomeImgWrap>
+
 
 			<HomeHeroView>
 				<HomeHeroTitle />
@@ -89,7 +110,9 @@
 					<HomeHeroSoc
 						:links="dataHeroSocials"
 					/>
-					<HomeHeroArrow />
+					<HomeHeroArrow
+						:href="`/${currentCategory}/${currentShootingSlug}`"
+					/>
 				</HomeHeroFooter>
 			</HomeHeroView>
 
