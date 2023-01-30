@@ -3,16 +3,16 @@
 	 * Animate first screen
 	 */
 	const store = useDefaultStore()
-	const commercialGallery = ref(null)
+	const categoryGallery = ref(null)
 	const { animate } = useFadeBlur()
-	tryOnMounted(() => {if(!store.isPreloaderVisible) animate(commercialGallery.value)})
-	watch(() => store.isPreloaderVisible, () => animate(commercialGallery.value))
+	tryOnMounted(() => {if(!store.isPreloaderVisible) animate(categoryGallery.value)})
+	watch(() => store.isPreloaderVisible, () => animate(categoryGallery.value))
 
 </script>
 
 <template>
 
-	<div ref="commercialGallery" class="commercial-gallery">
+	<div ref="categoryGallery" class="category-gallery">
 		<slot />
 	</div>
 
@@ -20,7 +20,7 @@
 
 
 <style lang="scss" scoped>
-.commercial-gallery {
+.category-gallery {
 	position: absolute;
 	top: 50%;
 	width: 100vw;

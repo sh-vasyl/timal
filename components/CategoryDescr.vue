@@ -7,13 +7,13 @@
 
 <template>
 
-	<div v-html="text" class="commercial-descr vt"></div>
+	<div v-html="text" class="category-descr vt"></div>
 
 </template>
 
 
 <style lang="scss" scoped>
-.commercial-descr {
+.category-descr {
 	line-height: 150%;
 	letter-spacing: 0.02em;
 	height: vw(320px);

@@ -1,11 +1,11 @@
 <template>
 
-	<div class="commercial-proxy"></div>
+	<div class="category-proxy"></div>
 
 </template>
 
 <style lang="scss" scoped>
-.commercial-proxy {
+.category-proxy {
 	position: absolute;
   visibility: hidden;
 }

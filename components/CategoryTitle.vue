@@ -6,7 +6,7 @@ defineProps({
 
 <template>
 
-	<div class="commercial-title vt h3">
+	<div class="category-title vt h3">
 		{{ text }}
 	</div>
 
@@ -14,7 +14,7 @@ defineProps({
 
 
 <style lang="scss" scoped>
-.commercial-title {
+.category-title {
 	mix-blend-mode: darken;
 }
 </style>

@@ -14,7 +14,7 @@ defineProps({
 			<span class="header-inner-nav__link-text">Commercial</span>
 			<span class="header-inner-nav__link-count">({{ commercialCount }})</span>
 		</nuxt-link>
-		<nuxt-link to="/" class="header-inner-nav__link alfaLink">
+		<nuxt-link to="/editorial" class="header-inner-nav__link alfaLink">
 			<span class="header-inner-nav__link-text">Editorial</span>
 			<span class="header-inner-nav__link-count">({{ editorialCount }})</span>
 		</nuxt-link>

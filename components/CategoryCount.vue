@@ -8,7 +8,7 @@
 
 <template>
 
-	<div class="commercial-count vt h5">
+	<div class="category-count vt h5">
 		({{ totalProjects }})
 	</div>
 
@@ -16,5 +16,5 @@
 
 
 <style lang="scss" scoped>
-.commercial-count {}
+.category-count {}
 </style>

@@ -9,9 +9,9 @@
 <template>
 
 		<img
-			class="commercial-gallery__img"
+			class="category-gallery__img"
 			:src="src"
-			alt="commercial gallery image"
+			alt="category gallery image"
 		/>
 
 </template>

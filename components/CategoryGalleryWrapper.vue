@@ -1,6 +1,6 @@
 <template>
 
-	<div class="commercial-gallery__wrapper">
+	<div class="category-gallery__wrapper">
 		<slot />
 	</div>
 
@@ -8,7 +8,7 @@
 
 
 <style lang="scss" scoped>
-.commercial-gallery__wrapper {
+.category-gallery__wrapper {
 	padding-left: 50vw;
 	padding-right: 10vw;
 	display: flex;
