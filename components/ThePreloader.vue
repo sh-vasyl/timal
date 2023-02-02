@@ -35,7 +35,21 @@
 	let tl = gsap.timeline()
 
 	tryOnMounted(() => {
+		setPhotosPositions()
+		animation()
+	})
 
+	function setPhotosPositions() {
+		preloaderPhotoItem.value.forEach((item, i) => {
+			gsap.set(item.$el, {
+				left: Math.floor(Math.random() * (85 - 15) + 10) + 'vw',
+				top: Math.floor(Math.random() * (85 - 10) + 10) + 'vh',
+			})
+		})
+	}
+
+
+	function animation() {
 		// Scroll off
 		ScrollSmoother.get().paused(true)
 
@@ -115,7 +129,8 @@
 
 			},
 		})
-	})
+	}
+
 
 </script>
 
