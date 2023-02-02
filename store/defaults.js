@@ -4,6 +4,7 @@ export const useDefaultStore = defineStore('default', {
   state: () => ({
 		isPreloaderVisible: true,
 		category: null,
+		transitionComplete: false,
 	}),
 	actions: {
 		hidePreloader() {
@@ -14,6 +15,9 @@ export const useDefaultStore = defineStore('default', {
 		},
 		editorialCategory() {
 			this.category = 1
+		},
+		toggleTransitionComplete(value) {
+			this.transitionComplete = value;
 		}
   },
   // getters: {

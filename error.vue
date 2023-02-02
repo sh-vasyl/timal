@@ -2,26 +2,28 @@
 
 <template>
 
-	<div id="viewport">
-		<ThePreloader />
-		<TheHeaderInner />
-		<TheSmoothWrapper>
-			<TheWrapper class="wrapper-inner">
-				<ErrorView>
-					<TheTitle class="--darken">
-						<ErrorTitle />
-					</TheTitle>
+	<ClientOnly>
+		<div id="viewport">
+			<ThePreloader />
+			<TheHeaderInner />
+			<TheSmoothWrapper>
+				<TheWrapper class="wrapper-inner">
+					<ErrorView>
+						<TheTitle class="--darken">
+							<ErrorTitle />
+						</TheTitle>
 
-					<TheActions class="--darken">
-						<ErrorToHome ref="errorToHome" />
-					</TheActions>
+						<TheActions class="--darken">
+							<ErrorToHome ref="errorToHome" />
+						</TheActions>
 
 
-					<ErrorNumber ref="errorToHome" />
-				</ErrorView>
-			</TheWrapper>
-		</TheSmoothWrapper>
-	</div>
+						<ErrorNumber ref="errorToHome" />
+					</ErrorView>
+				</TheWrapper>
+			</TheSmoothWrapper>
+		</div>
+	</ClientOnly>
 
 </template>
 

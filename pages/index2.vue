@@ -2,13 +2,14 @@
 import gsap from 'gsap'
 import transitionConfig from '@/helpers/transitionConfig'
 
-	const store = useDefaultStore()
 
 	/**
 	 * Transition beetwen pages
 	 */
 	definePageMeta({ pageTransition: transitionConfig })
 	const { transitionState } = useTransitionComposable()
+
+	const store = useDefaultStore()
 
 	/**
 	 * API

@@ -6,6 +6,24 @@
 
 	const store = useDefaultStore()
 
+	const { transitionState } = useTransitionComposable()
+
+	/**
+	 * Animate
+	 */
+	// Animate after route change
+	watch(() => transitionState.transitionComplete, (newValue) => {
+		if (newValue) {
+			initGalleryScroll()
+		}
+	});
+
+	// Animate after preloader
+	watch(() => store.isPreloaderVisible, () => {
+		initGalleryScroll()
+	})
+
+
 	/**
 	 * API
 	 */
@@ -41,6 +59,23 @@
 	/**
 	 * Variables
 	 */
+	const itemWidth = ref(45),
+	      itemScale = ref(0.5),
+
+	      galleryPadding = ref(110),
+				galleryScrollSpeed = ref(7),
+				galleryScrollDistance = ref(250),
+
+				viewAllItemWidth = ref(7.77),
+				viewAllItemHeight = ref(10.4),
+	      viewAllAnimationDuration = ref(1.5),
+
+				galleryTitleSmallSize = ref(5),
+				galleryTitleBigSize = ref(8.75),
+				galleryMorePosition = ref(-24.5),
+
+				dimensions = ref('vw')
+
 	const shootingView = ref(null)
 	const shootingTitle = ref(null)
 	const shootingDescr = ref(null)
@@ -52,30 +87,26 @@
 	const shootingCount = ref(null)
 
 	const totalImages = ref(0)
-	const itemWidth = ref(0)
 	const scaleProperties = ref([])
 
 	const currentNumberImage = ref(1)
 	const currentScrollPosition = ref(0)
 	const toggleViewMode = ref(false)
 
-	const animationDuration = ref(1.5)
-	const animationDistance = ref(250)
-
-	/**
-	 * (after route change or preloader)
-	 */
 	tryOnMounted(() => {
 		getTotalImages()
-		getItemWidth()
-		setItemsPosition()
-		if(!toggleViewMode.value) initGalleryScroll()
+		setItemsWidthAndPosition()
+		setGalleryWidth()
 	})
 
-	function setItemsPosition() {
+	/**
+	 * Functions
+	 */
+	function setItemsWidthAndPosition() {
 		shootingGalleryItem.value.forEach((item, i) => {
 			gsap.set(item.$el, {
-				left: `calc(55vw + ${item.$el.clientWidth * i}px)`
+				width: itemWidth.value + dimensions.value,
+				left: (galleryPadding.value / 2) + (itemWidth.value * i) + dimensions.value
 			})
 		})
 	}
@@ -84,13 +115,15 @@
 		totalImages.value = shootingGalleryItem.value.length
 	}
 
-	function getItemWidth() {
-		itemWidth.value = shootingGalleryItem.value[0].$el.clientWidth
+	function setGalleryWidth() {
+		gsap.set(shootingGalleryWrapper.value.$el, {
+			width: galleryPadding.value + (itemWidth.value * totalImages.value) + dimensions.value
+		})
 	}
 
 	function initGalleryScroll() {
 		shootingGalleryItem.value.forEach((item, i) => {
-			if(i) gsap.set(item.$el, {scale: 0.5})
+			if(i) gsap.set(item.$el, {scale: itemScale.value})
 		})
 
 		let tlScroll = gsap.to(shootingGalleryWrapper.value.$el, {
@@ -100,11 +133,11 @@
 				trigger: shootingView.value.$el,
 				pin: true,
 				scrub: 0.1,
-				end: "+=700%",
+				end: `+=${galleryScrollSpeed.value}00%`,
 				onUpdate: (self) => {
 					currentScrollPosition.value = self.scroll()
 
-					if(currentScrollPosition.value > animationDistance.value) {
+					if(currentScrollPosition.value > galleryScrollDistance.value) {
 						animateTextTo()
 					} else {
 						animateTextFrom()
@@ -147,10 +180,10 @@
 					${-gsap.getProperty(shootingGalleryWrapper.value.$el, 'x')}px +
 					${Math.floor(Math.random() * (85 - 15) + 10)}vw)`,
 				top: Math.floor(Math.random() * (85 - 10) + 10) + 'vh',
-				width: '7.77vw',
+				width: `${viewAllItemWidth.value}vw`,
+				height: `${viewAllItemHeight.value}vw`,
 				scale: 1,
-				height: '10.4vw',
-				duration: animationDuration.value,
+				duration: viewAllAnimationDuration.value,
 			}, 0)
 		})
 	}
@@ -167,7 +200,7 @@
 			}
 		})
 
-		if(currentScrollPosition.value < animationDistance.value) {
+		if(currentScrollPosition.value < galleryScrollDistance.value) {
 			animateTextFrom()
 		}
 		animateContentFrom()
@@ -175,15 +208,14 @@
 
 		shootingGalleryItem.value.forEach((item, i) => {
 			tl.to(item.$el, {
-				left: `calc(55vw + ${itemWidth.value * i}px)`,
+				width: itemWidth.value + dimensions.value,
+				left: (galleryPadding.value / 2) + (itemWidth.value * i) + dimensions.value,
 				top: 0,
 				x: 0,
 				y: 0,
-				width: '45vw',
 				height: '100%',
 				scale: scaleProperties.value[i],
-				duration: animationDuration.value,
-
+				duration: viewAllAnimationDuration.value,
 			}, 0)
 		})
 	}
@@ -228,13 +260,13 @@
 	}
 
 	function animateTextTo() {
-		gsap.to(shootingTitle.value.$el, { fontSize: "5vw" })
+		gsap.to(shootingTitle.value.$el, { fontSize: galleryTitleSmallSize.value + dimensions.value })
 		gsap.to(shootingDescr.value.$el, { autoAlpha: 0, x: -100 })
-		gsap.to(shootingMore.value.$el, { x: '-24.5vw' })
+		gsap.to(shootingMore.value.$el, { x: galleryMorePosition.value + dimensions.value })
 	}
 
 	function animateTextFrom() {
-		gsap.to(shootingTitle.value.$el, { fontSize: "8.75vw" })
+		gsap.to(shootingTitle.value.$el, { fontSize: galleryTitleBigSize.value + dimensions.value })
 		gsap.to(shootingDescr.value.$el, { autoAlpha: 1, x: 0 })
 		gsap.to(shootingMore.value.$el, { x: 0 })
 	}

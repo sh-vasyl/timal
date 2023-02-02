@@ -2,34 +2,46 @@
 
 	import gsap from 'gsap'
 
+	const { transitionState } = useTransitionComposable()
+	const store = useDefaultStore()
+
 	/**
-	 * Animation hero title
+	 * Animation
 	 */
 	const homeHeroTitle = ref(null)
 	const homeHeroTitleWrap = ref(null)
-	let tl = gsap.timeline()
 
-	// on scroll
 	tryOnMounted(() => {
-
-		setTimeout(() => {
-			tl.to(homeHeroTitle.value, {
-				opacity: 0,
-				scaleX: 1.2,
-				scrollTrigger: {
-					trigger: '.home-hero',
-					scrub: true,
-					start: 'top top',
-					end: 'center 25%'
-				}
-			})
-		}, 1)
+		gsap.set(homeHeroTitleWrap.value, { opacity: 0, yPercent: 25 })
 	})
 
-	// after route change
-	tryOnMounted(() => {
-		gsap.from(homeHeroTitleWrap.value, { opacity: 0, yPercent: 25, duration: 1.5, delay: 0.5 })
-	})
+	watch(() => transitionState.transitionComplete, (newValue) => {
+    if (newValue) {
+			showTitle()
+			onScrollTitle()
+    }
+  })
+	watch(() => store.isPreloaderVisible, () => {
+		onScrollTitle()
+  })
+
+
+	function showTitle() {
+		gsap.to(homeHeroTitleWrap.value, { opacity: 1, yPercent: 0, duration: 1.5, delay: 0.5 })
+	}
+
+	function onScrollTitle() {
+		gsap.to(homeHeroTitle.value, {
+			opacity: 0,
+			scaleX: 1.2,
+			scrollTrigger: {
+				trigger: '.home-hero',
+				scrub: true,
+				start: 'top top',
+				end: 'center 25%'
+			}
+		})
+	}
 
 </script>
 

@@ -1,12 +1,27 @@
 <script setup>
+	import gsap from 'gsap'
 	/**
-	 * Animate first screen
+	 * Animate
 	 */
+	const { transitionState } = useTransitionComposable()
 	const store = useDefaultStore()
+
 	const heroTitle = ref(null)
+
 	const { animate } = useFadeLeft()
-	tryOnMounted(() => {if(!store.isPreloaderVisible) animate(heroTitle.value)})
-	watch(() => store.isPreloaderVisible, () => animate(heroTitle.value))
+
+	tryOnMounted(() => {
+		gsap.set(heroTitle.value, { opacity: 0, xPercent: -150 })
+	})
+
+	watch(() => transitionState.transitionComplete, (newValue) => {
+    if (newValue) {
+			animate(heroTitle.value)
+    }
+  })
+	watch(() => store.isPreloaderVisible, () => {
+		animate(heroTitle.value)
+  })
 
 </script>
 

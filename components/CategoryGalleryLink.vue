@@ -2,14 +2,34 @@
 
 	import gsap from 'gsap'
 
-	const categoryGalleryLink = ref([])
-
 	/**
 	 * Props
 	 */
 	defineProps({
 		href: String
 	})
+
+	/**
+	 * Animate
+	 */
+	const { transitionState } = useTransitionComposable()
+	const { animate } = useFadeIn()
+	const store = useDefaultStore()
+
+	const categoryGalleryLink = ref(null)
+
+	tryOnMounted(() => {
+		gsap.set(categoryGalleryLink.value.$el, { opacity: 0 })
+	})
+
+	watch(() => transitionState.transitionComplete, (newValue) => {
+    if (newValue) {
+			animate(categoryGalleryLink.value.$el)
+    }
+  })
+	watch(() => store.isPreloaderVisible, () => {
+		animate(categoryGalleryLink.value.$el)
+  })
 
 	/**
 	 * Set random rotation

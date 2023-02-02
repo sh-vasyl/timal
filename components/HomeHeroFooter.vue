@@ -2,23 +2,46 @@
 
 	import gsap from 'gsap'
 
+	const { transitionState } = useTransitionComposable()
+
 	/**
-	 * Animation Footer
+	 * Animation
 	 */
 	const store = useDefaultStore()
 	const heroFooter = ref(null)
 
-	function anim() {
+	// Hide elements to animate
+	tryOnMounted(() => {
+		hideElements()
+	})
+
+	// Animate after route change
+	watch(() => transitionState.transitionComplete, (newValue) => {
+    if (newValue) {
+			animateFooter()
+    }
+  })
+
+	// Animate after preloader
+	watch(() => store.isPreloaderVisible, () => {
+		animateFooter()
+  })
+
+	/**
+	 * Functions
+	 */
+	function animateFooter() {
 		gsap.to(heroFooter.value, {
 			opacity: 1,
-			y: 0,
+			yPercent: 0,
 			duration: 1,
 			delay: 0.5
 		})
 	}
 
-	tryOnMounted(() => {if(!store.isPreloaderVisible) anim()})
-	watch(() => store.isPreloaderVisible, () => anim())
+	function hideElements() {
+		gsap.set(heroFooter.value, {opacity: 0, yPercent: 100})
+	}
 
 </script>
 
@@ -38,8 +61,6 @@
 	bottom: vw(16px);
 	left: 0;
 	width: 100vw;
-	opacity: 0;
-	transform: translateY(100%);
 }
 
 .home-hero-footer__wrap {

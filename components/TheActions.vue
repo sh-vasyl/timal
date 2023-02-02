@@ -1,12 +1,27 @@
 <script setup>
+	import gsap from 'gsap'
 	/**
-	 * Animate first screen
+	 * Animate
 	 */
+	const { transitionState } = useTransitionComposable()
 	const store = useDefaultStore()
+
 	const heroActions = ref(null)
+
 	const { animate } = useFadeIn()
-	tryOnMounted(() => {if(!store.isPreloaderVisible) animate(heroActions.value)})
-	watch(() => store.isPreloaderVisible, () => animate(heroActions.value))
+
+	tryOnMounted(() => {
+		gsap.set(heroActions.value, { opacity: 0 })
+	})
+
+	watch(() => transitionState.transitionComplete, (newValue) => {
+    if (newValue) {
+			animate(heroActions.value)
+    }
+  })
+	watch(() => store.isPreloaderVisible, () => {
+		animate(heroActions.value)
+  })
 
 </script>
 <template>

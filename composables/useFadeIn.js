@@ -3,10 +3,11 @@ import gsap from 'gsap'
 export default function useFadeIn() {
 
 	function animate(el) {
-		gsap.from(el, {
-			opacity: 0,
+		gsap.to(el, {
+			opacity: 1,
 			duration: 1,
-			delay: 0.5
+			delay: 0.5,
+			clearProps: 'opacity'
 		})
 	}
 

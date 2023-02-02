@@ -47,6 +47,7 @@
 			onStart: () => {
 				if(route.name === 'index') {
 					gsap.set('.home-hero-title', {top: 0, yPercent: 0})
+					gsap.set('.home-hero-title__wrap', {opacity: 1, yPercent: 0})
 				}
 				gsap.to(preloaderWrapper.value.$el, {
 					opacity: 1
@@ -85,9 +86,11 @@
 			onComplete: () => {
 				const endOfAnimationTl = gsap.timeline({
 					onStart: () => {
-						ScrollSmoother.get().paused(false)
 						store.hidePreloader()
 					},
+					onComplete: () => {
+						ScrollSmoother.get().paused(false)
+					}
 				})
 				endOfAnimationTl.to(preloader.value, {
 					autoAlpha: 0,

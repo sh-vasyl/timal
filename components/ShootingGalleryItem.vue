@@ -1,9 +1,33 @@
 <script setup>
 
+	import gsap from 'gsap'
+
 	defineProps({
 		src: String,
 		text: String
 	})
+
+	/**
+	 * Animate
+	 */
+	const { transitionState } = useTransitionComposable()
+	const { animate } = useFadeIn()
+	const store = useDefaultStore()
+
+	const shootingGalleryItem = ref(null)
+
+	tryOnMounted(() => {
+		gsap.set(shootingGalleryItem.value, { opacity: 0 })
+	})
+
+	watch(() => transitionState.transitionComplete, (newValue) => {
+    if (newValue) {
+			animate(shootingGalleryItem.value)
+    }
+  })
+	watch(() => store.isPreloaderVisible, () => {
+		animate(shootingGalleryItem.value)
+  })
 
 </script>
 
@@ -33,7 +57,6 @@
 
 .shooting-gallery__item {
 	height: 100%;
-	width: 45vw;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

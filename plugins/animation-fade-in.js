@@ -15,6 +15,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 			const tl = gsap.timeline({
 				scrollTrigger: {
 					trigger: el,
+
 					toggleActions: 'play none none none',
 					...scrollTrigger,
 				}

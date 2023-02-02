@@ -7,19 +7,37 @@
 		text: String
 	})
 
+	const { transitionState } = useTransitionComposable()
+
 	/**
-	 * Animation description
+	 * Animation
 	 */
 	const heroDescr = ref(null)
 	const store = useDefaultStore()
-	tryOnMounted(async() => {
-		await document.fonts.ready
-		if(!store.isPreloaderVisible) anim()
-	})
-	watch(() => store.isPreloaderVisible, () => anim())
 
-	function anim() {
-		let tl = gsap.timeline({ scrollTrigger: { trigger: heroDescr.value }})
+	// Hide elements to animate
+	tryOnMounted(() => {
+		hideElements()
+	})
+
+	// Animate after route change
+	watch(() => transitionState.transitionComplete, (newValue) => {
+    if (newValue) {
+			textLinesAnimate()
+    }
+  })
+
+	// Animate after preloader
+	watch(() => store.isPreloaderVisible, () => {
+		textLinesAnimate()
+  })
+
+
+	/**
+	 * Functions
+	 */
+	function textLinesAnimate() {
+		gsap.set(heroDescr.value, {opacity: 1})
 
 		const split = new SplitText(heroDescr.value, { type: 'lines', linesClass: 'mask' })
 		split.lines.forEach(line => {
@@ -28,10 +46,13 @@
 		gsap.set(heroDescr.value.querySelectorAll('.mask'), { overflow: 'hidden' })
 		const lines = heroDescr.value.querySelectorAll('.split-line')
 
-		setTimeout(() => {
-			tl.set(heroDescr.value, {opacity: 1})
-			tl.from(lines, { yPercent: 101, duration: 2, stagger: 0.2})
-		}, 300)
+		let tl = gsap.timeline()
+		tl.set(heroDescr.value, {opacity: 1}, 0)
+		tl.from(lines, { yPercent: 101, duration: 2, stagger: 0.2}, 0)
+	}
+
+	function hideElements() {
+		gsap.set(heroDescr.value, {opacity: 0})
 	}
 
 </script>

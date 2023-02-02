@@ -7,7 +7,7 @@ export default defineNuxtConfig({
 	},
 	pages: true,
 	app: {
-		pageTransition: { name: 'page', mode: 'in-out' },
+		// pageTransition: { name: 'page', mode: 'out-in' },
 		head: {
 			title: 'Tanya Timal',
 			htmlAttrs: {
@@ -79,6 +79,6 @@ export default defineNuxtConfig({
 		'@pinia/nuxt',
 	],
 	build: {
-		transpile: ['gsap', 'gsap/ScrollTrigger'],
+		transpile: ['gsap'],
 	},
 })

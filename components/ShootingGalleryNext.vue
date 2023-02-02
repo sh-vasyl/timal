@@ -1,15 +1,39 @@
 <script setup>
 
+	import gsap from "gsap"
+
 	defineProps({
 		text: String,
 		href: String
 	})
 
+	/**
+	 * Animate
+	 */
+	const { transitionState } = useTransitionComposable()
+	const { animate } = useFadeIn()
+	const store = useDefaultStore()
+
+	const shootingGalleryNext = ref(null)
+
+	tryOnMounted(() => {
+		gsap.set(shootingGalleryNext.value.$el, { opacity: 0 })
+	})
+
+	watch(() => transitionState.transitionComplete, (newValue) => {
+    if (newValue) {
+			animate(shootingGalleryNext.value.$el)
+    }
+  })
+	watch(() => store.isPreloaderVisible, () => {
+		animate(shootingGalleryNext.value.$el)
+  })
+
 </script>
 
 <template>
 
-	<nuxt-link :to="href" class="shooting-gallery-next alfaLink">
+	<nuxt-link ref="shootingGalleryNext" :to="href" class="shooting-gallery-next alfaLink">
 		<div class="shooting-gallery-next__text h5">(next)</div>
 		<div class="shooting-gallery-next__name h3">{{ text }}</div>
 	</nuxt-link>

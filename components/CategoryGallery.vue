@@ -1,12 +1,4 @@
 <script setup>
-	/**
-	 * Animate first screen
-	 */
-	const store = useDefaultStore()
-	const categoryGallery = ref(null)
-	const { animate } = useFadeBlur()
-	tryOnMounted(() => {if(!store.isPreloaderVisible) animate(categoryGallery.value)})
-	watch(() => store.isPreloaderVisible, () => animate(categoryGallery.value))
 
 </script>
 

@@ -1,13 +1,28 @@
 
 <script setup>
+	import gsap from 'gsap'
 	/**
-	 * Animate first screen
+	 * Animate
 	 */
+	const { transitionState } = useTransitionComposable()
 	const store = useDefaultStore()
+
 	const categorySignature = ref(null)
+
 	const { animate } = useSvg()
-	tryOnMounted(() => {if(!store.isPreloaderVisible) animate(categorySignature.value)})
-	watch(() => store.isPreloaderVisible, () => animate(categorySignature.value))
+
+	tryOnMounted(() => {
+		gsap.set(categorySignature.value, { opacity: 0 })
+	})
+
+	watch(() => transitionState.transitionComplete, (newValue) => {
+    if (newValue) {
+			animate(categorySignature.value)
+    }
+  })
+	watch(() => store.isPreloaderVisible, () => {
+		animate(categorySignature.value)
+  })
 
 </script>
 

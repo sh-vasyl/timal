@@ -1,19 +1,5 @@
 <script setup>
 
-	import gsap from 'gsap'
-
-	const shootingGalleryWrapper = ref(null)
-
-	// set wrapper width
-	tryOnMounted(() => {
-		const shootingGalleryItems = document.querySelectorAll('.shooting-gallery__item')
-		const totalItemsWidth = shootingGalleryItems[0].clientWidth * shootingGalleryItems.length
-
-		gsap.set(shootingGalleryWrapper.value, {
-			width: `calc(110vw + ${totalItemsWidth}px)`
-		})
-	})
-
 </script>
 
 <template>

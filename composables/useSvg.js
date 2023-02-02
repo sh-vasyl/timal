@@ -11,10 +11,14 @@ export default function useSvg() {
 			})
 		})
 
+		gsap.set(el, {
+			opacity: 1
+		})
+
 		gsap.to(paths, {
 			strokeDashoffset: 0,
 			duration: 1.5,
-			delay: 0.5,
+			delay: 1,
 			ease: 'none'
 		})
 	}

@@ -6,12 +6,29 @@
 
 	const store = useDefaultStore()
 
+	const { transitionState } = useTransitionComposable()
+
+	/**
+	 * Animate
+	 */
+	// Animate after route change
+	watch(() => transitionState.transitionComplete, (newValue) => {
+    if (newValue) {
+			initProjectsSlider()
+    }
+  });
+
+	// Animate after preloader
+	watch(() => store.isPreloaderVisible, () => {
+		initProjectsSlider()
+  })
+
 	/**
 	 * API
 	 */
 	const runTimeConfig = useRuntimeConfig()
 	const url = runTimeConfig.public.baseUrl
-	 const { data: categories } = await useAsyncData('categories', () => {
+	const { data: categories } = await useAsyncData('categories', () => {
 		return $fetch('/api/categories')
 	})
 
@@ -40,17 +57,16 @@
 	const currentScrollPosition = ref(0)
 
 	const animationDistance = ref(250)
-	const animationDragSpeed = ref(2)
-	const animationScrollSpeed = ref(4)
+	const animationDragSpeed = ref(3)
+	const animationScrollSpeed = ref(3)
 
-	/**
-	 * (after route change or preloader)
-	 */
 	tryOnMounted(() => {
 		getTotalProjects()
-		initProjectsSlider()
 	})
 
+	/**
+	 * Functions
+	 */
 	function getTotalProjects() {
 		totalProjects.value = categoryGalleryLink.value.length
 	}
@@ -201,6 +217,5 @@
 			ref="categoryProxy"
 		/>
 	</TheWrapper>
-
 
 </template>

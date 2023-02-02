@@ -2,6 +2,8 @@
 
 	import gsap from 'gsap'
 
+	const { transitionState } = useTransitionComposable()
+
 	/**
 	 * Api
 	 */
@@ -24,16 +26,37 @@
 	const store = useDefaultStore()
 	const headerInner = ref(null)
 
-	function anim() {
-		gsap.from(headerInner.value, {
-			opacity: 0,
-			yPercent: -100,
+	// Hide elements to animate
+	tryOnMounted(() => {
+		hideElements()
+	})
+
+	// Animate after route change
+	watch(() => transitionState.transitionComplete, (newValue) => {
+    if (newValue) {
+			animateHeader()
+    }
+  })
+
+	// Animate after preloader
+	watch(() => store.isPreloaderVisible, () => {
+		animateHeader()
+  })
+
+	/**
+	 * Functions
+	 */
+	function animateHeader() {
+		gsap.to(headerInner.value, {
+			opacity: 1,
+			yPercent: 0,
 			duration: 1
 		})
 	}
 
-	tryOnMounted(() => {if(!store.isPreloaderVisible) anim()})
-	watch(() => store.isPreloaderVisible, () => anim())
+	function hideElements() {
+		gsap.set(headerInner.value, {opacity: 0, yPercent: -100})
+	}
 
 </script>
 
