@@ -10,7 +10,6 @@ onMounted(() => {
 
 	<div id="viewport">
 		<ThePreloader />
-		<HeaderComponent />
 		<TheSmoothWrapper>
 			<slot />
 

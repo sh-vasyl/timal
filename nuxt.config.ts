@@ -71,7 +71,7 @@ export default defineNuxtConfig({
 		},
 	},
 	imports: {
-    dirs: ['store'],
+    dirs: ['store', 'helpers'],
   },
 	modules: [
 		'@nuxtjs/robots',

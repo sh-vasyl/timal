@@ -8,15 +8,11 @@ const pageTransition = {
   name: 'page-transiton',
 	mode: 'out-in',
 	onEnter: (el, done) => {
-		ScrollTrigger.refresh()
+
 		let tl = gsap.timeline({
 			paused: true,
 			onComplete() {
-
-				setTimeout(() => {
-					ScrollTrigger.refresh()
-
-				}, 1000)
+				setTimeout(() => ScrollTrigger.refresh(), 1)
 				toggleTransitionComplete(true)
 				done()
 			},
