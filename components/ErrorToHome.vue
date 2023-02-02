@@ -2,9 +2,9 @@
 
 <template>
 
-	<nuxt-link to="/" class="error-to-home vt h5">
+	<a href="/" class="error-to-home vt h5">
 		<span class="alfaLink">(HOMEPAGE)</span>
-	</nuxt-link>
+	</a>
 
 </template>
 

@@ -31,7 +31,7 @@ const pageTransition = {
 		let tl = gsap.timeline({
 			paused: true,
 			onComplete() {
-				ScrollTrigger.getAll().forEach(el => el.kill())
+				ScrollTrigger.killAll()
 				done()
 			}
 		})

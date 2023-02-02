@@ -57,7 +57,7 @@
 	const currentScrollPosition = ref(0)
 
 	const animationDistance = ref(250)
-	const animationDragSpeed = ref(3)
+	const animationDragSpeed = ref(0.5)
 	const animationScrollSpeed = ref(3)
 
 	tryOnMounted(() => {
@@ -72,6 +72,10 @@
 	}
 
 	function initProjectsSlider() {
+		console.log(ScrollTrigger.getAll());
+		setTimeout(() => {
+			console.log(ScrollTrigger.getAll());
+		}, 1000)
 		let tlScroll = gsap.to(categoryGalleryWrapper.value.$el, {
 			x: document.documentElement.clientWidth - categoryGalleryWrapper.value.$el.clientWidth,
 			ease: "none",
@@ -81,7 +85,11 @@
 				id: 'scroll',
 				scrub: 1,
 				end: `+=${animationScrollSpeed.value}00%`,
-				invalidateOnRefresh: true,
+				// invalidateOnRefresh: true,
+				markers: true,
+				onEnter: (self) => {
+					console.log(self);
+				},
 				onUpdate: (self) => {
 					currentScrollPosition.value = self.scroll()
 
@@ -113,6 +121,7 @@
 			},
 			onDrag() {
 				tlScroll.scrollTrigger.scroll(clamp(this.startScroll - (this.x - this.startX) * dragRatio));
+
 			},
 			onDragEnd() {
 				animateLinksFrom()
@@ -121,7 +130,8 @@
 
 		clamp = gsap.utils.clamp(tlScroll.scrollTrigger.start + 1, tlScroll.scrollTrigger.end - 1)
 		dragRatio = categoryGalleryWrapper.value.$el.clientWidth /
-									document.documentElement.clientWidth * animationDragSpeed.value
+									(document.documentElement.clientWidth * animationDragSpeed.value)
+
 
 	}
 

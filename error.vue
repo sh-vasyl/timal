@@ -1,11 +1,16 @@
-<script setup></script>
+<script setup>
+
+
+
+
+</script>
 
 <template>
 
-	<ClientOnly>
 		<div id="viewport">
+
 			<ThePreloader />
-			<TheHeaderInner />
+			<!-- <TheHeaderInner /> -->
 			<TheSmoothWrapper>
 				<TheWrapper class="wrapper-inner">
 					<ErrorView>
@@ -17,13 +22,11 @@
 							<ErrorToHome ref="errorToHome" />
 						</TheActions>
 
-
 						<ErrorNumber ref="errorToHome" />
 					</ErrorView>
 				</TheWrapper>
 			</TheSmoothWrapper>
 		</div>
-	</ClientOnly>
 
 </template>
 

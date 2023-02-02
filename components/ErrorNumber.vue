@@ -1,12 +1,28 @@
 <script setup>
+	import gsap from 'gsap'
 	/**
-	 * Animate first screen
+	 * Animate
 	 */
+	const { transitionState } = useTransitionComposable()
 	const store = useDefaultStore()
+
 	const errorNumber = ref(null)
+
 	const { animate } = useSvg()
-	tryOnMounted(() => {if(!store.isPreloaderVisible) animate(errorNumber.value)})
-	watch(() => store.isPreloaderVisible, () => animate(errorNumber.value))
+
+	tryOnMounted(() => {
+		gsap.set(errorNumber.value, { opacity: 0 })
+	})
+
+	watch(() => transitionState.transitionComplete, (newValue) => {
+    if (newValue) {
+			animate(errorNumber.value)
+    }
+  })
+	watch(() => store.isPreloaderVisible, () => {
+		animate(errorNumber.value)
+  })
+
 
 </script>
 <template>
