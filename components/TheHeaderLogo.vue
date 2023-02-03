@@ -1,30 +1,44 @@
 <script setup>
 
 	import gsap from 'gsap'
+	/**
+	 * Animate
+	 */
+	const { transitionState } = useTransitionComposable()
+	const store = useDefaultStore()
 
 	const headerLogoIcon = ref(null)
 	const headerLogoName = ref(null)
 
-	tryOnMounted(() => {
-		// gsap.to(headerLogoIcon.value, {
-		// 	opacity: 0,
-		// 	scrollTrigger: {
-		// 		trigger: '.home-hero',
-		// 		scrub: true,
-		// 		start: 'top top',
-		// 		end: 'center 25%'
-		// 	}
-		// })
-		// gsap.to(headerLogoName.value, {
-		// 	opacity: 1,
-		// 	scrollTrigger: {
-		// 		trigger: '.home-hero',
-		// 		scrub: true,
-		// 		start: 'top top',
-		// 		end: 'center 25%'
-		// 	}
-		// })
-	})
+	watch(() => transitionState.transitionComplete, (newValue) => {
+    if (newValue) {
+			animateLogo()
+    }
+  })
+	watch(() => store.isPreloaderVisible, () => {
+		animateLogo()
+  })
+
+	function animateLogo() {
+		gsap.to(headerLogoIcon.value, {
+			opacity: 0,
+			scrollTrigger: {
+				trigger: '.home-hero',
+				scrub: true,
+				start: 'top top',
+				end: 'center 25%'
+			}
+		})
+		gsap.to(headerLogoName.value, {
+			opacity: 1,
+			scrollTrigger: {
+				trigger: '.home-hero',
+				scrub: true,
+				start: 'top top',
+				end: 'center 25%'
+			}
+		})
+	}
 
 </script>
 
