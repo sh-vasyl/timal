@@ -7,7 +7,7 @@
 		text: String
 	})
 
-	const { transitionState } = useTransitionComposable()
+
 
 	/**
 	 * Animation
@@ -21,7 +21,7 @@
 	})
 
 	// Animate after route change
-	watch(() => transitionState.transitionComplete, (newValue) => {
+	watch(() => store.transitionComplete, (newValue) => {
     if (newValue) {
 			textLinesAnimate()
     }

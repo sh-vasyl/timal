@@ -20,7 +20,4 @@ export const useDefaultStore = defineStore('default', {
 			this.transitionComplete = value;
 		}
   },
-  // getters: {
-  //   doubleCount: (state) => state.count * 2,
-  // },
 })

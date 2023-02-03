@@ -7,13 +7,13 @@ export default defineNuxtPlugin((nuxtApp) => {
 			await document.fonts.ready
 
 			const store = useDefaultStore()
-			const { transitionState } = useTransitionComposable()
+
 
 			watch(() => store.isPreloaderVisible, () => {
 				anim()
 			})
 
-			watch(() => transitionState.transitionComplete, (newValue) => {
+			watch(() => store.transitionComplete, (newValue) => {
 				if (newValue) {
 					anim()
 				}

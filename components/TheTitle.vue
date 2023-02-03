@@ -3,7 +3,7 @@
 	/**
 	 * Animate
 	 */
-	const { transitionState } = useTransitionComposable()
+
 	const store = useDefaultStore()
 
 	const heroTitle = ref(null)
@@ -14,7 +14,7 @@
 		gsap.set(heroTitle.value, { opacity: 0, xPercent: -150 })
 	})
 
-	watch(() => transitionState.transitionComplete, (newValue) => {
+	watch(() => store.transitionComplete, (newValue) => {
     if (newValue) {
 			animate(heroTitle.value)
     }

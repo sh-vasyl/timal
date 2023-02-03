@@ -1,10 +1,11 @@
 <script setup>
 
-const { toggleTransitionComplete } = useTransitionComposable();
+	const store = useDefaultStore()
 
-onMounted(() => {
-  toggleTransitionComplete(true);
-});
+	tryOnMounted(() => {
+		store.toggleTransitionComplete(false)
+	});
+
 </script>
 <template>
 

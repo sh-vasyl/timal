@@ -4,7 +4,7 @@
 	/**
 	 * Animate
 	 */
-	const { transitionState } = useTransitionComposable()
+
 	const store = useDefaultStore()
 
 	const shootingSignature = ref(null)
@@ -15,7 +15,7 @@
 		gsap.set(shootingSignature.value, { opacity: 0 })
 	})
 
-	watch(() => transitionState.transitionComplete, (newValue) => {
+	watch(() => store.transitionComplete, (newValue) => {
     if (newValue) {
 			animate(shootingSignature.value)
     }

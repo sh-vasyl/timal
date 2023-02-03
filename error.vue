@@ -1,8 +1,4 @@
 <script setup>
-
-
-
-
 </script>
 
 <template>

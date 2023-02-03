@@ -8,7 +8,7 @@ import transitionConfig from '@/helpers/transitionConfig'
 	 * Transition beetwen pages
 	 */
 	definePageMeta({ pageTransition: transitionConfig })
-	const { transitionState } = useTransitionComposable()
+
 
 	/**
 	 * API
@@ -67,7 +67,7 @@ import transitionConfig from '@/helpers/transitionConfig'
 	let interval;
 
 	// Animate after route change
-	watch(() => transitionState.transitionComplete, (newValue) => {
+	watch(() => store.transitionComplete, (newValue) => {
     if (newValue) {
 			interval = setInterval(() => changeImgs(), timeChangeImg.value)
     }

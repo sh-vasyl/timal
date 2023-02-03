@@ -12,7 +12,7 @@
 	/**
 	 * Animate
 	 */
-	const { transitionState } = useTransitionComposable()
+
 	const { animate } = useFadeIn()
 	const store = useDefaultStore()
 
@@ -22,7 +22,7 @@
 		gsap.set(categoryGalleryLink.value.$el, { opacity: 0 })
 	})
 
-	watch(() => transitionState.transitionComplete, (newValue) => {
+	watch(() => store.transitionComplete, (newValue) => {
     if (newValue) {
 			animate(categoryGalleryLink.value.$el)
     }

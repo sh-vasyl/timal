@@ -2,7 +2,7 @@
 
 	import gsap from 'gsap'
 
-	const { transitionState } = useTransitionComposable()
+
 	const store = useDefaultStore()
 
 	/**
@@ -15,7 +15,7 @@
 		gsap.set(homeHeroTitleWrap.value, { opacity: 0, yPercent: 25 })
 	})
 
-	watch(() => transitionState.transitionComplete, (newValue) => {
+	watch(() => store.transitionComplete, (newValue) => {
     if (newValue) {
 			showTitle()
 			onScrollTitle()

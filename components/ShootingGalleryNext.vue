@@ -10,7 +10,7 @@
 	/**
 	 * Animate
 	 */
-	const { transitionState } = useTransitionComposable()
+
 	const { animate } = useFadeIn()
 	const store = useDefaultStore()
 
@@ -20,7 +20,7 @@
 		gsap.set(shootingGalleryNext.value.$el, { opacity: 0 })
 	})
 
-	watch(() => transitionState.transitionComplete, (newValue) => {
+	watch(() => store.transitionComplete, (newValue) => {
     if (newValue) {
 			animate(shootingGalleryNext.value.$el)
     }

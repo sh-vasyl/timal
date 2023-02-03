@@ -2,7 +2,7 @@
 
 	import gsap from 'gsap'
 
-	const { transitionState } = useTransitionComposable()
+
 
 	defineProps({
 		pageIndex: Boolean,
@@ -36,7 +36,7 @@
 	})
 
 	// Animate after route change
-	watch(() => transitionState.transitionComplete, (newValue) => {
+	watch(() => store.transitionComplete, (newValue) => {
     if (newValue) {
 			animateHeader()
     }

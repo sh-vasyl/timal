@@ -6,13 +6,13 @@
 	/**
 	 * Animate
 	 */
-	const { transitionState } = useTransitionComposable()
+
 	const store = useDefaultStore()
 
 	const headerLogoIcon = ref(null)
 	const headerLogoName = ref(null)
 
-	watch(() => transitionState.transitionComplete, (newValue) => {
+	watch(() => store.transitionComplete, (newValue) => {
     if (newValue) {
 			animateLogo()
     }

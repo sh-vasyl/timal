@@ -3,7 +3,7 @@
 	/**
 	 * Animate
 	 */
-	const { transitionState } = useTransitionComposable()
+
 	const store = useDefaultStore()
 
 	const errorNumber = ref(null)
@@ -14,7 +14,7 @@
 		gsap.set(errorNumber.value, { opacity: 0 })
 	})
 
-	watch(() => transitionState.transitionComplete, (newValue) => {
+	watch(() => store.transitionComplete, (newValue) => {
     if (newValue) {
 			animate(errorNumber.value)
     }

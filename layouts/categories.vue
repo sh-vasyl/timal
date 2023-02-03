@@ -7,13 +7,13 @@
 
 	const store = useDefaultStore()
 
-	const { transitionState } = useTransitionComposable()
+
 
 	/**
 	 * Animate
 	 */
 	// Animate after route change
-	watch(() => transitionState.transitionComplete, (newValue) => {
+	watch(() => store.transitionComplete, (newValue) => {
     if (newValue) {
 			initProjectsSlider()
     }
