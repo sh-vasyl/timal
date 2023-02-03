@@ -1,6 +1,8 @@
 <script setup>
 
 	import gsap from 'gsap'
+
+
 	/**
 	 * Animate
 	 */

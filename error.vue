@@ -10,7 +10,7 @@
 		<div id="viewport">
 
 			<ThePreloader />
-			<!-- <TheHeaderInner /> -->
+			<TheHeader :external-link="true" />
 			<TheSmoothWrapper>
 				<TheWrapper class="wrapper-inner">
 					<ErrorView>

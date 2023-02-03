@@ -289,7 +289,7 @@
 	<TheWrapper class="wrapper-inner">
 		<ClientOnly>
 			<Teleport to="#viewport">
-				<TheHeaderInner />
+				<TheHeader />
 			</Teleport>
 		</ClientOnly>
 

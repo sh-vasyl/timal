@@ -101,7 +101,7 @@ import transitionConfig from '@/helpers/transitionConfig'
   <TheWrapper>
 		<ClientOnly>
 			<Teleport to="#viewport">
-				<TheHeader />
+				<TheHeader :page-index="true" />
 			</Teleport>
 		</ClientOnly>
 

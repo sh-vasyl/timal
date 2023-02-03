@@ -4,6 +4,11 @@
 
 	const { transitionState } = useTransitionComposable()
 
+	defineProps({
+		pageIndex: Boolean,
+		externalLink: Boolean
+	})
+
 	/**
 	 * Api
 	 */
@@ -61,11 +66,23 @@
 </script>
 
 <template>
-	<header ref="header" class="header">
+	<header
+		ref="header"
+		class="header"
+		:class="{'header-inner': !pageIndex}"
+	>
 		<div class="header-head _container">
-			<TheHeaderLogo />
+			<TheHeaderInnerLogo
+				v-if="!pageIndex"
+				:external-link="externalLink"
+			>
+				<TheHeaderInnerLogoSvg />
+			</TheHeaderInnerLogo>
+			<TheHeaderLogo v-else />
+
 			<TheHeaderNav>
 				<TheHeaderNavLink
+					:external-link="externalLink"
 					:commercial-count="commercialCount"
 					:editorial-count="editorialCount"
 				/>
@@ -88,7 +105,7 @@
 }
 
 .header-inner {
-	color: $c-black;
+	mix-blend-mode: difference;
 }
 
 .header-head {

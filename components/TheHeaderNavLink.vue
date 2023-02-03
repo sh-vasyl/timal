@@ -3,36 +3,52 @@
 defineProps({
 	commercialCount: Number,
 	editorialCount: Number,
+	externalLink: Boolean
 })
 
+
 </script>
+
 <template>
 
-	<div class="header-nav__wrap">
-		<nuxt-link to="/commercial" class="header-nav__link alfaLink">
-			<span class="header-nav__link-text">Commercial</span>
-			<span class="header-nav__link-count">({{ commercialCount }})</span>
-		</nuxt-link>
-		<nuxt-link to="/editorial" class="header-nav__link alfaLink">
-			<span class="header-nav__link-text">Editorial</span>
-			<span class="header-nav__link-count">({{ editorialCount }})</span>
-		</nuxt-link>
-		<a href="mailto:shot@tanyatimal.studio" class="header-nav__link alfaLink">
-			<span class="header-nav__link-text">shot@tanyatimal.studio</span>
+	<div v-if="externalLink" class="header-nav__wrap">
+		<a href="/commercial" class="header-inner-nav__link alfaLink">
+			<span class="header-inner-nav__link-text">Commercial</span>
+			<span class="header-inner-nav__link-count">({{ commercialCount }})</span>
+		</a>
+		<a href="/editorial" class="header-inner-nav__link alfaLink">
+			<span class="header-inner-nav__link-text">Editorial</span>
+			<span class="header-inner-nav__link-count">({{ editorialCount }})</span>
+		</a>
+		<a href="mailto:shot@tanyatimal.studio" class="header-inner-nav__link alfaLink">
+			<span class="header-inner-nav__link-text">shot@tanyatimal.studio</span>
 		</a>
 	</div>
 
+	<div v-else class="header-nav__wrap">
+		<nuxt-link to="/commercial" class="header-inner-nav__link alfaLink">
+			<span class="header-inner-nav__link-text">Commercial</span>
+			<span class="header-inner-nav__link-count">({{ commercialCount }})</span>
+		</nuxt-link>
+		<nuxt-link to="/editorial" class="header-inner-nav__link alfaLink">
+			<span class="header-inner-nav__link-text">Editorial</span>
+			<span class="header-inner-nav__link-count">({{ editorialCount }})</span>
+		</nuxt-link>
+		<a href="mailto:shot@tanyatimal.studio" class="header-inner-nav__link alfaLink">
+			<span class="header-inner-nav__link-text">shot@tanyatimal.studio</span>
+		</a>
+	</div>
 
 </template>
 
 <style lang="scss" scoped>
 
-.header-nav__link {
+.header-inner-nav__link {
 	margin-left: vw(25px);
 	text-transform: uppercase;
 }
 
-.header-nav__link-count {
+.header-inner-nav__link-count {
 	font-family: $xl;
 	font-size: vw(12px);
 	line-height: 86%;
