@@ -26,13 +26,13 @@ const pageTransition = {
 	},
 
 	onLeave: (el, done) => {
-		ScrollTrigger.killAll()
+
 		toggleTransitionComplete(false);
 
 		let tl = gsap.timeline({
 			paused: true,
 			onComplete() {
-				// ScrollTrigger.killAll()
+				ScrollTrigger.killAll()
 				done()
 			}
 		})
