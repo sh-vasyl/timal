@@ -76,7 +76,6 @@
 
 		setTimeout(() => { ScrollSmoother.get().scrollTo(1)}, 1)
 
-
 		let tlScroll = gsap.to(categoryGalleryWrapper.value.$el, {
 			x: document.documentElement.clientWidth - categoryGalleryWrapper.value.$el.clientWidth,
 			ease: "none",
@@ -86,8 +85,6 @@
 				id: 'scroll',
 				scrub: 1,
 				end: `+=${animationScrollSpeed.value}00%`,
-				// invalidateOnRefresh: true,
-				markers: true,
 				onEnter: () => {
 					let clamp, dragRatio;
 
@@ -129,10 +126,6 @@
 		ScrollTrigger.addEventListener("scrollEnd", () => {
 			animateLinksFrom()
 		})
-
-
-
-
 
 	}
 
