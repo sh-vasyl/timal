@@ -1,6 +1,25 @@
+<script setup>
+import gsap from 'gsap'
+
+const categoryGalleryWrapper = ref(null)
+
+tryOnMounted(() => {
+	let mm = gsap.matchMedia()
+	mm.add("(max-width: 1023px)", () => {
+		gsap.set(categoryGalleryWrapper.value, {
+			paddingLeft: `calc(50vw - 206px)`
+		})
+	})
+	mm.add("(max-width: 767px)", () => {
+		gsap.set(categoryGalleryWrapper.value, {
+			paddingLeft: `calc(50vw - 130px)`
+		})
+	})
+})
+</script>
 <template>
 
-	<div class="category-gallery__wrapper">
+	<div ref="categoryGalleryWrapper" class="category-gallery__wrapper">
 		<slot />
 	</div>
 
@@ -14,5 +33,8 @@
 	display: flex;
 	width: max-content;
 	align-items: center;
+	@include max(sm) {
+		padding-left: 25vw;
+	}
 }
 </style>

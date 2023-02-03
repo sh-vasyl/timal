@@ -43,5 +43,23 @@
 	top: vw(582px);
 	transform: translateY(-50%) rotate(-180deg);
 	left: vw(758px);
+	@include max(bg) {
+		width: 299px;
+		height: 331px;
+		left: 558px;
+		top: 435px;
+	}
+	@include max(sm) {
+		transform: none;
+		top: 69px;
+		left: 15px;
+	}
+	@include max(xs) {
+		transform: none;
+		top: 52px;
+		left: 17px;
+		width: 222px;
+		height: 246px;
+	}
 }
 </style>

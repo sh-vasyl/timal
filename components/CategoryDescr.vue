@@ -17,5 +17,15 @@
 	line-height: 150%;
 	letter-spacing: 0.02em;
 	height: vw(320px);
+	@include max(bg) {
+		height: 304px;
+	}
+	@include max(sm) {
+		height: auto;
+		width: 304px
+	}
+	@include max(xs) {
+		width: 100%;
+	}
 }
 </style>

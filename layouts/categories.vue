@@ -43,6 +43,9 @@
 	/**
 	 * Variables
 	 */
+	const theTitle = ref(null)
+	const theActions = ref(null)
+
 	const categoryView = ref(null)
 	const categoryTitle = ref(null)
 	const categoryDescr = ref(null)
@@ -60,6 +63,31 @@
 	const animationDistance = ref(250)
 	const animationDragSpeed = ref(0.5)
 	const animationScrollSpeed = ref(3)
+
+	const galleryTitleSmallSize = ref(5),
+				galleryTitleBigSize = ref(8.75),
+
+				dimensions = ref('vw')
+
+	tryOnMounted(() => {
+		let mm = gsap.matchMedia();
+
+		mm.add("(max-width: 1439px)", () => {
+			galleryTitleBigSize.value = 96
+			galleryTitleSmallSize.value = 72
+			dimensions.value = 'px'
+		})
+
+		mm.add("(max-width: 1023px)", () => {
+			galleryTitleBigSize.value = 88
+			galleryTitleSmallSize.value = 64
+		})
+
+		mm.add("(max-width: 767px)", () => {
+			galleryTitleBigSize.value = 64
+			galleryTitleSmallSize.value = 40
+		})
+	})
 
 	tryOnMounted(() => {
 		getTotalProjects()
@@ -148,13 +176,42 @@
 	}
 
 	function animateTextTo() {
-		gsap.to(categoryTitle.value.$el, { fontSize: "5vw" })
-		gsap.to([categoryCount.value.$el, categoryDescr.value.$el], { autoAlpha: 0 })
+		let mm = gsap.matchMedia();
+
+		mm.add("(max-width: 1023px)", () => {
+			gsap.to(theTitle.value.$el, { bottom: '32px'})
+			gsap.to(theActions.value.$el, { bottom: '60px' })
+		})
+		mm.add("(max-width: 767px)", () => {
+			gsap.to(theActions.value.$el, { bottom: '44px' })
+		})
+		gsap.to(categoryTitle.value.$el, { fontSize: galleryTitleSmallSize.value + dimensions.value })
+
+		gsap.to(categoryDescr.value.$el, { autoAlpha: 0 })
+
+		mm.add("(min-width: 1440px)", () => {
+			gsap.to(categoryCount.value.$el, { autoAlpha: 0 })
+		})
 	}
 
 	function animateTextFrom() {
-		gsap.to(categoryTitle.value.$el, { fontSize: "8.75vw" })
-		gsap.to([categoryCount.value.$el, categoryDescr.value.$el], { autoAlpha: 1 })
+		let mm = gsap.matchMedia();
+
+		mm.add("(max-width: 1023px)", () => {
+			gsap.to(theTitle.value.$el, { bottom: '135px'})
+			gsap.to(theActions.value.$el, { bottom: '172px' })
+		})
+		mm.add("(max-width: 767px)", () => {
+			gsap.to(theTitle.value.$el, { bottom: '127px'})
+			gsap.to(theActions.value.$el, { bottom: '159px' })
+		})
+
+		gsap.to(categoryTitle.value.$el, { fontSize: galleryTitleBigSize.value + dimensions.value })
+		gsap.to(categoryDescr.value.$el, { autoAlpha: 1 })
+
+		mm.add("(min-width: 1440px)", () => {
+			gsap.to(categoryCount.value.$el, { autoAlpha: 1 })
+		})
 	}
 
 </script>
@@ -171,7 +228,10 @@
 		<CategoryView
 			ref="categoryView"
 		>
-			<TheTitle class="--darken">
+			<TheTitle
+				ref="theTitle"
+				class="--darken"
+			>
 				<CategoryTitle
 					ref="categoryTitle"
 					:text="dataCategoryTitle"
@@ -185,7 +245,9 @@
 				/>
 			</TheDescription>
 
-			<TheActions class="--darken">
+			<TheActions
+				ref="theActions"
+				class="--darken">
 				<CategoryCount
 					ref="categoryCount"
 					:total-projects="totalProjects"

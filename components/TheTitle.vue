@@ -49,4 +49,14 @@
 		left: 24px;
 	}
 }
+
+.category-view .hero-title {
+	@include max(sm) {
+		bottom: 135px
+	}
+	@include max(xs) {
+		bottom: 127px
+	}
+
+}
 </style>

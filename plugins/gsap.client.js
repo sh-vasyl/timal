@@ -9,10 +9,10 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 		gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, Draggable)
 	}
 
-	if (ScrollTrigger.isTouch === 1) {
+	if (ScrollTrigger.isTouch !== 1) {
     ScrollSmoother.create({
       ignoreMobileResize: true,
-			invalidateOnRefresh: true,
+			// invalidateOnRefresh: true,
     })
   } else {
 		ScrollSmoother.create({

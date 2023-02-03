@@ -40,6 +40,18 @@
 	z-index: 1;
 	bottom: vw(32px);
 	left: vw(387px);
+	@include max(bg) {
+		left: 210px;
+		bottom: 32px;
+	}
+	@include max(sm) {
+		left: 32px;
+	}
+	@include max(xs) {
+		left: 0;
+		padding-left: 24px;
+		padding-right: 24px;
+	}
 }
 
 </style>
