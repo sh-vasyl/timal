@@ -1,5 +1,6 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import { useTransitionComposable } from '../composables/transition-composable';
 
 const { toggleTransitionComplete } = useTransitionComposable();
@@ -8,7 +9,6 @@ const pageTransition = {
   name: 'page-transiton',
 	mode: 'out-in',
 	onEnter: (el, done) => {
-
 		let tl = gsap.timeline({
 			paused: true,
 			onComplete() {
@@ -26,12 +26,13 @@ const pageTransition = {
 	},
 
 	onLeave: (el, done) => {
+		ScrollTrigger.killAll()
 		toggleTransitionComplete(false);
 
 		let tl = gsap.timeline({
 			paused: true,
 			onComplete() {
-				ScrollTrigger.killAll()
+				// ScrollTrigger.killAll()
 				done()
 			}
 		})

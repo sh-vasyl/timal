@@ -1,6 +1,7 @@
 <script setup>
 
 	import gsap from 'gsap'
+	import { ScrollSmoother } from 'gsap/ScrollSmoother'
 	import { ScrollTrigger } from 'gsap/ScrollTrigger'
 	import { Draggable } from 'gsap/Draggable'
 
@@ -72,10 +73,10 @@
 	}
 
 	function initProjectsSlider() {
-		console.log(ScrollTrigger.getAll());
-		setTimeout(() => {
-			console.log(ScrollTrigger.getAll());
-		}, 1000)
+
+		setTimeout(() => { ScrollSmoother.get().scrollTo(1)}, 1)
+
+
 		let tlScroll = gsap.to(categoryGalleryWrapper.value.$el, {
 			x: document.documentElement.clientWidth - categoryGalleryWrapper.value.$el.clientWidth,
 			ease: "none",
@@ -87,8 +88,28 @@
 				end: `+=${animationScrollSpeed.value}00%`,
 				// invalidateOnRefresh: true,
 				markers: true,
-				onEnter: (self) => {
-					console.log(self);
+				onEnter: () => {
+					let clamp, dragRatio;
+
+					Draggable.create(categoryProxy.value.$el, {
+						trigger: categoryGalleryWrapper.value.$el,
+						type: "x",
+						onDragStart() {
+							clamp
+							this.startScroll = tlScroll.scrollTrigger.scroll()
+							animateLinksTo()
+						},
+						onDrag() {
+							tlScroll.scrollTrigger.scroll(clamp(this.startScroll - (this.x - this.startX) * dragRatio));
+						},
+						onDragEnd() {
+							animateLinksFrom()
+						}
+					});
+
+					clamp = gsap.utils.clamp(tlScroll.scrollTrigger.start + 1, tlScroll.scrollTrigger.end - 1)
+					dragRatio = categoryGalleryWrapper.value.$el.clientWidth /
+												(document.documentElement.clientWidth * animationDragSpeed.value)
 				},
 				onUpdate: (self) => {
 					currentScrollPosition.value = self.scroll()
@@ -109,28 +130,8 @@
 			animateLinksFrom()
 		})
 
-		let clamp, dragRatio;
 
-		Draggable.create(categoryProxy.value.$el, {
-			trigger: categoryGalleryWrapper.value.$el,
-			type: "x",
-			onDragStart() {
-				clamp
-				this.startScroll = tlScroll.scrollTrigger.scroll()
-				animateLinksTo()
-			},
-			onDrag() {
-				tlScroll.scrollTrigger.scroll(clamp(this.startScroll - (this.x - this.startX) * dragRatio));
 
-			},
-			onDragEnd() {
-				animateLinksFrom()
-			}
-		});
-
-		clamp = gsap.utils.clamp(tlScroll.scrollTrigger.start + 1, tlScroll.scrollTrigger.end - 1)
-		dragRatio = categoryGalleryWrapper.value.$el.clientWidth /
-									(document.documentElement.clientWidth * animationDragSpeed.value)
 
 
 	}
