@@ -87,6 +87,7 @@
 					:editorial-count="editorialCount"
 				/>
 			</TheHeaderNav>
+			<TheHeaderBurger />
 		</div>
 	</header>
 </template>
@@ -102,10 +103,22 @@
 	padding-top: vw(32px);
 	padding-bottom: vw(32px);
 	color: $c-white;
+	@include max(bg) {
+		padding-top: 32px;
+		padding-bottom: 32px;
+	}
+	@include max(xs) {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
 }
 
 .header-inner {
 	mix-blend-mode: difference;
+	@include max(sm) {
+		mix-blend-mode: normal;
+		color: $c-black;
+	}
 }
 
 .header-head {

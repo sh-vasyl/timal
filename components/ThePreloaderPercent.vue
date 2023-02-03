@@ -7,7 +7,7 @@
 
 <template>
 
-	<div class="preloader-percent s32">
+	<div class="preloader-percent h5">
 		{{ progress }}%
 	</div>
 
@@ -19,7 +19,15 @@
 	position: absolute;
 	bottom: vw(40px);
 	left: vw(32px);
-	font-family: $xl;
+	z-index: 1;
+	@include max(bg) {
+		left: 32px;
+		bottom: 40px;
+	}
+	@include max(xs) {
+		left: 24px;
+		bottom: 30px;
+	}
 }
 
 </style>

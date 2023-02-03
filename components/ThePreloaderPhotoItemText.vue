@@ -20,6 +20,14 @@
 	line-height: vw(16px);
 	letter-spacing: 0.523657px;
 	white-space: nowrap;
+	@include max(bg) {
+		margin-top: 9px;
+		font-size: 13px;
+		line-height: 1.2;
+	}
+	@include max(xs) {
+		font-size: 10px;
+	}
 }
 
 </style>

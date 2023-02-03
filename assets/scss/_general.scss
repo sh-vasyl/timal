@@ -13,6 +13,10 @@ body {
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	@include max(bg) {
+		font-size: 11px;
+		line-height: 1.2;
+	}
 
 }
 
@@ -24,8 +28,16 @@ body {
 
 ._container {
 	width: 100vw;
-	padding-left: 32px;
-	padding-right: 32px;
+	padding-left: vw(32px);
+	padding-right: vw(32px);
+	@include max(bg) {
+		padding-left: 32px;
+		padding-right: 32px;
+	}
+	@include max(xs) {
+		padding-left: 24px;
+		padding-right: 24px;
+	}
 }
 
 button,

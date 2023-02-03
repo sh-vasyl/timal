@@ -20,6 +20,9 @@ defineProps({
 
 .header-inner-logo {
 	position: relative;
+	@include max(sm) {
+		z-index: 3;
+	}
 }
 
 </style>

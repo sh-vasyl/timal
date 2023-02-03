@@ -31,6 +31,10 @@
 .vt {
 	writing-mode: vertical-rl;
 	transform: rotate(-180deg);
+	@include max(sm) {
+		writing-mode: unset;
+		transform: rotate(0);
+	}
 }
 
 .s32 {
@@ -43,6 +47,12 @@
 	line-height: 86%;
 	font-family: $xl;
 	text-transform: uppercase;
+	@include max(bg) {
+		font-size: 72px;
+	}
+	@include max(xs) {
+		font-size: 64px;
+	}
 }
 
 .h5 {
@@ -50,6 +60,9 @@
 	line-height: 86%;
 	font-family: $xl;
 	text-transform: uppercase;
+	@include max(bg) {
+		font-size: 24px;
+	}
 }
 
 .h6 {

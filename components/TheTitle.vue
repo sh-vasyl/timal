@@ -40,5 +40,13 @@
 	bottom: vw(32px);
 	left: vw(32px);
 	z-index: 1;
+	@include max(bg) {
+		bottom: 32px;
+		left: 32px;
+	}
+	@include max(xs) {
+		bottom: 24px;
+		left: 24px;
+	}
 }
 </style>

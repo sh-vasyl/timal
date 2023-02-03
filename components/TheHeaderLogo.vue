@@ -70,6 +70,10 @@
 .header-logo__icon {
 	width: vw(29px);
 	height: vw(29px);
+	@include max(bg) {
+		width: 29px;
+		height: 29px;
+	}
 }
 
 .header-logo__name {
@@ -81,6 +85,9 @@
 	left: vw(6px);
 	transform: translateY(-50%);
 	max-width: none;
+	@include max(bg) {
+		width: 150px;
+	}
 }
 
 </style>

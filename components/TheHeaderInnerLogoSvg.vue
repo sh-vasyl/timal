@@ -24,10 +24,17 @@
 .header-inner-logo__icon {
 	width: vw(119px);
 	height: vw(14px);
+	@include max(bg) {
+		width: 118px;
+		height: 14px;
+	}
 }
 
 .header-inner-logo__icon path {
 	fill: $c-white;
+	@include max(sm) {
+		fill: $c-black;
+	}
 }
 
 </style>

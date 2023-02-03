@@ -43,5 +43,23 @@
 	right: vw(32px);
 	width: vw(552px);
 	height: vw(281px);
+	@include max(bg) {
+		width: 549px;
+		height: 278px;
+		bottom: 32px;
+		rightr: 32px;
+	}
+	@include max(sm) {
+		bottom: auto;
+		right: auto;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	@include max(xs) {
+		width: 306px;
+		height: 155px;
+
+	}
 }
 </style>

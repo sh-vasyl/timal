@@ -40,6 +40,20 @@
 	top: 33.333%;
 	transform: translateY(-50%);
 	left: vw(387px);
+	@include max(bg) {
+		left: 210px;
+	}
+	@include max(sm) {
+		top: auto;
+		transform: none;
+		left: auto;
+		right: 32px;
+		bottom: 137px;
+	}
+	@include max(xs) {
+		right: 24px;
+		bottom: 110px;
+	}
 }
 
 
