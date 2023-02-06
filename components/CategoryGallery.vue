@@ -16,6 +16,7 @@
 	position: absolute;
 	top: 50%;
 	width: 100vw;
+	height: 100%;
 	left: 0;
 	transform: translateY(-50%);
 }

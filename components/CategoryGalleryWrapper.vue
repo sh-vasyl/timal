@@ -31,6 +31,7 @@ tryOnMounted(() => {
 	padding-left: 50vw;
 	padding-right: 10vw;
 	display: flex;
+	height: 100%;
 	width: max-content;
 	align-items: center;
 	@include max(sm) {

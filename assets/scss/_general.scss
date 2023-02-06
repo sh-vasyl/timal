@@ -2,6 +2,9 @@ body,
 html {
 	overscroll-behavior: none;
 	touch-action: pan-y, pan-x;
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
 }
 
 body {

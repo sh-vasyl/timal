@@ -15,3 +15,11 @@
 		/>
 
 </template>
+
+<style>
+.category-gallery__img {
+	width: auto;
+	max-height: 100%;
+}
+
+</style>
