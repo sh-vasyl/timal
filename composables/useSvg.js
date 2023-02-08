@@ -19,7 +19,7 @@ export default function useSvg() {
 			strokeDashoffset: 0,
 			duration: 1.5,
 			delay: 1,
-			ease: 'none'
+			ease: 'Power2.easeOut'
 		})
 	}
 

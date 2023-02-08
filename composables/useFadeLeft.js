@@ -6,7 +6,8 @@ export default function useFadeLeft() {
 		gsap.to(el, {
 			opacity: 1,
 			xPercent: 0,
-			duration: 1.5
+			duration: 1.5,
+			ease: 'Power2.easeOut'
 		})
 	}
 

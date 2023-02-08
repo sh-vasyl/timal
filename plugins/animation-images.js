@@ -2,12 +2,10 @@ import { gsap } from 'gsap'
 
 export default defineNuxtPlugin((nuxtApp) => {
 
-  nuxtApp.vueApp.directive('animation-fade-in', {
+  nuxtApp.vueApp.directive('animation-images', {
     async mounted (el, binding) {
-			await document.fonts.ready
 
 			const store = useDefaultStore()
-
 
 			watch(() => store.isPreloaderVisible, () => {
 				anim()
@@ -20,17 +18,23 @@ export default defineNuxtPlugin((nuxtApp) => {
 			});
 
 			function anim() {
+				const img = el.querySelector('img')
 				let tl = gsap.timeline({
+					ease: 'Power2.easeOut',
 					scrollTrigger: {
 						trigger: el,
 					}
 				})
 				tl.from(el, {
-					duration: 1,
-					y: 30,
-					opacity: 0,
-					ease: 'Power2.easeOut'
+					height: 0,
+					duration: 1.2,
+					delay: 0.3,
 				})
+				tl.from(img, {
+					scale: 1.2,
+					duration: 1.2,
+					delay: 0.3
+				}, 0)
 			}
     },
 		getSSRProps (binding, vnode) {

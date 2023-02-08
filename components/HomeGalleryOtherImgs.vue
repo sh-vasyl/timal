@@ -26,7 +26,7 @@
 		})
 	})
 
-	const anim = () => {
+	function anim() {
 		const paralaxX = cursor.value.x
 		const paralaxY = -cursor.value.y
 		gsap.to(homeGalleryImg.value[0], {
@@ -56,22 +56,45 @@
 		})
 	}
 
+	function zoomIn(e) {
+		gsap.to(e.target, {
+			scale: 1.2
+		})
+	}
+	function zoomOut(e) {
+		gsap.to(e.target, {
+			scale: 1
+		})
+	}
+
 </script>
 
 <template>
 
-	<img
+	<div
 		v-for="(img, i) in images"
+		v-animation-images
 		ref="homeGalleryImg"
+		class="home-gallery-img__wrap"
 		:class="`home-gallery-img home-gallery-img-${i + 5}`"
-		:src="img.src"
-		alt="home gallery image"
-	/>
+	>
+		<img
+			:src="img.src"
+			alt="home gallery image"
+			@mouseenter="zoomIn"
+			@mouseleave="zoomOut"
+		/>
+	</div>
+
 
 </template>
 
 
 <style lang="scss" scoped>
+
+.home-gallery-img__wrap {
+	overflow: hidden;
+}
 .home-gallery-img {
 	position: absolute;
 	left: 50%;

@@ -18,7 +18,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 			const lines = el.querySelectorAll('.split-line')
 			const {
 				scrollTrigger = {},
-				duration = 2,
+				duration = 1.5,
 				stagger = 0.2,
 				delay = 0,
 				y = 100,

@@ -48,7 +48,7 @@
 
 		let tl = gsap.timeline()
 		tl.set(heroDescr.value, {opacity: 1}, 0)
-		tl.from(lines, { yPercent: 101, duration: 2, stagger: 0.2}, 0)
+		tl.from(lines, { yPercent: 101, duration: 1.2, stagger: 0.2, ease: 'Power2.easeOut'}, 0)
 	}
 
 	function hideElements() {

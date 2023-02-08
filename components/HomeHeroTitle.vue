@@ -27,13 +27,14 @@
 
 
 	function showTitle() {
-		gsap.to(homeHeroTitleWrap.value, { opacity: 1, yPercent: 0, duration: 1.5, delay: 0.5 })
+		gsap.to(homeHeroTitleWrap.value, { opacity: 1, yPercent: 0, duration: 1.2, delay: 0.3 })
 	}
 
 	function onScrollTitle() {
 		gsap.to(homeHeroTitle.value, {
 			opacity: 0,
 			scaleX: 1.2,
+			ease: 'Power2.easeOut',
 			scrollTrigger: {
 				trigger: '.home-hero',
 				scrub: true,

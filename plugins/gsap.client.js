@@ -11,10 +11,12 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 
 	if (ScrollTrigger.isTouch === 1) {
     ScrollSmoother.create({
+			smooth: 1,
       ignoreMobileResize: true,
 			normalizeScroll: true,
 			// invalidateOnRefresh: true,
     })
+
   } else {
 		ScrollSmoother.create({
 			smooth: 1,
@@ -24,11 +26,13 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 		})
 	}
 
+
+
 	return {
 		provide: {
       gsap,
       Draggable,
-      ScrollTrigger,
+      ScrollTrigger
     },
 	}
 

@@ -40,6 +40,7 @@
 	bottom: vw(32px);
 	left: vw(32px);
 	z-index: 1;
+	transform-origin: left bottom;
 	@include max(bg) {
 		bottom: 32px;
 		left: 32px;

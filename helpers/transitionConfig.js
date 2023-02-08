@@ -11,6 +11,7 @@ const pageTransition = {
 			paused: true,
 			onComplete() {
 				setTimeout(() => ScrollTrigger.refresh(), 1)
+				setTimeout(() => ScrollSmoother.get().paused(false), 0)
 				const store = useDefaultStore()
 				store.toggleTransitionComplete(true)
 				done()

@@ -54,7 +54,7 @@
 		gsap.to(header.value, {
 			opacity: 1,
 			yPercent: 0,
-			duration: 1
+			duration: 1,
 		})
 	}
 

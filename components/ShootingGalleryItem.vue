@@ -4,7 +4,8 @@
 
 	defineProps({
 		src: String,
-		text: String
+		text: String,
+		index: Number
 	})
 
 	/**
@@ -36,10 +37,15 @@
 	<div
 		ref="shootingGalleryItem"
 		class="shooting-gallery__item"
+		:id="`shootingGalleryItem-${index}`"
 	>
 		<div class="shooting-gallery__img-wrap">
 			<div class="shooting-gallery__img-bg"></div>
-			<img :src="src" class="shooting-gallery__img" alt="gallery image" />
+			<img
+				:src="src"
+				class="shooting-gallery__img"
+				alt="gallery image"
+			/>
 		</div>
 		<div class="shooting-gallery__item-bg"></div>
 		<div class="shooting-gallery__text">
@@ -61,12 +67,13 @@
 	flex-direction: column;
 	align-items: center;
 	position: absolute;
+	height: 100%;
 	top: 0;
 }
 
 .shooting-gallery__item-bg {
-	width: 150%;
-	height: 125%;
+	width: calc(100% + #{vw(50px)});
+	height: calc(100% + #{vw(50px)});
 	border-radius: vw(10px);
 	background: #E6E6E6;
 	position: absolute;
@@ -83,17 +90,21 @@
 }
 
 .shooting-gallery__img {
-	height: 100%;
-	width: 100%;
-	object-fit: cover;
 	position: relative;
 	z-index: 1;
+
+
+	max-width: none;
+	width: auto;
+	max-height: 100%;
 }
 
 .shooting-gallery__img-wrap {
 	position: relative;
 	height: 100%;
 	width: 100%;
+	display: flex;
+	align-items: center;
 }
 
 .shooting-gallery__img-bg {
@@ -117,7 +128,8 @@
 	white-space: nowrap;
 	opacity: 0;
 	padding: vw(1px) vw(3px) vw(3px);
-	position: relative;
+	position: absolute;
+	top: 100%;
 	z-index: 2;
 }
 

@@ -31,6 +31,7 @@
 	const preloaderTitleSecond = ref(null)
 	const preloaderPhotoItem = ref([])
 	const preloaderTimeInSeconds = ref(1)
+	const preloaderPhotosWrapper = ref(null)
 	let progress = ref(0)
 	let tl = gsap.timeline()
 
@@ -65,6 +66,12 @@
 				}
 				gsap.to(preloaderWrapper.value.$el, {
 					opacity: 1
+				})
+			},
+			onComplete: () => {
+				gsap.to(preloaderPhotosWrapper.value.$el, {
+					opacity: 0,
+					duration: 1
 				})
 			},
 			onUpdate: () => {
@@ -115,7 +122,6 @@
 					top: '50%',
 					y: '-50%',
 					duration: 1,
-					ease: 'none'
 				}, 0)
 
 				if(route.name === 'index') {
@@ -123,7 +129,6 @@
 						top: '50%',
 						y: '-50%',
 						duration: 1,
-						ease: 'none'
 					}, 0)
 				}
 
@@ -142,7 +147,7 @@
 				<ThePreloaderTitleSecond ref="preloaderTitleSecond" />
 			</ThePreloaderTitle>
 			<ThePreloaderPercent :progress="progress" />
-			<ThePreloaderPhotos>
+			<ThePreloaderPhotos ref="preloaderPhotosWrapper">
 				<ThePreloaderPhotoItem
 					v-for="(item, i) in preloaderPhotos"
 					ref="preloaderPhotoItem"

@@ -7,6 +7,7 @@ export default function useFadeLeft() {
 			opacity: 1,
 			xPercent: 0,
 			duration: 1.5,
+			ease: 'Power2.easeOut'
 		})
 	}
 
