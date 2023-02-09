@@ -104,10 +104,8 @@
 
 	function animation() {
 		// Scroll off
-		if (!ScrollTrigger.isTouch === 1) {
-			ScrollSmoother.get().paused(true)
-		}
 
+		ScrollSmoother.get().paused(true)
 
 		// Start animation
 		tl.to(progress, {
@@ -163,9 +161,7 @@
 						store.hidePreloader()
 					},
 					onComplete: () => {
-						if (!ScrollTrigger.isTouch === 1) {
-							ScrollSmoother.get().paused(false)
-						}
+						ScrollSmoother.get().paused(false)
 					}
 				})
 				endOfAnimationTl.to(preloader.value, {
