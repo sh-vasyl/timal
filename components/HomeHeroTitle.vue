@@ -1,6 +1,7 @@
 <script setup>
 
 	import gsap from 'gsap'
+	import { ScrollSmoother } from 'gsap/ScrollSmoother'
 
 
 	const store = useDefaultStore()
@@ -23,6 +24,7 @@
   })
 	watch(() => store.isPreloaderVisible, () => {
 		onScrollTitle()
+		ScrollSmoother.get().scrollTo(1)
   })
 
 
@@ -58,6 +60,8 @@
 
 
 <style lang="scss" scoped>
+
+
 .home-hero-title {
 	position: absolute;
 	top: 50%;

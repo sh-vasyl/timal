@@ -20,8 +20,8 @@
 	line-height: vw(16px);
 	letter-spacing: 0.523657px;
 	white-space: nowrap;
-	mix-blend-mode: difference;
-	color: $c-white;
+	// mix-blend-mode: difference;
+	// color: $c-white;
 	@include max(bg) {
 		margin-top: 9px;
 		font-size: 13px;
