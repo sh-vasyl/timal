@@ -112,6 +112,8 @@
 						},
 						onDrag() {
 							tlScroll.scrollTrigger.scroll(clamp(this.startScroll - (this.x - this.startX) * dragRatio));
+							console.log(this.x);
+							console.log(this.startX);
 						},
 						onDragEnd() {
 							animateLinksFrom()
