@@ -6,7 +6,7 @@
 
 	defineProps({
 		pageIndex: Boolean,
-		externalLink: Boolean
+		externalLink: Boolean,
 	})
 
 	/**
@@ -19,10 +19,12 @@
 	// commercial api
 	const commercialData = categories.value?.data?.data[0]
 	const commercialCount = commercialData?.attributes?.shootings?.data?.length
+	const categoryName1 = commercialData?.attributes?.name
 
 	// editorial api
 	const editorialData = categories.value?.data?.data[1]
 	const editorialCount = editorialData?.attributes?.shootings?.data?.length
+	const categoryName2 = editorialData?.attributes?.name
 
 	/**
 	 * Header animation
@@ -85,6 +87,8 @@
 					:external-link="externalLink"
 					:commercial-count="commercialCount"
 					:editorial-count="editorialCount"
+					:category-name1="categoryName1"
+					:category-name2="categoryName2"
 				/>
 			</TheHeaderNav>
 			<TheHeaderBurger />

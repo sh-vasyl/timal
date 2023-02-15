@@ -3,7 +3,9 @@
 defineProps({
 	commercialCount: Number,
 	editorialCount: Number,
-	externalLink: Boolean
+	externalLink: Boolean,
+	categoryName1: String,
+	categoryName2: String,
 })
 
 
@@ -12,12 +14,12 @@ defineProps({
 <template>
 
 	<div v-if="externalLink" class="header-nav__wrap">
-		<a href="/commercial" class="header-inner-nav__link">
-			<span class="header-inner-nav__link-text alfaLink">Commercial</span>
+		<a :href="`/${categoryName1.toLowerCase()}`" class="header-inner-nav__link">
+			<span class="header-inner-nav__link-text alfaLink">{{ categoryName1 }}</span>
 			<span class="header-inner-nav__link-count">({{ commercialCount }})</span>
 		</a>
-		<a href="/editorial" class="header-inner-nav__link">
-			<span class="header-inner-nav__link-text alfaLink">Editorial</span>
+		<a :href="`/${categoryName2.toLowerCase()}`" class="header-inner-nav__link">
+			<span class="header-inner-nav__link-text alfaLink">{{ categoryName2 }}</span>
 			<span class="header-inner-nav__link-count">({{ editorialCount }})</span>
 		</a>
 		<a href="mailto:shot@tanyatimal.studio" class="header-inner-nav__link">
@@ -26,12 +28,12 @@ defineProps({
 	</div>
 
 	<div v-else class="header-nav__wrap">
-		<nuxt-link to="/commercial" class="header-inner-nav__link">
-			<span class="header-inner-nav__link-text alfaLink">Commercial</span>
+		<nuxt-link :to="`/${categoryName1.toLowerCase()}`" class="header-inner-nav__link">
+			<span class="header-inner-nav__link-text alfaLink">{{ categoryName1 }}</span>
 			<span class="header-inner-nav__link-count">({{ commercialCount }})</span>
 		</nuxt-link>
-		<nuxt-link to="/editorial" class="header-inner-nav__link">
-			<span class="header-inner-nav__link-text alfaLink">Editorial</span>
+		<nuxt-link :to="`/${categoryName2.toLowerCase()}`" class="header-inner-nav__link">
+			<span class="header-inner-nav__link-text alfaLink">{{ categoryName2 }}</span>
 			<span class="header-inner-nav__link-count">({{ editorialCount }})</span>
 		</nuxt-link>
 		<a href="mailto:shot@tanyatimal.studio" class="header-inner-nav__link">

@@ -7,8 +7,6 @@
 
 	const store = useDefaultStore()
 
-
-
 	/**
 	 * Animate
 	 */
@@ -96,7 +94,6 @@
 				trigger: categoryView.value.$el,
 				pin: true,
 				id: 'scroll',
-				markers: true,
 				scrub: 1,
 				end: `+=${animationScrollSpeed.value}00%`,
 				onEnter: () => {
