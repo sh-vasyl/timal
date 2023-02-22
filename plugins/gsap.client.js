@@ -27,17 +27,10 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 		// 	width: '100vw',
 		// })
 
-		ScrollTrigger.normalizeScroll({
-			type: "touch,wheel,pointer", // now the page will be drag-scrollable on desktop because "pointer" is in the list
-			momentum: self => Math.min(3, self.velocityY / 1000) // dynamically control the duration of the momentum when flick-scrolling
-		});
-
 		ScrollSmoother.create({
 			smooth: 1,
-			// normalizeScroll: true,
-			// ignoreMobileResize: true,
-			smoothTouch: 0.1,
-			// invalidateOnRefresh: true,
+			smoothTouch: 0,
+  		ignoreMobileResize: true
 		})
   } else {
 		ScrollSmoother.create({
