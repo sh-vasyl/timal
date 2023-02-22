@@ -13,6 +13,7 @@
 	// Animate after route change
 	watch(() => store.transitionComplete, (newValue) => {
     if (newValue) {
+			removeBasicScroll()
 			initProjectsSlider()
     }
   });
@@ -20,6 +21,9 @@
 	// Animate after preloader
 	watch(() => store.isPreloaderVisible, () => {
 		initProjectsSlider()
+		setTimeout(() => {
+			removeBasicScroll()
+		}, 1000)
   })
 
 	/**
@@ -79,6 +83,13 @@
 	/**
 	 * Functions
 	 */
+	function removeBasicScroll() {
+		if (ScrollTrigger.isTouch === 1) {
+			console.log('over');
+			gsap.set('body, html', { overflow: 'hidden' })
+		}
+	}
+
 	function getTotalProjects() {
 		totalProjects.value = categoryGalleryLink.value.length
 	}

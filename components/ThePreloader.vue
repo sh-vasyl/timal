@@ -168,6 +168,7 @@
 					onComplete: () => {
 						if (ScrollTrigger.isTouch === 1) {
 							gsap.set('body, html', { clearProps: 'overflow' })
+							console.log('clear');
 						} else {
 							ScrollSmoother.get().paused(false)
 						}
