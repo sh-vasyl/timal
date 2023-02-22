@@ -10,29 +10,11 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 	}
 
 	if (ScrollTrigger.isTouch === 1) {
-		// ScrollTrigger.defaults({ scroller: '#viewport' })
-		// ScrollTrigger.normalizeScroll({ target: "#viewport", allowNestedScroll: true })
-
-		// gsap.set('body, html', {
-		// 	overflow: 'hidden',
-		// 	height: '100vh',
-		// 	width: '100vw'
-		// })
-
-		// gsap.set('#viewport', {
-		// 	position: 'fixed',
-		// 	overflowX: 'hidden',
-		// 	overflowY: 'scroll',
-		// 	height: '100vh',
-		// 	width: '100vw',
-		// })
-
 		ScrollSmoother.create({
 			smooth: 1,
 			smoothTouch: 0,
-  		ignoreMobileResize: true,
 			invalidateOnRefresh: true,
-			normalizeScroll: true,
+			ignoreMobileResize: true,
 		})
   } else {
 		ScrollSmoother.create({
