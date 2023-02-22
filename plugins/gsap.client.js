@@ -29,7 +29,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 
 		ScrollSmoother.create({
 			smooth: 1,
-			normalizeScroll: true,
+			// normalizeScroll: true,
 			ignoreMobileResize: true,
 			smoothTouch: 0.1,
 			invalidateOnRefresh: true,
