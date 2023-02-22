@@ -85,8 +85,7 @@
 	 */
 	function removeBasicScroll() {
 		if (ScrollTrigger.isTouch === 1) {
-			console.log('over');
-			gsap.set('body, html', { overflow: 'hidden' })
+			gsap.set('body, html', { overflow: 'hidden', position: 'fixed' })
 		}
 	}
 
