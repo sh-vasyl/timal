@@ -31,6 +31,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 			smooth: 1,
 			smoothTouch: 0,
   		ignoreMobileResize: true,
+			invalidateOnRefresh: true,
 			normalizeScroll: true,
 		})
   } else {
@@ -41,14 +42,6 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 			ignoreMobileResize: true,
 		})
 	}
-
-	// ScrollSmoother.create({
-	// 	smooth: 1,
-	// 	normalizeScroll: true,
-	// 	invalidateOnRefresh: true,
-	// 	ignoreMobileResize: true,
-	// 	smoothTouch: 0.1,
-	// })
 
 
 
