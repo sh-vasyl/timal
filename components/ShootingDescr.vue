@@ -26,6 +26,9 @@
 .shooting-descr {
 	line-height: 160%;
 	font-size: vw(11px);
+	@include max(bg) {
+		font-size: 11px;
+	}
 }
 
 .shooting-descr__item-prof {
@@ -35,5 +38,11 @@
 .shooting-descr__item-slash {
 	margin-top: vw(3px);
 	margin-bottom: vw(3px);
+	@include max(sm) {
+		margin-top: 0;
+		margin-bottom: 0;
+		margin-left: 5px;
+		margin-right: 5px;
+	}
 }
 </style>

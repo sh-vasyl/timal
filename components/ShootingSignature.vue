@@ -43,5 +43,19 @@
 	top: vw(116px);
 	transform: translateX(-50%);
 	left: 50%;
+
+	@include max(sm) {
+		width: 267px;
+		height: 361px;
+		top: -100px;
+		left: 75%;
+	}
+
+	@include max(xs) {
+		width: 188px;
+		height: 254px;
+		left: 73%;
+		top: 63px;
+	}
 }
 </style>

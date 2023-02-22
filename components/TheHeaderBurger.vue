@@ -1,6 +1,7 @@
 <script setup>
 
 	import gsap from 'gsap'
+	import ScrollSmoother from 'gsap/ScrollSmoother'
 
 	const isOpen = ref(false)
 
@@ -16,20 +17,22 @@
 	function openMenu() {
 		if(isOpen.value) {
 			isOpen.value = false
+			ScrollSmoother.get().paused(false)
 			gsap.to('.header-burger__line-first', { rotate: 0 })
 			gsap.to('.header-burger__line-second', { rotate: 0 })
 			gsap.to('.header-nav', {
 				autoAlpha: 0
 			})
 			gsap.to('.header-inner-nav__link', { opacity: 0, yPercent: 100, stagger: 0.1 })
-			gsap.to('.wrapper', {filter: 'blur(0rem)'})
+			gsap.to('.wrapper', {filter: 'blur(0)', clearProps: 'filter'})
 
 		} else {
 			isOpen.value = true
+			ScrollSmoother.get().paused(true)
 			gsap.to('.header-burger__line-first', { rotate: 24 })
 			gsap.to('.header-burger__line-second', { rotate: -24 })
 			gsap.to('.header-nav', {
-				autoAlpha: 1
+				autoAlpha: 1,
 			})
 			gsap.to('.header-inner-nav__link', {opacity: 1, yPercent: 0, stagger: 0.1 })
 			gsap.to('.wrapper', {filter: 'blur(1rem)'})

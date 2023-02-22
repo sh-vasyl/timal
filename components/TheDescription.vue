@@ -41,7 +41,7 @@
 	bottom: vw(32px);
 	left: vw(387px);
 	@include max(bg) {
-		left: 210px;
+		left: 25%;
 		bottom: 32px;
 	}
 	@include max(sm) {
@@ -51,6 +51,18 @@
 		left: 0;
 		padding-left: 24px;
 		padding-right: 24px;
+	}
+}
+
+.shooting-view .hero-descr {
+	@include max(sm) {
+		position: static;
+		padding-left: 32px;
+		padding-right: 32px;
+	}
+	@include max(xs) {
+		padding-left: 20px;
+		padding-right: 20px;
 	}
 }
 

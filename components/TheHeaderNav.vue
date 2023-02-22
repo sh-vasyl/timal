@@ -15,7 +15,7 @@
 		left: 0;
 		z-index: 2;
 		width: 100%;
-		// background: $c-white;
+		background: rgba($c-white, 0.5);
 		height: 100vh;
 		opacity: 0;
 		visibility: hidden;

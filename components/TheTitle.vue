@@ -58,6 +58,21 @@
 	@include max(xs) {
 		bottom: 127px
 	}
+}
 
+.shooting-view .hero-title {
+	@include max(sm) {
+		position: static;
+		margin-bottom: 40px;
+		padding-left: 32px;
+		padding-right: 32px;
+		padding-top: 198px;
+	}
+	@include max(xs) {
+		margin-bottom: 24px;
+		padding-left: 20px;
+		padding-right: 20px;
+		padding-top: 131px;
+	}
 }
 </style>

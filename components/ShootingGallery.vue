@@ -1,7 +1,3 @@
-<script setup>
-
-
-</script>
 
 <template>
 
@@ -20,5 +16,14 @@
 	right: 0;
 	bottom: 0;
 	background-color: $c-white;
+
+	@include max(sm) {
+		position: static;
+		margin-top: 72px;
+		padding-bottom: 32px;
+	}
+	@include max(xs) {
+		margin-top: 56px;
+	}
 }
 </style>

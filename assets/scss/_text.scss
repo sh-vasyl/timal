@@ -26,6 +26,10 @@
 .--difference {
 	mix-blend-mode: difference;
 	color: $c-white;
+	@include max(sm) {
+		mix-blend-mode: normal;
+		color: $c-black;
+	}
 }
 
 .vt {
@@ -48,10 +52,13 @@
 	font-family: $xl;
 	text-transform: uppercase;
 	@include max(bg) {
-		font-size: 72px;
+		font-size: 96px;
+	}
+	@include max(sm) {
+		font-size: 88px;
 	}
 	@include max(xs) {
-		font-size: 64px;
+		font-size: 56px;
 	}
 }
 

@@ -65,7 +65,7 @@
 	const dimensions = ref('vw')
 
 	tryOnMounted(() => {
-		let mm = gsap.matchMedia();
+		let mm = gsap.matchMedia()
 
 		mm.add("(max-width: 1439px)", () => {
 			dimensions.value = 'px'
@@ -174,7 +174,7 @@
 
 		gsap.to(categoryDescr.value.$el, { autoAlpha: 0, duration: 0.25, ease: 'Power2.easeOut' })
 
-		mm.add("(min-width: 1440px)", () => {
+		mm.add("(min-width: 1024px)", () => {
 			gsap.to(categoryCount.value.$el, { autoAlpha: 0, duration: 0.25, ease: 'Power2.easeOut' })
 		})
 	}
@@ -195,7 +195,7 @@
 
 		gsap.to(categoryDescr.value.$el, { autoAlpha: 1, duration: 0.25, ease: 'Power2.easeOut' })
 
-		mm.add("(min-width: 1440px)", () => {
+		mm.add("(min-width: 1024px)", () => {
 			gsap.to(categoryCount.value.$el, { autoAlpha: 1, duration: 0.25, ease: 'Power2.easeOut' })
 		})
 	}

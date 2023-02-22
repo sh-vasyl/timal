@@ -49,11 +49,28 @@
 	bottom: vw(32px);
 	right: vw(32px);
 	z-index: 1;
+
+	@include max(sm) {
+		position: static;
+		transform: none;
+		margin-top: 72px;
+		writing-mode: unset;
+	}
+	@include max(xs) {
+		margin-top: 56px;
+	}
 }
 
 .shooting-gallery-next__text {
 	text-transform: none;
 	padding-left: vw(16px);
+	@include max(bg) {
+		padding-left: 16px;
+	}
+	@include max(sm) {
+		padding-left: 0;
+		padding-bottom: 16px;
+	}
 }
 
 </style>

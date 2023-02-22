@@ -17,19 +17,27 @@
 	// Animate after route change
 	watch(() => store.transitionComplete, (newValue) => {
 		if (newValue) {
-			getItemsDistance()
-			setItemsPosition()
-			setGalleryWidth()
-			initGalleryScroll()
+			let mm = gsap.matchMedia()
+
+			mm.add("(min-width: 1024px)", () => {
+				getItemsDistance()
+				setItemsPosition()
+				setGalleryWidth()
+				initGalleryScroll()
+			})
 		}
 	});
 
 	// Animate after preloader
 	watch(() => store.isPreloaderVisible, () => {
-		getItemsDistance()
-		setItemsPosition()
-		setGalleryWidth()
-		initGalleryScroll()
+		let mm = gsap.matchMedia()
+
+		mm.add("(min-width: 1024px)", () => {
+			getItemsDistance()
+			setItemsPosition()
+			setGalleryWidth()
+			initGalleryScroll()
+		})
 	})
 
 
@@ -83,6 +91,7 @@
 
 
 	const theTitle = ref(null)
+	const theActions = ref(null)
 	const shootingView = ref(null)
 	const shootingTitle = ref(null)
 	const shootingDescr = ref(null)
@@ -101,6 +110,15 @@
 	const itemsDistance = ref([])
 
 	let tlScroll;
+
+	tryOnMounted(() => {
+		let mm = gsap.matchMedia()
+
+		mm.add("(max-width: 1439px)", () => {
+			dimensions.value = 'px'
+			galleryMorePosition.value = 32
+		})
+	})
 
 	/**
 	 * Functions
@@ -288,22 +306,69 @@
 	}
 
 	function animateContentFrom() {
+		let mm = gsap.matchMedia()
+
 		gsap.to(shootingNext.value.$el, { autoAlpha: 1 })
 		gsap.to(shootingCount.value.$el, {opacity: 1, x: 0})
 		gsap.to('.shooting-gallery__text', {opacity: 0})
-		shootingSeeAll.value.$el.textContent = '(see all)'
+
+		mm.add({
+			isMaxBG: "(max-width: 1439px)",
+			isMinBG: "(min-width: 1440px)",
+		}, (context) => {
+			let { isMaxBG, isMinBG } = context.conditions
+
+			shootingSeeAll.value.textContent = isMinBG ? '(see all)' : '(ALL)'
+		})
+
 	}
 
 	function animateTextTo() {
+		let mm = gsap.matchMedia();
+
+		mm.add("(max-width: 1023px)", () => {
+			gsap.to(theTitle.value.$el, { bottom: '32px', ease: 'Power2.easeOut'})
+			gsap.to(theActions.value.$el, { bottom: '60px', ease: 'Power2.easeOut' })
+		})
+		mm.add("(max-width: 767px)", () => {
+			gsap.to(theActions.value.$el, { bottom: '44px', ease: 'Power2.easeOut' })
+		})
 		gsap.to(theTitle.value.$el, {scale: 0.5, ease: 'Power2.easeOut'})
-		gsap.to(shootingDescr.value.$el, { autoAlpha: 0, duration: 0.25, ease: 'Power2.easeOut'})
-		gsap.to(shootingMore.value.$el, { x: galleryMorePosition.value + dimensions.value, ease: 'Power2.easeOut' })
+
+		gsap.to(shootingDescr.value.$el, { autoAlpha: 0, duration: 0.25, ease: 'Power2.easeOut' })
+
+		mm.add("(min-width: 1440px)", () => {
+			gsap.to(shootingMore.value.$el, {
+				x: galleryMorePosition.value + dimensions.value,
+				ease: 'Power2.easeOut'
+			})
+		})
+		mm.add("(max-width: 1439px)", () => {
+			gsap.to(theActions.value.$el, {
+				left: galleryMorePosition.value,
+				ease: 'Power2.easeOut'
+			})
+		})
 	}
 
 	function animateTextFrom() {
+		let mm = gsap.matchMedia();
+
 		gsap.to(theTitle.value.$el, {scale: 1, ease: 'Power2.easeOut'})
 		gsap.to(shootingDescr.value.$el, { autoAlpha: 1, duration: 0.25, ease: 'Power2.easeOut'})
-		gsap.to(shootingMore.value.$el, { x: 0, ease: 'Power2.easeOut' })
+
+		mm.add("(min-width: 1440px)", () => {
+			gsap.to(shootingMore.value.$el, {
+				x: 0,
+				ease: 'Power2.easeOut'
+			})
+		})
+		mm.add("(max-width: 1439px)", () => {
+			gsap.to(theActions.value.$el, {
+				left: '25%',
+				ease: 'Power2.easeOut'
+			})
+		})
 	}
 
 	function toggleMode() {
@@ -377,7 +442,10 @@
 				/>
 			</TheDescription>
 
-			<TheActions class="--difference">
+			<TheActions
+				ref="theActions"
+				class="--difference"
+			>
 				<ShootingMore ref="shootingMore">
 					<ShootingCount
 						ref="shootingCount"

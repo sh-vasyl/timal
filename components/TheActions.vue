@@ -41,7 +41,7 @@
 	transform: translateY(-50%);
 	left: vw(387px);
 	@include max(bg) {
-		left: 210px;
+		left: 25%;
 	}
 	@include max(sm) {
 		top: auto;
@@ -62,6 +62,17 @@
 	}
 	@include max(xs) {
 		bottom: 158px
+	}
+}
+
+.shooting-view .hero-actions {
+	@include max(sm) {
+		bottom: auto;
+		top: 198px;
+	}
+	@include max(xs) {
+		top: 131px;
+		right: 20px;
 	}
 }
 

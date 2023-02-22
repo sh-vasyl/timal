@@ -69,6 +69,11 @@
 	position: absolute;
 	height: 100%;
 	top: 0;
+
+	@include max(sm) {
+		position: static;
+		margin-bottom: 8px;
+	}
 }
 
 .shooting-gallery__item-bg {
@@ -82,6 +87,10 @@
 	transform: translate(-50%, -50%);
 	opacity: 0;
 
+	@include max(sm) {
+		display: none;
+	}
+
 }
 
 .shooting-gallery__item:first-child {
@@ -92,11 +101,13 @@
 .shooting-gallery__img {
 	position: relative;
 	z-index: 1;
-
-
 	max-width: none;
 	width: auto;
 	max-height: 100%;
+
+	@include max(sm) {
+		width: 100%;
+	}
 }
 
 .shooting-gallery__img-wrap {
@@ -117,6 +128,10 @@
 	height: calc(100% + #{vw(10px)});
 	z-index: 1;
 	opacity: 0;
+
+	@include max(sm) {
+		display: none;
+	}
 }
 
 .shooting-gallery__text {
@@ -131,6 +146,11 @@
 	position: absolute;
 	top: 100%;
 	z-index: 2;
+
+
+	@include max(sm) {
+		display: none;
+	}
 }
 
 .shooting-gallery__text-bg {
@@ -142,11 +162,19 @@
 	top: 0;
 	left: 0;
 	opacity: 0;
+
+	@include max(sm) {
+		display: none;
+	}
 }
 
 .shooting-gallery__text-wrapper {
 	position: relative;
 	z-index: 1;
+
+	@include max(sm) {
+		display: none;
+	}
 }
 
 
