@@ -85,7 +85,13 @@
 
 	function initProjectsSlider() {
 
-		setTimeout(() => { ScrollSmoother.get().scrollTo(1)}, 1)
+		setTimeout(() => {
+			if (ScrollTrigger.isTouch === 1) {
+				gsap.to(window, { scrollTo: 1, duration: 0.01 })
+			} else {
+				ScrollSmoother.get().scrollTo(1)
+			}
+		}, 1)
 
 		let tlScroll = gsap.to(categoryGalleryWrapper.value.$el, {
 			x: document.documentElement.clientWidth - categoryGalleryWrapper.value.$el.clientWidth,
@@ -109,8 +115,6 @@
 						},
 						onDrag() {
 							tlScroll.scrollTrigger.scroll(clamp(this.startScroll - (this.x - this.startX) * dragRatio));
-							console.log(this.x);
-							console.log(this.startX);
 						},
 						onDragEnd() {
 							animateLinksFrom()

@@ -2,6 +2,7 @@
 
 	import gsap from 'gsap'
 	import ScrollSmoother from 'gsap/ScrollSmoother'
+	import ScrollTrigger from 'gsap/ScrollTrigger'
 
 	const isOpen = ref(false)
 
@@ -17,7 +18,13 @@
 	function openMenu() {
 		if(isOpen.value) {
 			isOpen.value = false
-			ScrollSmoother.get().paused(false)
+
+			if (ScrollTrigger.isTouch === 1) {
+				gsap.set('body, html', { clearProps: 'overflow' })
+			} else {
+				ScrollSmoother.get().paused(false)
+			}
+
 			gsap.to('.header-burger__line-first', { rotate: 0 })
 			gsap.to('.header-burger__line-second', { rotate: 0 })
 			gsap.to('.header-nav', {
@@ -28,7 +35,12 @@
 
 		} else {
 			isOpen.value = true
-			ScrollSmoother.get().paused(true)
+
+			if (ScrollTrigger.isTouch === 1) {
+				gsap.set('body, html', { overflow: 'hidden' })
+			} else {
+				ScrollSmoother.get().paused(true)
+			}
 			gsap.to('.header-burger__line-first', { rotate: 24 })
 			gsap.to('.header-burger__line-second', { rotate: -24 })
 			gsap.to('.header-nav', {

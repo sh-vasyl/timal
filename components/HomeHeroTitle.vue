@@ -2,6 +2,7 @@
 
 	import gsap from 'gsap'
 	import { ScrollSmoother } from 'gsap/ScrollSmoother'
+	import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 
 	const store = useDefaultStore()
@@ -24,7 +25,12 @@
   })
 	watch(() => store.isPreloaderVisible, () => {
 		onScrollTitle()
-		ScrollSmoother.get().scrollTo(1)
+
+		if (ScrollTrigger.isTouch === 1) {
+			gsap.to(window, { scrollTo: 1, duration: 0.01 })
+		} else {
+			ScrollSmoother.get().scrollTo(1)
+		}
   })
 
 

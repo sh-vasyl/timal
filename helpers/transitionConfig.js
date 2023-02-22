@@ -11,7 +11,13 @@ const pageTransition = {
 			paused: true,
 			onComplete() {
 				setTimeout(() => ScrollTrigger.refresh(), 1)
-				setTimeout(() => ScrollSmoother.get().paused(false), 0)
+				setTimeout(() => {
+					if (ScrollTrigger.isTouch === 1) {
+						gsap.set('body, html', { clearProps: 'overflow' })
+					} else {
+						ScrollSmoother.get().paused(false)
+					}
+				}, 0)
 				const store = useDefaultStore()
 				store.toggleTransitionComplete(true)
 				done()
