@@ -114,7 +114,7 @@
 	tryOnMounted(() => {
 
 		if (ScrollTrigger.isTouch === 1) {
-			// ScrollTrigger.normalizeScroll({ target: "#viewport", allowNestedScroll: true })
+			ScrollTrigger.normalizeScroll({ target: "#viewport", allowNestedScroll: true })
 		}
 
 		let mm = gsap.matchMedia()

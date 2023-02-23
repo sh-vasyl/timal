@@ -14,6 +14,8 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 		gsap.set('body,html', {
 			position: 'fixed',
 			overflow: 'hidden',
+			height: '100vh',
+			width: '100vw'
 		})
 
 		gsap.set('#viewport', {
