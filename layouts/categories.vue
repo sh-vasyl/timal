@@ -85,6 +85,7 @@
 	tryOnUnmounted(() => {
 		if (ScrollTrigger.isTouch === 1) {
 			gsap.set('body,html,#viewport', { clearProps: 'all' })
+			ScrollTrigger.defaults({ scroller: window })
 		}
 	})
 
