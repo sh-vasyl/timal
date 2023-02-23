@@ -36,8 +36,13 @@
 	let tl = gsap.timeline()
 
 	tryOnMounted(() => {
-		setPhotosPositions()
-		animation()
+		if(localStorage.getItem('preloader')) {
+			withoutPreloader()
+		} else {
+			localStorage.setItem('preloader', 'show')
+			setPhotosPositions()
+			animation()
+		}
 	})
 
 	function setPhotosPositions() {
@@ -101,16 +106,16 @@
 		}
 	}
 
-
-	function animation() {
-		// Scroll off
-
+	function scrollOff() {
 		if (ScrollTrigger.isTouch === 1) {
 			gsap.set('body,html', { overflow: 'hidden' })
 		} else {
 			ScrollSmoother.get().paused(true)
 		}
+	}
 
+	function animation() {
+		scrollOff()
 
 		// Start animation
 		tl.to(progress, {
@@ -194,6 +199,20 @@
 				}
 			},
 		}, '-=0.5')
+	}
+
+	function withoutPreloader() {
+		gsap.to('.preloader', {
+			autoAlpha: 0,
+			duration: 1,
+			delay: 0.25,
+			onStart() {
+				store.hidePreloader()
+			},
+			onComplete() {
+				store.finishAllPreloaderAnimation()
+			}
+		})
 	}
 
 

@@ -7,7 +7,9 @@ const pageTransition = {
   name: 'page-transiton',
 	mode: 'out-in',
 	onEnter: (el, done) => {
-		ScrollTrigger.defaults({ scroller: window })
+		if (ScrollTrigger.isTouch === 1) {
+			ScrollTrigger.defaults({ scroller: window })
+		}
 
 		let tl = gsap.timeline({
 			paused: true,
