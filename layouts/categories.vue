@@ -67,8 +67,6 @@
 	const currentScrollPosition = ref(0)
 
 	const animationDistance = ref(250)
-	const animationDragSpeed = ref(0.8)
-	const animationScrollSpeed = ref(3)
 
 	const dimensions = ref('vw')
 
@@ -136,7 +134,7 @@
 				pinType: ScrollTrigger.isTouch === 1 ? 'fixed' : 'transform',
 				id: 'scroll',
 				scrub: 1,
-				end: `+=${animationScrollSpeed.value}00%`,
+				end: `+=${totalProjects.value * 0.5}00%`,
 				onEnter: () => {
 					let clamp, dragRatio;
 
@@ -158,7 +156,7 @@
 
 					clamp = gsap.utils.clamp(tlScroll.scrollTrigger.start + 1, tlScroll.scrollTrigger.end - 1)
 					dragRatio = categoryGalleryWrapper.value.$el.clientWidth /
-												(document.documentElement.clientWidth * animationDragSpeed.value)
+												(document.documentElement.clientWidth * (totalProjects.value * 0.1))
 				},
 				onUpdate: (self) => {
 					currentScrollPosition.value = self.scroll()
