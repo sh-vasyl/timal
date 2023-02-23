@@ -42,6 +42,7 @@
 	 * Variables
 	 */
 	const theTitle = ref(null)
+	const theDescr = ref(null)
 	const theActions = ref(null)
 
 	const categoryView = ref(null)
@@ -180,12 +181,14 @@
 		let mm = gsap.matchMedia();
 
 		mm.add("(max-width: 1023px)", () => {
-			gsap.to(theTitle.value.$el, { bottom: '32px', ease: 'Power2.easeOut'})
-			gsap.to(theActions.value.$el, { bottom: '60px', ease: 'Power2.easeOut' })
+			gsap.to(theDescr.value.$el, { height: 0, duration: 0.25, ease: 'Power2.easeOut' })
+			gsap.to(theActions.value.$el, {y: 40, ease: 'Power2.easeOut'})
 		})
+
 		mm.add("(max-width: 767px)", () => {
-			gsap.to(theActions.value.$el, { bottom: '44px', ease: 'Power2.easeOut' })
+			gsap.to(theActions.value.$el, {y: 26, ease: 'Power2.easeOut'})
 		})
+
 		gsap.to(theTitle.value.$el, {scale: 0.5, ease: 'Power2.easeOut'})
 
 		gsap.to(categoryDescr.value.$el, { autoAlpha: 0, duration: 0.25, ease: 'Power2.easeOut' })
@@ -199,12 +202,8 @@
 		let mm = gsap.matchMedia();
 
 		mm.add("(max-width: 1023px)", () => {
-			gsap.to(theTitle.value.$el, { bottom: '135px', ease: 'Power2.easeOut'})
-			gsap.to(theActions.value.$el, { bottom: '172px', ease: 'Power2.easeOut' })
-		})
-		mm.add("(max-width: 767px)", () => {
-			gsap.to(theTitle.value.$el, { bottom: '127px', ease: 'Power2.easeOut'})
-			gsap.to(theActions.value.$el, { bottom: '159px', ease: 'Power2.easeOut' })
+			gsap.to(theDescr.value.$el, { height: 'auto', duration: 0.25, ease: 'Power2.easeOut' })
+			gsap.to(theActions.value.$el, {y: 0, ease: 'Power2.easeOut'})
 		})
 
 		gsap.to(theTitle.value.$el, {scale: 1, ease: 'Power2.easeOut'})
@@ -230,31 +229,37 @@
 		<CategoryView
 			ref="categoryView"
 		>
-			<TheTitle
-				ref="theTitle"
-				class="--darken"
-			>
-				<CategoryTitle
-					ref="categoryTitle"
-					:text="dataCategoryTitle"
-				/>
-			</TheTitle>
+			<ThePageContentWrap>
+				<TheTitle
+					ref="theTitle"
+					class="--darken"
+				>
+					<CategoryTitle
+						ref="categoryTitle"
+						:text="dataCategoryTitle"
+					/>
+				</TheTitle>
 
-			<TheDescription class="--darken">
-				<CategoryDescr
-					ref="categoryDescr"
-					:text="dataCategoryDescr"
-				/>
-			</TheDescription>
+				<TheDescription
+					ref="theDescr"
+					class="--darken"
+				>
+					<CategoryDescr
+						ref="categoryDescr"
+						:text="dataCategoryDescr"
+					/>
+				</TheDescription>
 
-			<TheActions
-				ref="theActions"
-				class="--darken">
-				<CategoryCount
-					ref="categoryCount"
-					:total-projects="totalProjects"
-				/>
-			</TheActions>
+				<TheActions
+					ref="theActions"
+					class="--darken">
+					<CategoryCount
+						ref="categoryCount"
+						:total-projects="totalProjects"
+					/>
+				</TheActions>
+			</ThePageContentWrap>
+
 
 			<CategorySignatureFirst
 				ref="categorySignatureFirst"

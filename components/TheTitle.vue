@@ -53,10 +53,9 @@
 
 .category-view .hero-title {
 	@include max(sm) {
-		bottom: 135px
-	}
-	@include max(xs) {
-		bottom: 127px
+		position: static;
+		order: 1;
+		flex: 1 1 auto;
 	}
 }
 

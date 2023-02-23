@@ -22,10 +22,12 @@
 	}
 	@include max(sm) {
 		height: auto;
-		width: 304px
+		width: 304px;
+		padding-top: 40px;
 	}
 	@include max(xs) {
 		width: 100%;
+		padding-top: 30px;
 	}
 }
 </style>

@@ -58,10 +58,8 @@
 
 .category-view .hero-actions {
 	@include max(sm) {
-		bottom: 172px
-	}
-	@include max(xs) {
-		bottom: 158px
+		position: static;
+		order: 2;
 	}
 }
 

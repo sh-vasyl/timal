@@ -54,6 +54,18 @@
 	}
 }
 
+.category-view .hero-descr {
+	@include max(sm) {
+		position: static;
+		order: 3;
+		flex: 0 0 100%;
+	}
+	@include max(xs) {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
 .shooting-view .hero-descr {
 	@include max(sm) {
 		position: static;
