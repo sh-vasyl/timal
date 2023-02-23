@@ -7,14 +7,16 @@ const pageTransition = {
   name: 'page-transiton',
 	mode: 'out-in',
 	onEnter: (el, done) => {
+		if (ScrollTrigger.isTouch === 1) {
+			gsap.to('#viewport', {duration: 0.016, scrollTo: 0})
+		}
+
 		let tl = gsap.timeline({
 			paused: true,
 			onComplete() {
 				setTimeout(() => ScrollTrigger.refresh(), 1)
 				setTimeout(() => {
-					if (ScrollTrigger.isTouch === 1) {
-						gsap.set('body, html', { clearProps: 'overflow' })
-					} else {
+					if (ScrollTrigger.isTouch !== 1) {
 						ScrollSmoother.get().paused(false)
 					}
 				}, 0)

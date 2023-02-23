@@ -13,7 +13,9 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 	if (ScrollTrigger.isTouch === 1) {
 		gsap.set('body,html', {
 			position: 'fixed',
-			overflow: 'hidden'
+			overflow: 'hidden',
+			height: '100vh',
+			width: '100vw'
 		})
 
 		gsap.set('#viewport', {
@@ -21,14 +23,9 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 			overflowY: 'scroll',
 		})
 
-		ScrollTrigger.defaults({
-			scroller: '#viewport'
-		})
+		ScrollTrigger.defaults({ scroller: '#viewport' })
+		ScrollTrigger.normalizeScroll({ target: "#viewport" })
 
-		ScrollTrigger.normalizeScroll({
-			target: "#viewport",
-			allowNestedScroll: true
-		})
   } else {
 		ScrollSmoother.create({
 			smooth: 1,

@@ -101,7 +101,7 @@
 			scrollTrigger: {
 				trigger: categoryView.value.$el,
 				pin: true,
-				pinType: "fixed",
+				pinType: ScrollTrigger.isTouch === 1 ? 'fixed' : 'transform',
 				id: 'scroll',
 				scrub: 1,
 				end: `+=${animationScrollSpeed.value}00%`,
@@ -121,7 +121,7 @@
 						},
 						onDragEnd() {
 							animateLinksFrom()
-						}
+						},
 					});
 
 					clamp = gsap.utils.clamp(tlScroll.scrollTrigger.start + 1, tlScroll.scrollTrigger.end - 1)
