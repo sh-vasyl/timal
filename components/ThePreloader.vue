@@ -106,7 +106,7 @@
 		// Scroll off
 
 		if (ScrollTrigger.isTouch === 1) {
-			gsap.set('body, html', { overflow: 'hidden' })
+			gsap.set('#viewport', { overflowY: 'hidden' })
 		} else {
 			ScrollSmoother.get().paused(true)
 		}
@@ -167,8 +167,7 @@
 					},
 					onComplete: () => {
 						if (ScrollTrigger.isTouch === 1) {
-							gsap.set('body, html', { clearProps: 'overflow' })
-							console.log('clear');
+							gsap.set('#viewport', { overflowY: 'scroll' })
 						} else {
 							ScrollSmoother.get().paused(false)
 						}

@@ -13,7 +13,6 @@
 	// Animate after route change
 	watch(() => store.transitionComplete, (newValue) => {
     if (newValue) {
-			removeBasicScroll()
 			initProjectsSlider()
     }
   });
@@ -21,9 +20,6 @@
 	// Animate after preloader
 	watch(() => store.isPreloaderVisible, () => {
 		initProjectsSlider()
-		setTimeout(() => {
-			removeBasicScroll()
-		}, 1000)
   })
 
 	/**
@@ -69,6 +65,7 @@
 	const dimensions = ref('vw')
 
 	tryOnMounted(() => {
+
 		let mm = gsap.matchMedia()
 
 		mm.add("(max-width: 1439px)", () => {
@@ -83,15 +80,6 @@
 	/**
 	 * Functions
 	 */
-	function removeBasicScroll() {
-		if (ScrollTrigger.isTouch === 1) {
-			const viewport = document.querySelector('#viewport')
-			gsap.set('body, html', {
-				position: 'fixed',
-				height: viewport.clientHeight,
-			})
-		}
-	}
 
 	function getTotalProjects() {
 		totalProjects.value = categoryGalleryLink.value.length
@@ -113,6 +101,7 @@
 			scrollTrigger: {
 				trigger: categoryView.value.$el,
 				pin: true,
+				pinType: "fixed",
 				id: 'scroll',
 				scrub: 1,
 				end: `+=${animationScrollSpeed.value}00%`,
