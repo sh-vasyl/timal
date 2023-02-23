@@ -13,13 +13,20 @@
 	// Animate after route change
 	watch(() => store.transitionComplete, (newValue) => {
     if (newValue) {
+			setScrollerMobile()
 			initProjectsSlider()
     }
   });
 
 	// Animate after preloader
 	watch(() => store.isPreloaderVisible, () => {
+		setScrollerMobile()
 		initProjectsSlider()
+  })
+
+	// After all preloader animations
+	watch(() => store.isPreloaderAnimationComplete, () => {
+		gsap.set('body,html', { overflow: 'hidden'})
   })
 
 	/**
@@ -66,7 +73,6 @@
 	const dimensions = ref('vw')
 
 	tryOnMounted(() => {
-
 		let mm = gsap.matchMedia()
 
 		mm.add("(max-width: 1439px)", () => {
@@ -76,16 +82,13 @@
 
 	tryOnMounted(() => {
 		getTotalProjects()
-		setScrollerMobile()
 	})
 
 	tryOnUnmounted(() => {
 		if (ScrollTrigger.isTouch === 1) {
 			ScrollTrigger.defaults({ scroller: window })
 
-			gsap.set('body,html,#viewport', {
-				clearProps: 'all'
-			})
+			gsap.set('body,html,#viewport', { clearProps: 'all' })
 		}
 	})
 
@@ -97,7 +100,6 @@
 		if (ScrollTrigger.isTouch === 1) {
 			gsap.set('body,html', {
 				position: 'fixed',
-				overflow: 'hidden',
 				height: '100vh',
 				width: '100vw'
 			})

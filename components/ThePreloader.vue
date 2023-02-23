@@ -105,7 +105,9 @@
 	function animation() {
 		// Scroll off
 
-		if (ScrollTrigger.isTouch !== 1) {
+		if (ScrollTrigger.isTouch === 1) {
+			gsap.set('body,html', { overflow: 'hidden' })
+		} else {
 			ScrollSmoother.get().paused(true)
 		}
 
@@ -165,10 +167,11 @@
 					},
 					onComplete: () => {
 						if (ScrollTrigger.isTouch === 1) {
-							gsap.set('#viewport', { overflowY: 'scroll' })
+							gsap.set('body,html', { clearProps: 'overflow' })
 						} else {
 							ScrollSmoother.get().paused(false)
 						}
+						store.finishAllPreloaderAnimation()
 					}
 				})
 				endOfAnimationTl.to(preloader.value, {
