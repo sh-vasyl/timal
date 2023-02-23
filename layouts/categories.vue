@@ -87,6 +87,8 @@
 
 	function initProjectsSlider() {
 
+		let animationComplete = false
+
 		setTimeout(() => {
 			if (ScrollTrigger.isTouch === 1) {
 				gsap.to(window, { scrollTo: 1, duration: 0.01 })
@@ -131,10 +133,17 @@
 				onUpdate: (self) => {
 					currentScrollPosition.value = self.scroll()
 
-					if(currentScrollPosition.value > animationDistance.value) {
-						animateTextTo()
-					} else {
-						animateTextFrom()
+					if(!animationComplete) {
+						if(currentScrollPosition.value > animationDistance.value) {
+							animateTextTo()
+							animationComplete = true
+						}
+					}
+					if(animationComplete) {
+						if(currentScrollPosition.value < animationDistance.value) {
+							animateTextFrom()
+							animationComplete = false
+						}
 					}
 				}
 			}
