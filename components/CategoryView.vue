@@ -21,7 +21,14 @@
 <style lang="scss" scoped>
 .category-view {
 	position: relative;
-	height: calc(var(--vh, 1vh) * 100)
+	height: 100vh;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .category-view {
+    /* The hack for Safari */
+    height: -webkit-fill-available;
+  }
 }
 
 </style>
