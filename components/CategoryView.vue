@@ -15,7 +15,7 @@
 <style lang="scss" scoped>
 .category-view {
 	position: relative;
-	height: calc(var(--vh, 1vh) * 100)
+	height: 100svh
 }
 
 </style>
