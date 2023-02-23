@@ -10,30 +10,40 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 		gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, Draggable, ScrollToPlugin)
 	}
 
-	if (ScrollTrigger.isTouch === 1) {
-		gsap.set('body,html', {
-			position: 'fixed',
-			overflow: 'hidden',
-			height: '100vh',
-			width: '100vw'
-		})
+	// if (ScrollTrigger.isTouch === 1) {
+	// 	gsap.set('body,html', {
+	// 		position: 'fixed',
+	// 		overflow: 'hidden',
+	// 		height: '100vh',
+	// 		width: '100vw'
+	// 	})
 
-		gsap.set('#viewport', {
-			height: '100vh',
-			overflowY: 'scroll',
-		})
+	// 	gsap.set('#viewport', {
+	// 		height: '100vh',
+	// 		overflowY: 'scroll',
+	// 	})
 
-		ScrollTrigger.defaults({ scroller: '#viewport' })
-		ScrollTrigger.normalizeScroll({ target: "#viewport" })
+	// 	ScrollTrigger.defaults({ scroller: '#viewport' })
+	// 	ScrollTrigger.normalizeScroll({ target: "#viewport" })
 
-  } else {
+  // } else {
+	// 	ScrollSmoother.create({
+	// 		smooth: 1,
+	// 		normalizeScroll: true,
+	// 		invalidateOnRefresh: true,
+	// 		ignoreMobileResize: true,
+	// 	})
+	// }
+
+	if (ScrollTrigger.isTouch !== 1) {
 		ScrollSmoother.create({
 			smooth: 1,
 			normalizeScroll: true,
 			invalidateOnRefresh: true,
 			ignoreMobileResize: true,
 		})
-	}
+
+  }
 
 
 

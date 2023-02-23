@@ -113,10 +113,6 @@
 
 	tryOnMounted(() => {
 
-		if (ScrollTrigger.isTouch === 1) {
-			ScrollTrigger.normalizeScroll({ target: "#viewport", allowNestedScroll: true })
-		}
-
 		let mm = gsap.matchMedia()
 
 		mm.add("(max-width: 1439px)", () => {

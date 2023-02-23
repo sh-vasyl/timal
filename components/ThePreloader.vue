@@ -105,9 +105,7 @@
 	function animation() {
 		// Scroll off
 
-		if (ScrollTrigger.isTouch === 1) {
-			gsap.set('#viewport', { overflowY: 'hidden' })
-		} else {
+		if (ScrollTrigger.isTouch !== 1) {
 			ScrollSmoother.get().paused(true)
 		}
 

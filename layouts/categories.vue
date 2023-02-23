@@ -76,11 +76,40 @@
 
 	tryOnMounted(() => {
 		getTotalProjects()
+		setScrollerMobile()
+	})
+
+	tryOnUnmounted(() => {
+		if (ScrollTrigger.isTouch === 1) {
+			ScrollTrigger.defaults({ scroller: window })
+
+			gsap.set('body,html,#viewport', {
+				clearProps: 'all'
+			})
+		}
 	})
 
 	/**
 	 * Functions
 	 */
+
+	function setScrollerMobile() {
+		if (ScrollTrigger.isTouch === 1) {
+			gsap.set('body,html', {
+				position: 'fixed',
+				overflow: 'hidden',
+				height: '100vh',
+				width: '100vw'
+			})
+
+			gsap.set('#viewport', {
+				height: '100vh',
+				overflowY: 'scroll',
+			})
+
+			ScrollTrigger.defaults({ scroller: '#viewport' })
+		}
+	}
 
 	function getTotalProjects() {
 		totalProjects.value = categoryGalleryLink.value.length
