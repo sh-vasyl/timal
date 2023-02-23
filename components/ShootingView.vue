@@ -13,6 +13,7 @@
 
 	@include max(sm) {
 		height: auto;
+		padding-bottom: 100px;
 	}
 }
 
