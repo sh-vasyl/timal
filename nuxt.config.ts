@@ -7,7 +7,6 @@ export default defineNuxtConfig({
 	},
 	pages: true,
 	app: {
-		// pageTransition: { name: 'page', mode: 'out-in' },
 		head: {
 			title: 'Tanya Timal',
 			htmlAttrs: {
@@ -65,7 +64,7 @@ export default defineNuxtConfig({
 		css: {
 			preprocessorOptions: {
 				scss: {
-					additionalData: ['@import "@/assets/scss/utils.scss";']
+					additionalData: '@import "@/assets/scss/utils.scss";'
 				}
 			}
 		},

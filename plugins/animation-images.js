@@ -29,6 +29,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 					height: 0,
 					duration: 1.2,
 					delay: 0.3,
+					clearProps: 'height'
 				})
 				tl.from(img, {
 					scale: 1.2,

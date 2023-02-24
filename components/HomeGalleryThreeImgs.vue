@@ -2,6 +2,9 @@
 
 	import gsap from 'gsap'
 
+	const runTimeConfig = useRuntimeConfig()
+	const url = runTimeConfig.public.baseUrl
+
 	/**
 	 * Props
 	 */
@@ -45,7 +48,7 @@
 			v-for="(img, i) in images"
 			ref="homeGalleryImg"
 			:class="`home-gallery-three-img home-gallery-three-img-${i + 2}`"
-			:src="img.src"
+			:src="url + img?.attributes?.photos?.data[0]?.attributes?.formats?.small?.url"
 			alt="home gallery image"
 		/>
 	</div>

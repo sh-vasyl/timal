@@ -2,6 +2,9 @@
 
 	import gsap from 'gsap'
 
+	const runTimeConfig = useRuntimeConfig()
+	const url = runTimeConfig.public.baseUrl
+
 	/**
 	 * Props
 	 */
@@ -79,8 +82,9 @@
 		:class="`home-gallery-img home-gallery-img-${i + 5}`"
 	>
 		<img
-			:src="img.src"
+			:src="url + img"
 			alt="home gallery image"
+			class="home-gallery-img__photo"
 			@mouseenter="zoomIn"
 			@mouseleave="zoomOut"
 		/>
@@ -98,34 +102,30 @@
 .home-gallery-img {
 	position: absolute;
 	left: 50%;
-	transform: translateX(-50%)
+	transform: translateX(-50%);
+	width: vw(150px);
 }
 
 .home-gallery-img-5 {
-	width: vw(112px);
 	top: vw(334px);
 	margin-left: vw(-414px);
 }
 
 .home-gallery-img-6 {
-	width: vw(112px);
 	top: vw(260px);
 	margin-left: vw(412px);
 }
 
 .home-gallery-img-7 {
-	width: vw(112px);
 	top: vw(648px);
 	margin-left: vw(-376px);
 }
 
 .home-gallery-img-8 {
-	width: vw(152px);
 	top: vw(547px);
 }
 
 .home-gallery-img-9 {
-	width: vw(112px);
 	top: vw(689px);
 	margin-left: vw(395px);
 }

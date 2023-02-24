@@ -37,31 +37,21 @@ import transitionConfig from '@/helpers/transitionConfig'
 	const commercialShootingData = commercialData?.attributes?.shootings?.data
 	const editorialShootingData = editorialData?.attributes?.shootings?.data
 	const categoriesShootingData = [...commercialShootingData, ...editorialShootingData]
+	const categoriesShootingDataForMain = categoriesShootingData.filter(el => el.attributes.show_to_main)
 
 	// Photo gallery
-	const galleryPhotosThree = ref([
-		{ src: '/images/collection-1/img-2.jpeg' },
-		{ src: '/images/collection-1/img-3.jpeg' },
-		{ src: '/images/collection-1/img-4.jpeg' },
-	])
-	const galleryPhotosOthers = ref([
-		{ src: '/images/collection-1/img-5.jpeg' },
-		{ src: '/images/collection-1/img-6.jpeg' },
-		{ src: '/images/collection-1/img-7.jpeg' },
-		{ src: '/images/collection-1/img-8.jpeg' },
-		{ src: '/images/collection-1/img-9.jpeg' },
-	])
-
+	const projectsThreePhoto = ref(null)
+	const projectOtherPhotos = ref(null)
 
 	/**
 	 * Animation changing background
 	 */
 	const currentShootingSlug = ref(null)
 	const currentCategory = ref(null)
-	currentShootingSlug.value = categoriesShootingData[0]?.attributes?.slug
-	currentCategory.value = categoriesShootingData[0]?.attributes?.category?.data?.attributes?.name.toLowerCase()
+	currentShootingSlug.value = categoriesShootingDataForMain[0]?.attributes?.slug
+	currentCategory.value = categoriesShootingDataForMain[0]?.attributes?.category?.data?.attributes?.name.toLowerCase()
 
-	const homeImg = ref([])
+	const homeImg = ref(null)
 	const homeImgCurrent = ref(1)
 	const timeChangeImg = ref(15000)
 	let interval;
@@ -69,13 +59,13 @@ import transitionConfig from '@/helpers/transitionConfig'
 	// Animate after route change
 	watch(() => store.transitionComplete, (newValue) => {
     if (newValue) {
-			interval = setInterval(() => changeImgs(), timeChangeImg.value)
+			interval = setInterval(() => changeProjectWithAnimation(), timeChangeImg.value)
     }
   });
 
 	// Animate after preloader
 	watch(() => store.isPreloaderVisible, () => {
-		interval = setInterval(() => changeImgs(), timeChangeImg.value)
+		interval = setInterval(() => changeProjectWithAnimation(), timeChangeImg.value)
   })
 
 	// Clear interval
@@ -83,15 +73,81 @@ import transitionConfig from '@/helpers/transitionConfig'
 		clearInterval(interval)
 	})
 
-	function changeImgs() {
+	tryOnMounted(() => {
+		projectsThreePhoto.value = [
+			categoriesShootingDataForMain[1],
+			categoriesShootingDataForMain[2],
+			categoriesShootingDataForMain[3]
+		]
+
+		projectOtherPhotos.value = []
+		for (let i = 0; i <= 4; i++) {
+			if(categoriesShootingDataForMain[i].attributes?.photos?.data[i]?.attributes?.url !== undefined) {
+				projectOtherPhotos.value.push(
+					categoriesShootingDataForMain[i].attributes?.photos?.data[i]?.attributes?.formats?.thumbnail?.url
+				)
+			}
+		}
+	})
+
+	function changeProjectWithAnimation() {
+
+		gsap.from('.home-gallery-three-imgs, .home-gallery-img__wrap', {
+			opacity: 0,
+			filter: 'blur(1rem)',
+			duration: 2
+		})
+
+		changeProject()
+	}
+
+	function changeProject() {
+		// change photo
 		homeImg.value.forEach(img => gsap.to(img.$el, { opacity: 0, duration: 1.5 }))
 		gsap.to(homeImg.value[homeImgCurrent.value].$el, { opacity: 1, duration: 1.5 })
 
-		currentShootingSlug.value = categoriesShootingData[homeImgCurrent.value]?.attributes?.slug
-		currentCategory.value = categoriesShootingData[homeImgCurrent.value]?.attributes?.category?.data?.attributes?.name.toLowerCase()
+		// change link
+		currentShootingSlug.value = categoriesShootingDataForMain[homeImgCurrent.value]?.attributes?.slug
+		currentCategory.value = categoriesShootingDataForMain[homeImgCurrent.value]?.attributes?.category?.data?.attributes?.name.toLowerCase()
+
+		// change other photos
+		projectOtherPhotos.value = []
+		if(!categoriesShootingDataForMain[homeImgCurrent.value]?.attributes?.photo_for_main?.data) {
+			for (let i = 1; i <= 5; i++) {
+				if(categoriesShootingDataForMain[homeImgCurrent.value].attributes?.photos?.data[i]?.attributes?.url !== undefined) {
+					projectOtherPhotos.value.push(
+						categoriesShootingDataForMain[homeImgCurrent.value].attributes?.photos?.data[i]?.attributes?.formats?.thumbnail?.url
+					)
+				}
+			}
+		}
 
 		homeImgCurrent.value === homeImg.value.length - 1 ?
 		homeImgCurrent.value = 0 : homeImgCurrent.value += 1
+
+		// change three photos
+		let first, second, third
+
+		first = categoriesShootingDataForMain[homeImgCurrent.value]
+
+		if(categoriesShootingDataForMain[homeImgCurrent.value + 1] === undefined) {
+			second = categoriesShootingDataForMain[0]
+		} else {
+			second = categoriesShootingDataForMain[homeImgCurrent.value + 1]
+		}
+
+		if(categoriesShootingDataForMain[homeImgCurrent.value + 2] === undefined) {
+			if(categoriesShootingDataForMain.length - 1 === homeImgCurrent.value) {
+				third = categoriesShootingDataForMain[1]
+			}
+			if(categoriesShootingDataForMain.length - 2 === homeImgCurrent.value) {
+				third = categoriesShootingDataForMain[0]
+			}
+		} else {
+			third = categoriesShootingDataForMain[homeImgCurrent.value + 2]
+		}
+
+		projectsThreePhoto.value = [first, second, third]
 	}
 
 
@@ -108,7 +164,7 @@ import transitionConfig from '@/helpers/transitionConfig'
 		<HomeView>
 			<HomeImgWrap>
 				<HomeImg
-					v-for="img in categoriesShootingData"
+					v-for="img in categoriesShootingDataForMain"
 					:src="url + img?.attributes?.photos?.data[0]?.attributes?.url"
 					ref="homeImg"
 				/>
@@ -132,8 +188,8 @@ import transitionConfig from '@/helpers/transitionConfig'
 			</HomeHeroView>
 
 			<HomeGalleryView>
-				<HomeGalleryThreeImgs :images="galleryPhotosThree" />
-				<HomeGalleryOtherImgs :images="galleryPhotosOthers" />
+				<HomeGalleryThreeImgs :images="projectsThreePhoto" />
+				<HomeGalleryOtherImgs :images="projectOtherPhotos" />
 				<HomeGalleryButton />
 				<HomeGalleryLines />
 			</HomeGalleryView>

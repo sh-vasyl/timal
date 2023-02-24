@@ -24,6 +24,7 @@
     }
   })
 	watch(() => store.isPreloaderVisible, () => {
+		showTitle()
 		onScrollTitle()
 
 		if (ScrollTrigger.isTouch === 1) {
