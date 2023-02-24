@@ -1,9 +1,3 @@
-<script setup>
-
-	tryOnMounted(() => {
-
-	})
-</script>
 <template>
 
 	<div class="category-view">
@@ -15,7 +9,8 @@
 <style lang="scss" scoped>
 .category-view {
 	position: relative;
-	height: 100svh
+	height: 100vh;
+	height: 100svh;
 }
 
 </style>

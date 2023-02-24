@@ -7,6 +7,10 @@ const pageTransition = {
   name: 'page-transiton',
 	mode: 'out-in',
 	onEnter: (el, done) => {
+		gsap.set(el, {
+			autoAlpha: 0,
+			filter: 'blur(1rem)',
+		})
 
 		let tl = gsap.timeline({
 			paused: true,
@@ -22,9 +26,9 @@ const pageTransition = {
 				done()
 			},
 		})
-		tl.from(el, {
-			autoAlpha: 0,
-			filter: 'blur(1rem)',
+		tl.to(el, {
+			autoAlpha: 1,
+			filter: 'blur(0)',
 			duration: 1,
 		})
 		tl.play()
