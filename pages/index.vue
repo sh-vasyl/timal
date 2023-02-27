@@ -41,6 +41,7 @@ import transitionConfig from '@/helpers/transitionConfig'
 
 	// Photo gallery
 	const projectsThreePhoto = ref(null)
+	const projectOtherPhotosArray = ref(null)
 	const projectOtherPhotos = ref(null)
 
 	/**
@@ -74,20 +75,26 @@ import transitionConfig from '@/helpers/transitionConfig'
 	})
 
 	tryOnMounted(() => {
+
 		projectsThreePhoto.value = [
 			categoriesShootingDataForMain[1],
 			categoriesShootingDataForMain[2],
 			categoriesShootingDataForMain[3]
 		]
 
-		projectOtherPhotos.value = []
-		for (let i = 0; i <= 4; i++) {
-			if(categoriesShootingDataForMain[i].attributes?.photos?.data[i]?.attributes?.url !== undefined) {
-				projectOtherPhotos.value.push(
-					categoriesShootingDataForMain[i].attributes?.photos?.data[i]?.attributes?.formats?.thumbnail?.url
+
+		projectOtherPhotosArray.value = []
+		categoriesShootingDataForMain.forEach(el => {
+			let elemPhotos = []
+			el?.attributes?.photo_for_main?.data.forEach(elem => {
+				elemPhotos.push(
+					elem?.attributes?.formats?.thumbnail?.url
 				)
-			}
-		}
+			})
+			projectOtherPhotosArray.value.push(elemPhotos)
+		})
+		projectOtherPhotos.value = projectOtherPhotosArray.value[0]
+
 	})
 
 	function changeProjectWithAnimation() {
@@ -112,15 +119,7 @@ import transitionConfig from '@/helpers/transitionConfig'
 
 		// change other photos
 		projectOtherPhotos.value = []
-		if(!categoriesShootingDataForMain[homeImgCurrent.value]?.attributes?.photo_for_main?.data) {
-			for (let i = 1; i <= 5; i++) {
-				if(categoriesShootingDataForMain[homeImgCurrent.value].attributes?.photos?.data[i]?.attributes?.url !== undefined) {
-					projectOtherPhotos.value.push(
-						categoriesShootingDataForMain[homeImgCurrent.value].attributes?.photos?.data[i]?.attributes?.formats?.thumbnail?.url
-					)
-				}
-			}
-		}
+		projectOtherPhotos.value = projectOtherPhotosArray.value[homeImgCurrent.value]
 
 		homeImgCurrent.value === homeImg.value.length - 1 ?
 		homeImgCurrent.value = 0 : homeImgCurrent.value += 1
