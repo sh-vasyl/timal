@@ -118,7 +118,7 @@
 		) {
 
 			let formData = new FormData(form.value);
-			let response = await fetch("https://timal.vercel.app/smtp.php", {
+			let response = await fetch("https://timal.vercel.app/public/smtp.php", {
 				method: "POST",
 				body: formData,
 			});
