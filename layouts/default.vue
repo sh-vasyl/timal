@@ -11,6 +11,7 @@
 
 	<div id="viewport">
 		<ThePreloader />
+		<ThePopup />
 		<TheSmoothWrapper>
 			<slot />
 

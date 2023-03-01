@@ -199,6 +199,7 @@ import transitionConfig from '@/helpers/transitionConfig'
 			</TheFooter>
 
 		</HomeView>
+
 	</TheWrapper>
 </template>
 
