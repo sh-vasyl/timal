@@ -19,8 +19,8 @@ try {
     $mail->isSMTP();
     $mail->SMTPAuth   = true;
     //Тут данные авторизации
-		$mail->Username   = 'etere.finance@gmail.com';
-    $mail->Password   = 'fqzlzkkfhveybvpx';
+		$mail->Username   = 'up.vasyl@gmail.com';
+    $mail->Password   = 'exomsygfkygiywvg';
 
     $mail->SMTPDebug  = 1;
     $mail->SMTPAuth   = TRUE;
@@ -30,8 +30,8 @@ try {
 
 
     //Тут данные куда отправить
-    $mail->setFrom('team@etere.finance', 'Site');
-    $mail->addAddress('team@etere.finance'); // Куда отправить
+    $mail->setFrom('up.vasyl@gmail.com', 'Site');
+    $mail->addAddress('up.vasyl@gmail.com'); // Куда отправить
 
   	//Сюда то что отправишь
 		$mail->CharSet = 'UTF-8';
