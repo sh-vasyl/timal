@@ -131,13 +131,14 @@
 			inputPhone.value.length <= 15
 		) {
 
+			addSending()
+
 			let formData = new FormData(form.value);
 			let response = await fetch("https://timal.vercel.app/smtp.php", {
 				method: "POST",
 				body: formData,
 			});
 
-			addSending()
 
 			if (response.ok) {
 				removeSending()
@@ -146,9 +147,10 @@
 				removeAllCategories()
 				clearCountries()
 				form.value.reset()
+				console.log('готово!')
 			} else {
 				removeSending()
-				console.log("Помилка");
+				console.log("Помилка")
 			}
 
 		} else {
