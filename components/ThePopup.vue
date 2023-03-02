@@ -5,10 +5,6 @@
 	const popup = ref(null)
 	const popupContainer = ref(null)
 
-	tryOnMounted(() => {
-		gsap.set(popup.value, {autoAlpha: 0})
-	})
-
 	function closePopup() {
 		const tl = gsap.timeline({
 			onComplete() {
@@ -22,8 +18,6 @@
 			filter: 'blur(0rem)',
 			clearProps: 'filter'
 		}, '-0.5')
-
-
 	}
 
 </script>
@@ -49,6 +43,8 @@
 	top: 0;
 	left: 0;
 	right: 0;
+	opacity: 0;
+	visibility: hidden;
 	bottom: 0;
 	background: rgba($c-black, 0.4);
 	z-index: 9999;
