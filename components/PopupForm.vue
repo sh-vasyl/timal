@@ -97,12 +97,12 @@
 
 		function addSending() {
 			document.querySelector('.form__submit').classList.add('sending')
-			gsap.to('html,body', {pointerEvents: 'none', opacity: 0.8})
+			gsap.to('#viewport', {pointerEvents: 'none', opacity: 0.8})
 		}
 
 		function removeSending() {
 			document.querySelector('.form__submit').classList.remove('sending')
-			gsap.to('html,body', {clearProps: 'pointer-events, opacity'})
+			gsap.set('#viewport', {clearProps: 'all'})
 		}
 
 		function removeErrorClasses() {
