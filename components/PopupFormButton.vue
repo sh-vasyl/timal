@@ -25,7 +25,7 @@
 
 	<div class="form__submit-wrap">
 		<button
-			class="form__submit sending"
+			class="form__submit"
 			type="submit"
 			@mouseenter="anim"
 		>

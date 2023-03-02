@@ -95,6 +95,16 @@
 			}
 		}
 
+		function addSending() {
+			document.querySelector('.form__submit').classList.add('sending')
+			gsap.to('html,body', {pointerEvents: 'none', opacity: 0.8})
+		}
+
+		function removeSending() {
+			document.querySelector('.form__submit').classList.remove('sending')
+			gsap.to('html,body', {clearProps: 'pointer-events, opacity'})
+		}
+
 		function removeErrorClasses() {
 			fieldWrappers.forEach(fieldWrap => {
 				fieldWrap.classList.remove('is-empty')
@@ -127,31 +137,17 @@
 				body: formData,
 			});
 
-			document.querySelector('.form__submit').classList.add('sending')
+			addSending()
 
 			if (response.ok) {
-				const data = []
-				data.push({
-					"Name": inputName.value,
-					"Phone": inputPhone.value,
-					"Instagram": inputInstagram.value,
-					"Country": countryCurrent.value,
-					"City": cityCurrent.value,
-					"Categories": []
-				})
-
-				formCategories.forEach(category => {
-					if(category.classList.contains('active')) {
-						data[0].Categories.push(category.textContent)
-					}
-				})
-
+				removeSending()
 				removePlusPhone()
 				removeErrorClasses()
 				removeAllCategories()
 				clearCountries()
 				form.value.reset()
 			} else {
+				removeSending()
 				console.log("Помилка");
 			}
 
