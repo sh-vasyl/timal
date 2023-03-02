@@ -42,6 +42,10 @@
 	&:hover {
 		transform: rotate(90deg);
 	}
+	@include max(bg) {
+		width: 20px;
+		height: 20px;
+	}
 }
 .select__clear-icon:after,
 .select__clear-icon:before {
@@ -52,6 +56,10 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
+	@include max(bg) {
+		width: 10px;
+		height: 1px;
+	}
 }
 
 .select__clear-icon:after {
@@ -66,6 +74,10 @@
 	width: vw(10px);
 	height: vw(5px);
 	position: relative;
+	@include max(bg) {
+		width: 10px;
+		height: 5px;
+	}
 }
 
 .vs__open-indicator:after,
@@ -76,6 +88,10 @@
 	background: rgba($c-black, 0.7);
 	position: absolute;
 	top: 0;
+	@include max(bg) {
+		width: 7px;
+		height: 1px;
+	}
 }
 
 .vs__open-indicator:after {
@@ -105,6 +121,10 @@
 	white-space: nowrap;
 	max-width: 90%;
 	overflow: hidden;
+	@include max(bg) {
+		padding-bottom: 7px;
+		font-size: 11px;
+	}
 }
 
 .vs__selected-options {
@@ -115,6 +135,9 @@
 	padding: 0;
 	border: none;
 	border-bottom: vw(1px) solid rgba($c-black, 0.3);
+	@include max(bg) {
+		border-bottom: 1px solid rgba($c-black, 0.3);
+	}
 }
 
 .vs--single.vs--open .vs__selected, .vs--single.vs--loading .vs__selected {
@@ -126,10 +149,17 @@
 	font-size: vw(11px);
 	text-transform: uppercase;
 	padding-bottom: vw(10px);
+	@include max(bg) {
+		font-size: 11px;
+		padding-bottom: 10px;
+	}
 }
 
 .vs__actions {
 	padding-bottom: vw(7px);
+	@include max(bg) {
+		padding-bottom: 7px;
+	}
 }
 
 .vs__search:focus::placeholder {
@@ -144,11 +174,19 @@
 	max-height: vw(200px);
 	font-size: vw(11px);
 	font-family: $i400;
+	@include max(bg) {
+		max-height: 200px;
+		font-size: 11px;
+		border: 1px solid rgba($c-black, 0.3);
+	}
 }
 
 .vs__dropdown-option {
 	padding: vw(10px) vw(20px);
 	text-transform: uppercase;
+	@include max(bg) {
+		padding: 10px 20px;
+	}
 }
 
 .vs__dropdown-option--highlight {

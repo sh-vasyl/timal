@@ -8,7 +8,11 @@
 	function closePopup() {
 		const tl = gsap.timeline({
 			onComplete() {
-				ScrollSmoother.get().paused(false)
+				if (ScrollTrigger.isTouch === 1) {
+					gsap.set('body,html', { clearProps: 'overflow' })
+				} else {
+					ScrollSmoother.get().paused(false)
+				}
 			}
 		})
 		tl.to(popup.value, {
@@ -18,6 +22,7 @@
 			filter: 'blur(0rem)',
 			clearProps: 'filter'
 		}, '-0.5')
+
 	}
 
 </script>

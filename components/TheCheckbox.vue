@@ -17,7 +17,6 @@
 <style lang="scss" scoped>
 .check-category__item {
   cursor: pointer;
-  font-size: 22px;
   user-select: none;
 }
 .check-category__item input {
@@ -39,6 +38,13 @@
 	margin-bottom: vw(10px);
 	transition: all .25s ease;
 	display: block;
+	@include max(bg) {
+		font-size: 11px;
+		padding: 6px 11px;
+		border-radius: 74px;
+		margin-right: 8px;
+		margin-bottom: 10px;
+	}
 }
 
 /* On mouse-over, add a grey background color */

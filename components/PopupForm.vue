@@ -81,7 +81,6 @@
 
 		const inputName = document.querySelector('.input-name')
 		const inputPhone = document.querySelector('.input-phone')
-		const inputInstagram = document.querySelector('.input-instagram')
 		const selectCountry = document.querySelector('.select-country')
 		const selectCity = document.querySelector('.select-city')
 		const formCategories = document.querySelectorAll('.popup__category-item')
@@ -96,12 +95,10 @@
 		}
 
 		function addSending() {
-			document.querySelector('.form__submit').classList.add('sending')
-			gsap.to('#viewport', {pointerEvents: 'none', opacity: 0.8})
+			gsap.to('#viewport', {pointerEvents: 'none', opacity: 0.5})
 		}
 
 		function removeSending() {
-			document.querySelector('.form__submit').classList.remove('sending')
 			gsap.set('#viewport', {clearProps: 'all'})
 		}
 
@@ -260,6 +257,12 @@
 .popup__form {
 	flex: 1 1 auto;
 	padding: vw(69px) vw(110px) vw(64px);
+	@include max(bg) {
+		padding: 69px 39px 64px;
+	}
+	@include max(sm) {
+		padding: 69px 89px 73px;
+	}
 }
 
 </style>

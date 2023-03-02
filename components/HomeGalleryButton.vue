@@ -1,6 +1,7 @@
 <script setup>
 	import { gsap } from 'gsap'
 	import ScrollSmoother from 'gsap/ScrollSmoother'
+	import ScrollTrigger from 'gsap/ScrollTrigger'
 
 	/**
 	 * Animation hover on button
@@ -20,7 +21,12 @@
 	}
 
 	function openPopup() {
-		ScrollSmoother.get().paused(true)
+		if (ScrollTrigger.isTouch === 1) {
+			gsap.set('body,html', { overflow: 'hidden' })
+		} else {
+			ScrollSmoother.get().paused(true)
+		}
+
 		const tl = gsap.timeline()
 		tl.to('.popup', {
 			autoAlpha: 1,

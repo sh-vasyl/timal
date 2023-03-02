@@ -11,6 +11,12 @@
 .popup__photo {
 	flex: 0 0 vw(440px);
 	position: relative;
+	@include max(bg) {
+		flex: 0 0 378px;
+	}
+	@include max(sm) {
+		display: none;
+	}
 }
 .popup__photo-img {
 	width: 100%;

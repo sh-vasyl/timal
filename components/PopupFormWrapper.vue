@@ -13,6 +13,9 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+	@include max(bg) {
+		margin-top: 42px;
+	}
 }
 
 </style>

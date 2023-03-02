@@ -11,12 +11,20 @@
 <style lang="scss" scoped>
 .popup__signature {
 	position: absolute;
-	top: 52px;
-	right: 57px;
+	top: vw(52px);
+	right: vw(57px);
+	@include max(bg) {
+		top: 52px;
+		right: 9px;
+	}
 }
 .popup__signature-svg {
 	width: vw(160px);
 	height: vw(119px);
+	@include max(bg) {
+		width: 158px;
+		height: 116px;
+	}
 }
 
 </style>

@@ -26,6 +26,10 @@
 .popup__close-svg {
 	width: vw(50px);
 	height: vw(50px);
+	@include max(bg) {
+		width: 50px;
+		height: 50px;
+	}
 }
 
 </style>

@@ -44,6 +44,9 @@
 .s32 {
 	font-size: vw(32px);
 	line-height: 86%;
+	@include max(bg) {
+		font-size: 32px;
+	}
 }
 
 .h3 {

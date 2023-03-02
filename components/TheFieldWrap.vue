@@ -13,6 +13,10 @@
 	position: relative;
 	margin-bottom: vw(32px);
 	flex: 0 0 vw(200px);
+	@include max(bg) {
+		flex: 0 0 200px;
+		margin-bottom: 32px;
+	}
 }
 .field__wrap.disabled {
 	pointer-events: none;

@@ -54,6 +54,12 @@
 	&:focus::placeholder {
 		opacity: 0.3;
 	}
+	@include max(bg) {
+		font-size: 11px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid rgba($c-black, 0.3);
+		height: 30px;
+	}
 }
 
 .input-phone:focus::placeholder {
@@ -61,5 +67,8 @@
 }
 .input-phone.offset {
 	padding-left: vw(8px);
+	@include max(bg) {
+		padding-left: 8px;
+	}
 }
 </style>

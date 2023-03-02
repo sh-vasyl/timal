@@ -10,6 +10,10 @@
 	font-family: $i400;
 	flex: 0 0 100%;
 	margin-bottom: vw(16px);
+	@include max(bg) {
+		font-size: 11px;
+		margin-bottom: 16px;
+	}
 }
 
 

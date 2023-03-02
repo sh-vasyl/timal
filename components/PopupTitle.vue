@@ -10,6 +10,10 @@
 	font-size: vw(72px);
 	line-height: 86%;
 	font-family: $xl;
+	@include max(bg) {
+		font-size: 72px;
+		text-align: center;
+	}
 }
 
 </style>
