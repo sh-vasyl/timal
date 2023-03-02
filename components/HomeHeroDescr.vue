@@ -77,6 +77,9 @@
 	font-size: vw(29px);
 	line-height: 130%;
 	opacity: 0;
+	@include max(bg) {
+		font-size: 24px;
+	}
 	br {
 		display: none;
 	}

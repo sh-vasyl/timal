@@ -263,6 +263,9 @@
 	@include max(sm) {
 		padding: 69px 89px 73px;
 	}
+	@include max(xs) {
+		padding: 36px 20px 36px;
+	}
 }
 
 </style>

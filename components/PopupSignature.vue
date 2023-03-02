@@ -17,6 +17,10 @@
 		top: 52px;
 		right: 9px;
 	}
+	@include max(xs) {
+		top: 32px;
+		right: 6px;
+	}
 }
 .popup__signature-svg {
 	width: vw(160px);
@@ -24,6 +28,10 @@
 	@include max(bg) {
 		width: 158px;
 		height: 116px;
+	}
+	@include max(xs) {
+		width: 96px;
+		height: 70px;
 	}
 }
 

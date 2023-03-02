@@ -70,13 +70,33 @@
 	width: vw(220px);
 	height: vw(54px);
 	left: vw(-30px);
-	top: vw(-13px)
+	top: vw(-13px);
+	@include max(bg) {
+		width: 218px;
+		height: 52px;
+		left: -30px;
+		top: -9px;
+	}
+	@include max(xs) {
+		width: 155px;
+		height: 36px;
+		left: -20px;
+		top: -8px;
+	}
 }
 
 .home-gallery-btn__first {
 	font-size: vw(29px);
 	line-height: 100%;
 	margin-right: vw(5px);
+	@include max(bg) {
+		font-size: 29px;
+		margin-right: 5px;
+	}
+	@include max(xs) {
+		font-size: 22px;
+		margin-right: 3px;
+	}
 }
 
 </style>

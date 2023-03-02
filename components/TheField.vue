@@ -60,6 +60,9 @@
 		border-bottom: 1px solid rgba($c-black, 0.3);
 		height: 30px;
 	}
+	@include max(xs) {
+		padding-bottom: 16px;
+	}
 }
 
 .input-phone:focus::placeholder {

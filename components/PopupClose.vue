@@ -30,6 +30,10 @@
 		width: 50px;
 		height: 50px;
 	}
+	@include max(xs) {
+		width: 42px;
+		height: 42px;
+	}
 }
 
 </style>

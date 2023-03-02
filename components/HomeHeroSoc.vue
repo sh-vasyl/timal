@@ -22,6 +22,9 @@
 
 .hero-soc__link {
 	margin-right: vw(32px);
+	@include max(bg) {
+		margin-right: 32px;
+	}
 }
 
 </style>

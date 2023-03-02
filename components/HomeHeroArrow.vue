@@ -36,6 +36,10 @@
 	line-height: 86%;
 	font-family: $xl;
 	margin-right: vw(16px);
+	@include max(bg) {
+		font-size: 20px;
+		margin-right: 16px;
+	}
 }
 
 .home-hero-arrow__arrow {

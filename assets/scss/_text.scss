@@ -47,6 +47,9 @@
 	@include max(bg) {
 		font-size: 32px;
 	}
+	@include max(xs) {
+		font-size: 22px;
+	}
 }
 
 .h3 {

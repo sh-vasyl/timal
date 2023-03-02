@@ -97,6 +97,11 @@
 	max-width: none;
 	margin-right: vw(-1px);
 	margin-left: vw(-1px);
+	@include max(bg) {
+		margin-left: -1px;
+		margin-right: -1px;
+		width: 1500px;
+	}
 }
 
 </style>

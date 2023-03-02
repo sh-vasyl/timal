@@ -86,10 +86,14 @@
 	position: absolute;
 	width: 20px;
 	height: 1px;
-	background: $c-black;
+	background: $c-white;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+
+}
+.header-inner .header-burger__line {
+	background: $c-black;
 }
 .header-burger__line-first {
 	margin-top: -4px;

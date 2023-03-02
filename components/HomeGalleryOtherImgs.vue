@@ -117,11 +117,18 @@
 	left: 50%;
 	transform: translateX(-50%);
 	width: vw(150px);
+	@include max(bg) {
+		width: 90px;
+	}
 }
 
 .home-gallery-img-5 {
 	top: vw(334px);
 	margin-left: vw(-414px);
+	@include max(bg) {
+		top: 249px;
+		margin-left: -350px;
+	}
 }
 
 .home-gallery-img-6 {

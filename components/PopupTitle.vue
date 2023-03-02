@@ -14,6 +14,9 @@
 		font-size: 72px;
 		text-align: center;
 	}
+	@include max(xs) {
+		font-size: 55px;
+	}
 }
 
 </style>

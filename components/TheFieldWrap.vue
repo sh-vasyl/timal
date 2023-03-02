@@ -17,6 +17,10 @@
 		flex: 0 0 200px;
 		margin-bottom: 32px;
 	}
+	@include max(xs) {
+		flex: 0 0 100%;
+		margin-bottom: 20px;
+	}
 }
 .field__wrap.disabled {
 	pointer-events: none;

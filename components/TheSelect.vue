@@ -125,6 +125,9 @@
 		padding-bottom: 7px;
 		font-size: 11px;
 	}
+	@include max(xs) {
+		padding-bottom: 8px;
+	}
 }
 
 .vs__selected-options {
@@ -152,6 +155,9 @@
 	@include max(bg) {
 		font-size: 11px;
 		padding-bottom: 10px;
+	}
+	@include max(xs) {
+		padding-bottom: 13px;
 	}
 }
 

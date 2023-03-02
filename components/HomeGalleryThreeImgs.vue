@@ -76,15 +76,27 @@
 	margin-top: vw(20px);
 	transform: translateX(-50%) rotate(-6.38deg);
 	left: calc(50% - #{vw(60px)});
+	@include max(bg) {
+		width: 220px;
+		margin-top: 20px;
+		left: calc(50% - 50px);
+	}
 }
 
 .home-gallery-three-img-3 {
 	width: vw(339px);
+	@include max(bg) {
+		width: 242px;
+	}
 }
 
 .home-gallery-three-img-4 {
 	width: vw(288px);
 	margin-top: vw(55px);
 	transform: translateX(-50%) rotate(4.12deg);
+	@include max(bg) {
+		width: 204px;
+		margin-top: 50px;
+	}
 }
 </style>

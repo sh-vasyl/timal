@@ -54,6 +54,9 @@
 	@include max(bg) {
 		margin-top: 37px;
 	}
+	@include max(xs) {
+		margin-top: 20px;
+	}
 }
 
 .form-btn__line {
@@ -69,6 +72,12 @@
 		left: -30px;
 		top: -9px;
 	}
+	@include max(xs) {
+		width: 155px;
+		height: 36px;
+		left: -20px;
+		top: -8px;
+	}
 }
 
 .form-btn__first {
@@ -78,6 +87,10 @@
 	@include max(bg) {
 		font-size: 29px;
 		margin-right: 5px;
+	}
+	@include max(xs) {
+		font-size: 22px;
+		margin-right: 3px;
 	}
 }
 </style>

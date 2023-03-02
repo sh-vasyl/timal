@@ -22,5 +22,8 @@
 	@include max(sm) {
 		width: 594px;
 	}
+	@include max(xs) {
+		width: 354px;
+	}
 }
 </style>

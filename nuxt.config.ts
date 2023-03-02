@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+
 	runtimeConfig: {
 		public: {
 			baseUrl: "https://timal-strapi.dev-onfire.work"
@@ -80,4 +81,5 @@ export default defineNuxtConfig({
 	build: {
 		transpile: ['gsap'],
 	},
+
 })

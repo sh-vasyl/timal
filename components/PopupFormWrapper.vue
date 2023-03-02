@@ -16,6 +16,9 @@
 	@include max(bg) {
 		margin-top: 42px;
 	}
+	@include max(xs) {
+		margin-top: 32px;
+	}
 }
 
 </style>

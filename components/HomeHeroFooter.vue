@@ -61,6 +61,9 @@
 	bottom: vw(16px);
 	left: 0;
 	width: 100vw;
+	@include max(bg) {
+		bottom: 16px
+	}
 }
 
 .home-hero-footer__wrap {
