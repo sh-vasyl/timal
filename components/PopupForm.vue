@@ -1,7 +1,6 @@
 <script setup>
 
 	import gsap from 'gsap'
-	import ScrollSmoother from 'gsap/ScrollSmoother'
 	import { Country, State }  from 'country-state-city'
 
 	const form = ref(null)
@@ -19,6 +18,14 @@
 		if(e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === '+') {
 			e.preventDefault()
 		}
+	}
+
+	function createNameForSelects() {
+		const selectCountry = document.querySelector('.select-country')
+		const selectCity = document.querySelector('.select-city')
+
+		selectCountry.querySelector('.vs__search').setAttribute('name', 'country')
+		selectCity.querySelector('.vs__search').setAttribute('name', 'city')
 	}
 
 	function selectedCountry(country) {
@@ -57,12 +64,9 @@
 		}
 	}
 
+	tryOnMounted(() => {
+		nextTick(() => createNameForSelects())
 
-	tryOnMounted(() => {
-		ScrollSmoother.get().paused(true)
-		// console.log(smtp);
-	})
-	tryOnMounted(() => {
 		Country.getAllCountries().forEach(country => {
 			countries.value.push({
 				label: country.name,
@@ -118,10 +122,12 @@
 		) {
 
 			let formData = new FormData(form.value);
-			let response = await fetch("https://timal.vercel.app/public/smtp.php", {
+			let response = await fetch("https://timal.vercel.app/smtp.php", {
 				method: "POST",
 				body: formData,
 			});
+
+			document.querySelector('.form__submit').classList.add('sending')
 
 			if (response.ok) {
 				const data = []
@@ -232,8 +238,15 @@
 						:options="cities" />
 				</TheFieldWrap>
 
-				<PopupFormCategory :categories="categories" />
-				<!-- <TheCheckbox /> -->
+				<PopupFormCategory>
+					<PopupFormCategoryTitle />
+					<TheCheckbox
+						v-for="categoryName in categories"
+						name="category[]"
+						:value="categoryName"
+					/>
+				</PopupFormCategory>
+
 
 				<PopupFormButton />
 			</PopupFormWrapper>

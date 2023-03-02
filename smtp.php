@@ -14,6 +14,9 @@ try {
     $name = $_POST["name"];
     $phone = $_POST["phone"];
     $instagram = $_POST["instagram"];
+    $country = $_POST["country"];
+    $city = $_POST["city"];
+		$categories = implode(", ", $_POST['category']);
 
 
     $mail->isSMTP();
@@ -38,8 +41,8 @@ try {
 		$mail->Encoding = 'base64';
     $mail->isHTML(true);
 
-    $mail->Subject = "Etere";
-    $mail->Body    = "<b>Ім'я:</b> $name <br><b>Почта:</b> $phone <br><b>Повідомлення:</b> $instagram";
+    $mail->Subject = "Timal";
+    $mail->Body    = "<b>Ім'я:</b> $name <br><b>Телефон:</b> $phone <br><b>Інстаграм:</b> $instagram <br><b>Країна:</b> $country <br><b>Місто:</b> $city<br><b>Категорії:</b> $categories";
 
     $mail->send();
     echo 'Message has been sent';

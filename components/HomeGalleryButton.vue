@@ -1,6 +1,6 @@
 <script setup>
-
 	import { gsap } from 'gsap'
+	import ScrollSmoother from 'gsap/ScrollSmoother'
 
 	/**
 	 * Animation hover on button
@@ -19,18 +19,32 @@
 		})
 	}
 
+	function openPopup() {
+		ScrollSmoother.get().paused(true)
+		const tl = gsap.timeline()
+		tl.to('.popup', {
+			autoAlpha: 1,
+			duration: 1
+		})
+		tl.to('.wrapper', {
+			filter: 'blur(1rem)',
+			duration: 1
+		}, '-0.25')
+
+	}
+
 </script>
 
 <template>
 
-  <a href="/" class="home-gallery-btn" @mouseenter="anim">
+  <button class="home-gallery-btn" @mouseenter="anim" @click="openPopup">
 		<svg class="home-gallery-btn__line" viewBox="0 0 220 54" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path ref="buttonPath" d="M140.775 53C191.139 41.1649 219.284 7.22883 119.344 1.62734C-0.671907 -5.09936 -39.2484 44.3927 49.6919 48.6963C123.599 52.2726 192.211 33.9922 219 21.7985" stroke="white" stroke-width="1.5"/>
 		</svg>
 
 		<span class="home-gallery-btn__first tf1">Send</span>
 		<span class="home-gallery-btn__second tf2 s32">request</span>
-	</a>
+	</button>
 
 </template>
 
