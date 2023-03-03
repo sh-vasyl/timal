@@ -5,7 +5,7 @@
 	defineProps({
 		name: String,
 		type: String,
-		placeholder: String
+		placeholder: String,
 	});
 
 	function onFocus(e) {

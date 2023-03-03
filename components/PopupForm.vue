@@ -3,16 +3,23 @@
 	import gsap from 'gsap'
 	import { Country, State }  from 'country-state-city'
 
-	const form = ref(null)
+	const form = ref({})
 
 	const countries = ref([])
 	const cities = ref([])
 
-	const cityCurrent = ref(null)
 	const countryCurrent = ref(null)
+	const cityCurrent = ref(null)
 
 	const cityFieldWrapper = ref(null)
 	const countryFieldWrapper = ref(null)
+
+	const inputName = ref(null)
+	const inputPhone = ref(null)
+	const inputInstagram = ref(null)
+	const checkboxCategory = ref(null)
+	const selectCountry = ref(null)
+	const selectCity = ref(null)
 
 	function onKeydown(e) {
 		if(e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === '+') {
@@ -21,18 +28,15 @@
 	}
 
 	function createNameForSelects() {
-		const selectCountry = document.querySelector('.select-country')
-		const selectCity = document.querySelector('.select-city')
-
-		selectCountry.querySelector('.vs__search').setAttribute('name', 'country')
-		selectCity.querySelector('.vs__search').setAttribute('name', 'city')
+		selectCountry.value.$el.querySelector('.vs__search').setAttribute('name', 'country')
+		selectCity.value.$el.querySelector('.vs__search').setAttribute('name', 'city')
 	}
 
 	function selectedCountry(country) {
 		cityFieldWrapper.value.$el.classList.remove('disabled')
 
 		countryCurrent.value = country.label
-		if(cityCurrent.value) {
+		if(selectCity.value) {
 			clearCities()
 		}
 		cities.value = []
@@ -45,15 +49,11 @@
 	}
 
 	function clearCities() {
-		const citySelectElement = document.querySelector('.select-city')
-		const clearButton = citySelectElement.querySelector('.vs__clear')
-		clearButton.click()
+		selectCity.value.$el.querySelector('.vs__clear').click()
 	}
 
 	function clearCountries() {
-		const countriesSelectElement = document.querySelector('.select-country')
-		const clearButton = countriesSelectElement.querySelector('.vs__clear')
-		clearButton.click()
+		selectCountry.value.$el.querySelector('.vs__clear').click()
 	}
 
 	function onClickCountryClearButton(e) {
@@ -76,14 +76,7 @@
 	})
 
 
-	async function handleSubmit(e) {
-		e.preventDefault()
-
-		const inputName = document.querySelector('.input-name')
-		const inputPhone = document.querySelector('.input-phone')
-		const selectCountry = document.querySelector('.select-country')
-		const selectCity = document.querySelector('.select-city')
-		const formCategories = document.querySelectorAll('.popup__category-item')
+	async function handleSubmit() {
 		const fieldWrappers = document.querySelectorAll('.field__wrap')
 
 		function addOrRemoveErrorClass(field, value) {
@@ -109,64 +102,90 @@
 		}
 
 		function removeAllCategories() {
-			formCategories.forEach(category => {
-				category.classList.remove('active')
+			checkboxCategory.value.forEach(category => {
+				category.$el.querySelector('input').checked = false
 			})
+		}
+
+		function clearInputs() {
+			inputName.value.$el.value = null
+			inputPhone.value.$el.value = null
+			inputInstagram.value.$el.value = null
 		}
 
 		function removePlusPhone() {
 			const plus = document.querySelector('.phone-plus')
-			inputPhone.classList.remove('offset')
+			inputPhone.value.$el.classList.remove('offset')
 			gsap.set(plus, {opacity: 0})
 		}
 
+		let pickedCategories = []
+
+		checkboxCategory.value.forEach(category => {
+			if(category.$el.querySelector('input').checked) {
+				pickedCategories.push(category.$el.querySelector('.checkmark').textContent)
+			}
+		})
+
 		if(
-			inputName.value &&
-			cityCurrent.value &&
-			countryCurrent.value &&
-			inputPhone.value.length >= 10 &&
-			inputPhone.value.length <= 15
+			inputName.value.$el.value &&
+			inputPhone.value.$el.value.length >= 10 &&
+			inputPhone.value.$el.value.length <= 15 &&
+			selectCountry.value.$el.querySelector('.vs__selected') &&
+			selectCity.value.$el.querySelector('.vs__selected')
 		) {
 
 			addSending()
 
-			let formData = new FormData(form.value);
-			let response = await fetch("https://timal.vercel.app/smtp.php", {
-				method: "POST",
-				body: formData,
-			});
+			form.value.name = inputName.value.$el.value
+			form.value.phone = inputPhone.value.$el.value
+			form.value.instagram = inputInstagram.value.$el.value
+			form.value.country = selectCountry.value.$el.querySelector('.vs__selected').textContent
+			form.value.city = selectCity.value.$el.querySelector('.vs__selected').textContent
+			form.value.categories = pickedCategories.join()
 
-
-			if (response.ok) {
-				removeSending()
-				removePlusPhone()
-				removeErrorClasses()
-				removeAllCategories()
-				clearCountries()
-				form.value.reset()
-				console.log('готово!')
-			} else {
-				removeSending()
-				console.log("Помилка")
-			}
-
+			await $fetch('https://timal.vercel.app/api/contact', {
+				method: 'POST',
+				body: form.value,
+			})
+				.then(() => {
+					removeSending()
+					removePlusPhone()
+					removeErrorClasses()
+					removeAllCategories()
+					clearCountries()
+					clearInputs()
+					console.log('готово!')
+				})
+				.catch(() => {
+					removeSending()
+					console.log("помилка!")
+				});
 		} else {
-			addOrRemoveErrorClass(inputName, inputName.value)
-			addOrRemoveErrorClass(selectCountry, countryCurrent.value)
-			addOrRemoveErrorClass(selectCity, cityCurrent.value)
+			addOrRemoveErrorClass(inputName.value.$el, inputName.value.$el.value)
+			addOrRemoveErrorClass(selectCountry.value.$el, selectCountry.value.$el.querySelector('.vs__selected'))
+			addOrRemoveErrorClass(selectCity.value.$el, selectCity.value.$el.querySelector('.vs__selected'))
 
-			if(inputPhone.value.length < 10 || inputPhone.value.length > 15) {
-				inputPhone.closest('.field__wrap').classList.add('is-empty')
+			if(inputPhone.value.$el.value.length < 10 || inputPhone.value.$el.value.length > 15) {
+				inputPhone.value.$el.closest('.field__wrap').classList.add('is-empty')
 			} else {
-				inputPhone.closest('.field__wrap').classList.remove('is-empty')
+				inputPhone.value.$el.closest('.field__wrap').classList.remove('is-empty')
 			}
 		}
 
 	}
 
 	const categories = [
-		'Studio', 'Image', 'commercial', 'nude', 'Jewelry', 'Nature',
-		'pregnant', 'Corporate', 'Image', 'Studio'
+		'Studio',
+		'Image',
+		'Commercial',
+		'Nude',
+		'Jewelry',
+		'Nature',
+		'Pregnant',
+		'Corporate',
+		'Image',
+		'Studio'
 	]
 
 
@@ -176,19 +195,20 @@
 	<ClientOnly>
 
 		<form
+
 			method="POST"
 			action="smtp.php"
-			ref="form"
 			class="popup__form"
 			novalidate
 			autocomplete="off"
-			@submit="handleSubmit($event)"
+			@submit.prevent="handleSubmit($event)"
 		>
 			<PopupTitle />
 
 			<PopupFormWrapper>
 				<TheFieldWrap>
 					<TheField
+						ref="inputName"
 						class="input-name"
 						type="text"
 						name="name"
@@ -198,6 +218,7 @@
 				<TheFieldWrap>
 					<PhonePlus />
 					<TheField
+						ref="inputPhone"
 						class="input-phone"
 						type="number"
 						name="phone"
@@ -207,6 +228,7 @@
 
 				<TheFieldWrap>
 					<TheField
+						ref="inputInstagram"
 						class="input-instagram"
 						type="text"
 						name="instagram"
@@ -216,7 +238,7 @@
 				<TheFieldWrap
 					ref="countryFieldWrapper">
 					<TheSelect
-						class="select-country"
+						ref="selectCountry"
 						placeholder="Country"
 						:options="countries"
 						@option:selected="selectedCountry"
@@ -227,6 +249,7 @@
 					ref="cityFieldWrapper"
 					class="disabled">
 					<TheSelect
+						ref="selectCity"
 						class="select-city"
 						placeholder="City"
 						v-model="cityCurrent"
@@ -237,7 +260,8 @@
 					<PopupFormCategoryTitle />
 					<TheCheckbox
 						v-for="categoryName in categories"
-						name="category[]"
+						ref="checkboxCategory"
+						:name="categoryName"
 						:value="categoryName"
 					/>
 				</PopupFormCategory>

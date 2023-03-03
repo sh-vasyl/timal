@@ -3,7 +3,7 @@
 	defineProps({
 		options: Array,
 		label: String,
-		placeholder: String
+		placeholder: String,
 	})
 
 </script>
