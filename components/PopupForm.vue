@@ -144,7 +144,7 @@
 			form.value.city = selectCity.value.$el.querySelector('.vs__selected').textContent
 			form.value.categories = pickedCategories.join()
 
-			await $fetch('https://timal.vercel.app/api/contact', {
+			await $fetch('/api/contact', {
 				method: 'POST',
 				body: form.value,
 			})
