@@ -22,7 +22,7 @@
 	const selectCity = ref(null)
 
 	function onKeydown(e) {
-		if(e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === '+') {
+		if(e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === '+' || e.key === 'e') {
 			e.preventDefault()
 		}
 	}
@@ -144,7 +144,7 @@
 			form.value.city = selectCity.value.$el.querySelector('.vs__selected').textContent
 			form.value.categories = pickedCategories.join()
 
-			await $fetch('http://localhost:3001/api/contact', {
+			await $fetch('/api/contact', {
 				method: 'POST',
 				body: form.value,
 			})
