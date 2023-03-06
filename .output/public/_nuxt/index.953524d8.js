@@ -1,0 +1,1 @@
+import{u as n,o as a,c as _,f as t,h as s,i as c,j as r}from"./entry.ca07d34d.js";const x={__name:"index",setup(u){return n().editorialCategory(),(p,i)=>{const e=r,o=c;return a(),_("div",null,[t(o,{name:"categories"},{default:s(()=>[t(e)]),_:1})])}}};export{x as default};
