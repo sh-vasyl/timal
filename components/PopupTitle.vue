@@ -15,7 +15,7 @@
 		text-align: center;
 	}
 	@include max(xs) {
-		font-size: 55px;
+		font-size: 48px;
 	}
 }
 

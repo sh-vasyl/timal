@@ -77,6 +77,12 @@
 .home-infinite-line__wrap-1 {
 	transform: rotate(-4.51deg);
 	top: vw(430px);
+	@include max(bg) {
+		top: 300px;
+	}
+	@include max(sm) {
+		top: 231px;
+	}
 }
 
 .home-infinite-line__wrap-2 {
@@ -84,6 +90,12 @@
 	top: vw(400px);
 	display: flex;
 	justify-content: flex-end;
+	@include max(bg) {
+		top: 280px;
+	}
+	@include max(sm) {
+		top: 220px;
+	}
 }
 
 .home-infinite-line {

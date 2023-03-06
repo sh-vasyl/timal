@@ -62,6 +62,9 @@
 	bottom: vw(120px);
 	left: 50%;
 	transform: translateX(-50%);
+	@include max(bg) {
+		bottom: 20px;
+	}
 }
 
 .home-gallery-btn__line {

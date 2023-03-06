@@ -4,6 +4,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   nuxtApp.vueApp.directive('animation-fade-in', {
     async mounted (el, binding) {
+
 			await document.fonts.ready
 
 			const store = useDefaultStore()
@@ -12,6 +13,11 @@ export default defineNuxtPlugin((nuxtApp) => {
 			watch(() => store.isPreloaderVisible, () => {
 				anim()
 			})
+
+			if(!store.isPreloaderVisible) {
+				anim()
+			}
+
 
 			watch(() => store.transitionComplete, (newValue) => {
 				if (newValue) {

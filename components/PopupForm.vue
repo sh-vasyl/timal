@@ -144,7 +144,7 @@
 			form.value.city = selectCity.value.$el.querySelector('.vs__selected').textContent
 			form.value.categories = pickedCategories.join()
 
-			await $fetch('/api/contact', {
+			await $fetch('http://localhost:3001/api/contact', {
 				method: 'POST',
 				body: form.value,
 			})
@@ -197,7 +197,6 @@
 		<form
 
 			method="POST"
-			action="smtp.php"
 			class="popup__form"
 			novalidate
 			autocomplete="off"
@@ -288,7 +287,7 @@
 		padding: 69px 89px 73px;
 	}
 	@include max(xs) {
-		padding: 36px 20px 36px;
+		padding: 36px 18px 36px;
 	}
 }
 

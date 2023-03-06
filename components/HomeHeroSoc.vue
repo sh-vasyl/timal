@@ -25,6 +25,9 @@
 	@include max(bg) {
 		margin-right: 32px;
 	}
+	@include max(xs) {
+		margin-right: 26px;
+	}
 }
 
 </style>

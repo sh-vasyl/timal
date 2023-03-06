@@ -45,6 +45,9 @@
 		margin-right: 8px;
 		margin-bottom: 10px;
 	}
+	@include max(xs) {
+		font-size: 9px;
+	}
 }
 
 /* On mouse-over, add a grey background color */

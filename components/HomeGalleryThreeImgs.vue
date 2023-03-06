@@ -81,12 +81,28 @@
 		margin-top: 20px;
 		left: calc(50% - 50px);
 	}
+	@include max(sm) {
+		width: 165px;
+		left: calc(50% - 30px);
+		margin-top: 10px;
+	}
+	@include max(xs) {
+		width: 138px;
+		left: calc(50% - 20px);
+		margin-top: 10px;
+	}
 }
 
 .home-gallery-three-img-3 {
 	width: vw(339px);
 	@include max(bg) {
 		width: 242px;
+	}
+	@include max(sm) {
+		width: 182px;
+	}
+	@include max(xs) {
+		width: 152px;
 	}
 }
 
@@ -97,6 +113,13 @@
 	@include max(bg) {
 		width: 204px;
 		margin-top: 50px;
+	}
+	@include max(sm) {
+		width: 153px;
+		margin-top: 40px;
+	}
+	@include max(xs) {
+		width: 127px;
 	}
 }
 </style>

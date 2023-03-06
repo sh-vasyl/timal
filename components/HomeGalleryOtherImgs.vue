@@ -120,6 +120,9 @@
 	@include max(bg) {
 		width: 90px;
 	}
+	@include max(xs) {
+		width: 60px;
+	}
 }
 
 .home-gallery-img-5 {
@@ -129,24 +132,77 @@
 		top: 249px;
 		margin-left: -350px;
 	}
+	@include max(sm) {
+		top:  175px;
+		margin-left: -290px;
+	}
+	@include max(xs) {
+		top: 132px;
+		margin-left: -140px;
+	}
 }
 
 .home-gallery-img-6 {
 	top: vw(260px);
 	margin-left: vw(412px);
+	@include max(bg) {
+		top: 196px;
+		margin-left: 380px;
+	}
+	@include max(sm) {
+		top:  130px;
+		margin-left: 280px;
+	}
+	@include max(xs) {
+		top: 91px;
+		margin-left: 130px;
+	}
 }
 
 .home-gallery-img-7 {
 	top: vw(648px);
 	margin-left: vw(-376px);
+	@include max(bg) {
+		top: 472px;
+		margin-left: -320px;
+	}
+	@include max(sm) {
+		top:  370px;
+		margin-left: -265px;
+	}
+	@include max(xs) {
+		top: 317px;
+		margin-left: -130px;
+	}
 }
 
 .home-gallery-img-8 {
 	top: vw(547px);
+	@include max(bg) {
+		top: 420px;
+	}
+	@include max(sm) {
+		top:  307px;
+	}
+	@include max(xs) {
+		top: 259px;
+	}
 }
 
 .home-gallery-img-9 {
 	top: vw(689px);
 	margin-left: vw(395px);
+	@include max(bg) {
+		top: 500px;
+		margin-left: 340px;
+	}
+	@include max(sm) {
+		top:  396px;
+		margin-left: 258px;
+	}
+	@include max(xs) {
+		top: 335px;
+		margin-left: 130px;
+	}
 }
 </style>

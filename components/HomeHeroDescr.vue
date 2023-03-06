@@ -64,7 +64,7 @@
 
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 .home-hero-descr {
 	position: absolute;
@@ -77,8 +77,18 @@
 	font-size: vw(29px);
 	line-height: 130%;
 	opacity: 0;
+	* {
+		@include max(xs) {
+			display: inline !important;
+		}
+	}
 	@include max(bg) {
 		font-size: 24px;
+	}
+	@include max(xs) {
+		font-size: 18px;
+		padding-left: 20px;
+		padding-right: 20px;
 	}
 	br {
 		display: none;

@@ -15,27 +15,21 @@ export default defineEventHandler(async (event) => {
 
 		const body = await readBody(event);
 
-		await content(body)
-			.then(async (data) => {
-				const mail = await transporter.sendMail({
-					form: `"${data.name}"`,
-					to: config.CONTACTMAIL,
-					subject: data.name,
-					html: `
-						<b>Name:</b> ${data.name}</br>
-						<b>Phone:</b> ${data.phone}</br>
-						<b>Instagram:</b> ${data.instagram}</br>
-						<b>Country:</b> ${data.country}</br>
-						<b>City:</b> ${data.city}</br>
-						<b>Categories:</b> ${data.categories}`
-				});
+		const data = await content(body)
 
-				console.log('Preview URL: %s', nodemailer.getTestMessageUrl(mail));
-				return Promise.resolve();
-			})
-			.catch((errors) => {
-				return Promise.reject(errors);
-			});
+		await transporter.sendMail({
+			form: `"${data.name}"`,
+			to: config.CONTACTMAIL,
+			subject: data.name,
+			html: `
+				<b>Name:</b> ${data.name}</br>
+				<b>Phone:</b> ${data.phone}</br>
+				<b>Instagram:</b> ${data.instagram}</br>
+				<b>Country:</b> ${data.country}</br>
+				<b>City:</b> ${data.city}</br>
+				<b>Categories:</b> ${data.categories}`
+		});
+
 
 		return 'Posted!';
 	} catch (error) {

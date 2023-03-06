@@ -23,7 +23,7 @@
 		width: 594px;
 	}
 	@include max(xs) {
-		width: 354px;
+		width: 310px;
 	}
 }
 </style>
