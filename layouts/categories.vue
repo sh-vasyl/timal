@@ -77,7 +77,6 @@
 
 		mm.add("(max-width: 1439px)", () => {
 			dimensions.value = 'px'
-
 		})
 	})
 

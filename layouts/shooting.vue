@@ -10,7 +10,6 @@
 	const store = useDefaultStore()
 
 
-
 	/**
 	 * Animate
 	 */
@@ -20,10 +19,17 @@
 			let mm = gsap.matchMedia()
 
 			mm.add("(min-width: 1024px)", () => {
-				getItemsDistance()
-				setItemsPosition()
-				setGalleryWidth()
-				initGalleryScroll()
+				setTimeout(() => {
+					getItemsDistance()
+				}, 0)
+				setTimeout(() => {
+					setItemsPosition()
+				}, 1)
+				setTimeout(() => {
+					setGalleryWidth()
+					initGalleryScroll()
+				}, 3)
+
 			})
 		}
 	});
@@ -33,10 +39,16 @@
 		let mm = gsap.matchMedia()
 
 		mm.add("(min-width: 1024px)", () => {
-			getItemsDistance()
-			setItemsPosition()
-			setGalleryWidth()
-			initGalleryScroll()
+			setTimeout(() => {
+				getItemsDistance()
+			}, 0)
+			setTimeout(() => {
+				setItemsPosition()
+			}, 1)
+			setTimeout(() => {
+				setGalleryWidth()
+				initGalleryScroll()
+			}, 3)
 		})
 	})
 
@@ -223,15 +235,41 @@
 			scaleProperties.value[i] = gsap.getProperty(item.$el, "scale")
 		})
 
-		shootingGalleryItem.value.forEach(item => {
-			gsap.to(item.$el, {
+
+		shootingGalleryItem.value.forEach((item, i) => {
+			let index = i + 1
+			const tlItems = gsap.timeline()
+			const posCenter = 1000 * 0.5
+			const random = Math.random() - 0.5
+			const radius = posCenter * 2 + random * 0;
+
+
+
+			tlItems.to(item.$el, {
+				scale: 0,
+			})
+
+
+			tlItems.set(item.$el, {
+				top:  window.innerHeight * 0.5 + (Math.sin(index) * radius),
+				left: -gsap.getProperty(shootingGalleryWrapper.value.$el, 'x') + window.innerWidth * 0.5 + (Math.cos(index) * radius),
+				duration: 1,
+				xPercent: -50,
+				yPercent: -50,
+				height: `${viewAllItemHeight.value}vw`,
+				scale: 1,
+			})
+
+
+			tlItems.to(item.$el, {
 				left: `calc(
 					${-gsap.getProperty(shootingGalleryWrapper.value.$el, 'x')}px +
 					${gsap.utils.random(10, 85)}vw)`,
 				top: gsap.utils.random(10, 85) + 'vh',
 				height: `${viewAllItemHeight.value}vw`,
-				scale: 1,
 				duration: viewAllAnimationDuration.value,
+				xPercent: 0,
+				yPercent: 0,
 				ease: 'Power2.easeOut',
 			})
 		})
@@ -271,6 +309,8 @@
 			tl.to(item.$el, {
 				x: 0,
 				y: 0,
+				xPercent: 0,
+				yPercent: 0,
 				left: i > 0 ? (window.innerWidth / 1.9) + itemsDistance.value[i - 1] : (window.innerWidth / 1.9),
 				top: 0,
 				height: '100%',
@@ -394,8 +434,10 @@
 
 			function scroll() {
 				let getPosition = getScrollLookup(".shooting-gallery__item", "center center", tlScroll);
-
-				ScrollSmoother.get().scrollTo(getPosition(`#shootingGalleryItem-${i}`), {smooth: 1})
+				gsap.to(ScrollSmoother.get(), {
+					scrollTop: getPosition(`#shootingGalleryItem-${i}`),
+					duration: 2.2
+				})
 			}
 		}
 	}
