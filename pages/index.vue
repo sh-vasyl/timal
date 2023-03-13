@@ -102,7 +102,7 @@ import transitionConfig from '@/helpers/transitionConfig'
 		gsap.from('.home-gallery-three-imgs, .home-gallery-img__wrap', {
 			opacity: 0,
 			filter: 'blur(1rem)',
-			duration: 2
+			duration: 3
 		})
 
 		changeProject()
@@ -110,8 +110,8 @@ import transitionConfig from '@/helpers/transitionConfig'
 
 	function changeProject() {
 		// change photo
-		homeImg.value.forEach(img => gsap.to(img.$el, { opacity: 0, duration: 1.5 }))
-		gsap.to(homeImg.value[homeImgCurrent.value].$el, { opacity: 1, duration: 1.5 })
+		homeImg.value.forEach(img => gsap.to(img.$el, { opacity: 0, duration: 3 }))
+		gsap.to(homeImg.value[homeImgCurrent.value].$el, { opacity: 1, duration: 3 })
 
 		// change link
 		currentShootingSlug.value = categoriesShootingDataForMain[homeImgCurrent.value]?.attributes?.slug

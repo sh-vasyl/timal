@@ -138,7 +138,7 @@
 			addSending()
 
 			form.value.name = inputName.value.$el.value
-			form.value.phone = inputPhone.value.$el.value
+			form.value.phone = "+" + inputPhone.value.$el.value
 			form.value.instagram = inputInstagram.value.$el.value
 			form.value.country = selectCountry.value.$el.querySelector('.vs__selected').textContent
 			form.value.city = selectCity.value.$el.querySelector('.vs__selected').textContent
@@ -155,6 +155,7 @@
 					removeAllCategories()
 					clearCountries()
 					clearInputs()
+					document.querySelector('.popup__close').click()
 					console.log('готово!')
 				})
 				.catch(() => {

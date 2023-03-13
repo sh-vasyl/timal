@@ -210,7 +210,11 @@
 	function initViewAllMode() {
 		toggleViewMode.value = true
 
-		ScrollSmoother.get().paused(true)
+		if (ScrollTrigger.isTouch === 1) {
+			gsap.set('body,html', { overflow: 'hidden' })
+		} else {
+			ScrollSmoother.get().paused(true)
+		}
 
 		animateTextTo()
 		animateContentTo()
@@ -235,6 +239,11 @@
 
 	function initNormalMode(isScroll) {
 		toggleViewMode.value = false
+		if (ScrollTrigger.isTouch === 1) {
+			gsap.set('body,html', { clearProps: 'overflow' })
+		} else {
+			ScrollSmoother.get().paused(false)
+		}
 
 		shootingGalleryItem.value.forEach(item => Draggable.get(item.$el).kill())
 
@@ -313,13 +322,11 @@
 		gsap.to(shootingCount.value.$el, {opacity: 1, x: 0})
 		gsap.to('.shooting-gallery__text', {opacity: 0})
 
-		mm.add({
-			isMaxBG: "(max-width: 1439px)",
-			isMinBG: "(min-width: 1440px)",
-		}, (context) => {
-			let { isMaxBG, isMinBG } = context.conditions
-
-			shootingSeeAll.value.textContent = isMinBG ? '(see all)' : '(ALL)'
+		mm.add("(min-width: 1440px)", () => {
+			shootingSeeAll.value.$el.textContent = '(see all)'
+		})
+		mm.add("(max-width: 1439px)", () => {
+			shootingSeeAll.value.$el.textContent = '(ALL)'
 		})
 
 	}

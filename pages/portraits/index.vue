@@ -1,10 +1,13 @@
 <script setup>
 
 	import transitionConfig from '@/helpers/transitionConfig'
-	definePageMeta({ pageTransition: transitionConfig })
+	definePageMeta({
+		pageTransition: transitionConfig
+	})
 
 	const store = useDefaultStore()
 	store.commercialCategory()
+
 
 </script>
 

@@ -24,9 +24,11 @@
 		initProjectsSlider()
   })
 
+
 	// After all preloader animations
 	watch(() => store.isPreloaderAnimationComplete, () => {
 		gsap.set('body,html', { overflow: 'hidden'})
+		console.log('oko');
   })
 
 	/**
@@ -117,6 +119,7 @@
 	function initProjectsSlider() {
 
 		let animationComplete = false
+		let isScrollFinish = false
 
 		setTimeout(() => {
 			if (ScrollTrigger.isTouch === 1) {
@@ -160,6 +163,20 @@
 												(document.documentElement.clientWidth * (totalProjects.value * 0.1))
 				},
 				onUpdate: (self) => {
+					if(!isScrollFinish) {
+						if(Math.abs(self.getVelocity()) < 150) {
+							animateLinksFrom()
+							isScrollFinish = true
+						}
+					}
+
+					if(isScrollFinish) {
+						if(Math.abs(self.getVelocity()) > 150) {
+							animateLinksTo()
+							isScrollFinish = false
+						}
+					}
+
 					currentScrollPosition.value = self.scroll()
 
 					if(!animationComplete) {
@@ -177,13 +194,6 @@
 				}
 			}
 		});
-
-		ScrollTrigger.addEventListener("scrollStart", () => {
-			animateLinksTo()
-		})
-		ScrollTrigger.addEventListener("scrollEnd", () => {
-			animateLinksFrom()
-		})
 
 	}
 

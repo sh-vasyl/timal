@@ -1,1 +1,0 @@
-import{u as n,o as a,c as _,f as e,h as c,i as s,j as r}from"./entry.ca07d34d.js";const x={__name:"index",setup(u){return n().commercialCategory(),(p,l)=>{const t=r,o=s;return a(),_("div",null,[e(o,{name:"categories"},{default:c(()=>[e(t)]),_:1})])}}};export{x as default};

@@ -1,1 +1,0 @@
-import{u as n,o as a,c as _,f as t,h as s,i as c,j as r}from"./entry.ca07d34d.js";const x={__name:"[slug]",setup(u){return n().editorialCategory(),(m,p)=>{const e=r,o=c;return a(),_("div",null,[t(o,{name:"shooting"},{default:s(()=>[t(e)]),_:1})])}}};export{x as default};
