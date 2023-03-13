@@ -1,0 +1,70 @@
+variables:
+  PROJ_PATH: "/home/admin/public_html/timal"
+  NVM_NODE: "v16.19.0"
+  PM2_NAME: "timal"
+
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - test
+  - deploy_dev
+  - production
+
+build-job:       # This job runs in the build stage, which runs first.
+  stage: build
+  tags:
+    - dev116server
+  only:
+    - DEV
+  variables:
+    BRANCH: "DEV"
+  script:
+    - cd $PROJ_PATH
+    - git add .
+    - if [ "`git branch | grep \*| cut -d ' ' -f2`" == "stable" ]; then git checkout -b tmp; fi
+    - if [ "`git branch --list stable`" ]; then git branch -D stable; fi
+    - if [ "`git diff --cached`" ]; then git commit -m 'before deploy'; fi
+    - git branch -m stable
+    - git fetch origin
+    - if [ "`git branch --list $BRANCH`" ]; then git branch -D $BRANCH; fi
+    - git checkout -b $BRANCH origin/$BRANCH
+    - git checkout $BRANCH
+    - git pull origin $BRANCH:$BRANCH
+    - nvm use $NVM_NODE
+    - npm install
+    - npm run build
+
+#unit-test-job:
+#  stage: test
+#  tags:
+#    - dev116server
+#  script:
+#    - echo "Nobody writes tests, it's a nightmare"
+
+#lint-test-job:
+#  stage: test
+#  tags:
+#    - dev116server
+#  script:
+#    - echo "Well, anyone?"
+
+deploy-dev-job:      # This job runs in the deploy stage.
+  stage: deploy_dev
+  only:
+    - DEV
+  tags:
+    - dev116server
+  script:
+    - pm2 restart $PM2_NAME
+  after_script:
+    - cd $PROJ_PATH
+    - if [ "`git branch --list tmp`" ]; then git branch -D tmp; fi
+    - echo "Successfully deployed"
+
+production-job:
+    stage: production
+    only:
+    - PROD
+    script:
+      - echo "Prod server is not defind"
+
+
