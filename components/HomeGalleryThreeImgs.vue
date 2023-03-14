@@ -47,6 +47,7 @@
 		<img
 			v-for="(img, i) in images"
 			ref="homeGalleryImg"
+			:data-id="img?.id"
 			:class="`home-gallery-three-img home-gallery-three-img-${i + 2}`"
 			:src="url + img?.attributes?.photos?.data[0]?.attributes?.formats?.small?.url"
 			alt="home gallery image"

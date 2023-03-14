@@ -221,6 +221,7 @@
 
 	function initViewAllMode() {
 		toggleViewMode.value = true
+		gsap.set(shootingSeeAll.value.$el, {pointerEvents: 'none'})
 
 		if (ScrollTrigger.isTouch === 1) {
 			gsap.set('body,html', { overflow: 'hidden' })
@@ -237,28 +238,32 @@
 
 
 		shootingGalleryItem.value.forEach((item, i) => {
-			let index = i + 1
-			const tlItems = gsap.timeline()
-			const posCenter = 1000 * 0.5
-			const random = Math.random() - 0.5
-			const radius = posCenter * 2 + random * 0;
-
-
-
-			tlItems.to(item.$el, {
-				scale: 0,
+			// let index = i + 1
+			const tlItems = gsap.timeline({
+				onComplete() {
+					gsap.set(shootingSeeAll.value.$el, {pointerEvents: 'auto'})
+				}
 			})
+			// const posCenter = 1000 * 0.5
+			// const random = Math.random() - 0.5
+			// const radius = posCenter * 2 + random * 0;
 
 
-			tlItems.set(item.$el, {
-				top:  window.innerHeight * 0.5 + (Math.sin(index) * radius),
-				left: -gsap.getProperty(shootingGalleryWrapper.value.$el, 'x') + window.innerWidth * 0.5 + (Math.cos(index) * radius),
-				duration: 1,
-				xPercent: -50,
-				yPercent: -50,
-				height: `${viewAllItemHeight.value}vw`,
-				scale: 1,
-			})
+
+			// tlItems.to(item.$el, {
+			// 	scale: 0,
+			// })
+
+
+			// tlItems.set(item.$el, {
+			// 	top:  window.innerHeight * 0.5 + (Math.sin(index) * radius),
+			// 	left: -gsap.getProperty(shootingGalleryWrapper.value.$el, 'x') + window.innerWidth * 0.5 + (Math.cos(index) * radius),
+			// 	duration: 1,
+			// 	xPercent: -50,
+			// 	yPercent: -50,
+			// 	height: `${viewAllItemHeight.value}vw`,
+			// 	scale: 1,
+			// })
 
 
 			tlItems.to(item.$el, {
@@ -270,13 +275,15 @@
 				duration: viewAllAnimationDuration.value,
 				xPercent: 0,
 				yPercent: 0,
-				ease: 'Power2.easeOut',
+				scale: 1,
+				ease: 'Power1.easeIn',
 			})
 		})
 	}
 
 	function initNormalMode(isScroll) {
 		toggleViewMode.value = false
+		gsap.set(shootingSeeAll.value.$el, {pointerEvents: 'none'})
 		if (ScrollTrigger.isTouch === 1) {
 			gsap.set('body,html', { clearProps: 'overflow' })
 		} else {
@@ -289,6 +296,7 @@
 			ease: 'none',
 			onComplete: () => {
 				if(!toggleViewMode.value) {
+					gsap.set(shootingSeeAll.value.$el, {pointerEvents: 'auto'})
 					setTimeout(() => {
 						ScrollSmoother.get().paused(false)
 						if(isScroll) {
@@ -316,7 +324,7 @@
 				height: '100%',
 				scale: scaleProperties.value[i],
 				duration: viewAllAnimationDuration.value,
-				ease: 'Power2.easeIn',
+				ease: 'Power1.easeOut',
 			}, 0)
 		})
 

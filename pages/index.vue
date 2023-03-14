@@ -59,15 +59,15 @@ import transitionConfig from '@/helpers/transitionConfig'
 
 	// Animate after route change
 	watch(() => store.transitionComplete, (newValue) => {
-    if (newValue) {
+		if (newValue) {
 			interval = setInterval(() => changeProjectWithAnimation(), timeChangeImg.value)
-    }
-  });
+		}
+	});
 
 	// Animate after preloader
 	watch(() => store.isPreloaderVisible, () => {
 		interval = setInterval(() => changeProjectWithAnimation(), timeChangeImg.value)
-  })
+  	})
 
 	// Clear interval
 	tryOnUnmounted(() => {
@@ -98,13 +98,15 @@ import transitionConfig from '@/helpers/transitionConfig'
 	})
 
 	function changeProjectWithAnimation() {
-
-		gsap.from('.home-gallery-three-imgs, .home-gallery-img__wrap', {
+		gsap.fromTo('.home-gallery-three-imgs, .home-gallery-img__wrap', {
 			opacity: 0,
 			filter: 'blur(1rem)',
-			duration: 3
-		})
 
+		}, {
+			duration: 3,
+			opacity: 1,
+			filter: 'blur(0rem)'
+		})
 		changeProject()
 	}
 
@@ -147,6 +149,15 @@ import transitionConfig from '@/helpers/transitionConfig'
 		}
 
 		projectsThreePhoto.value = [first, second, third]
+		console.log(projectsThreePhoto.value);
+	}
+
+	function changeProjectOnClick(e) {
+		const getId = Number(e.target.getAttribute('data-id'))
+		clearInterval(interval)
+		homeImgCurrent.value = categoriesShootingDataForMain.findIndex(x => x.id === getId)
+		changeProjectWithAnimation()
+		interval = setInterval(() => changeProjectWithAnimation(), timeChangeImg.value)
 	}
 
 
@@ -187,7 +198,10 @@ import transitionConfig from '@/helpers/transitionConfig'
 			</HomeHeroView>
 
 			<HomeGalleryView>
-				<HomeGalleryThreeImgs :images="projectsThreePhoto" />
+				<HomeGalleryThreeImgs
+					:images="projectsThreePhoto"
+					@click="changeProjectOnClick"
+				/>
 				<HomeGalleryOtherImgs :images="projectOtherPhotos" />
 				<HomeGalleryButton />
 				<HomeGalleryLines />
